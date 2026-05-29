@@ -3,461 +3,354 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ArchiveTune – Enhanced Music Streaming Client for Android | Background Playback & Offline Downloads</title>
-  <meta name="description" content="ArchiveTune is a feature-rich music streaming client for Android with Material 3 design, background playback, offline downloads, live synchronized lyrics, and Discord Rich Presence integration. Free and open-source.">
-  <meta name="theme-color" content="#a78bfa">
+  <title>AvidTune – Enhanced Music Streaming Client for Android</title>
+  <meta name="description" content="AvidTune is a feature-rich music streaming client for Android with Material 3 design, background playback, offline downloads, live synchronized lyrics, and Discord Rich Presence integration.">
+  <meta name="theme-color" content="#141218">
 
   <!-- Fallback Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
 
+  <!-- Fonts: Roboto for true Material feel -->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   
-  <!-- Material Symbols -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  <!-- Material Symbols Outlined (Supports Fill variations) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" rel="stylesheet" />
   
   <!-- AOS Animation Library CSS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       ORIGINAL STYLE.CSS
+       MATERIAL DESIGN 3 EXPRESSIVE VARIABLES
        ========================================================================== */
     :root {
-      --bg-dark: #050508;
-      --bg-surface: #0e0e14;
-      --glass-bg: rgba(255, 255, 255, 0.04);
-      --glass-border: rgba(255, 255, 255, 0.10);
-      --glass-hover: rgba(255, 255, 255, 0.08);
-      --accent-primary: #f472b6;
-      --accent-secondary: #a78bfa;
-      --accent-tertiary: #60a5fa;
-      --accent-warm: #fb923c;
-      --gradient-accent: linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa);
-      --gradient-accent-reverse: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
-      --text-primary: rgba(255, 255, 255, 0.95);
-      --text-secondary: rgba(255, 255, 255, 0.65);
-      --glass-blur: 28px;
-      --radius: 16px;
-      --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.45);
-      --shadow-strong: 0 16px 48px rgba(0, 0, 0, 0.65);
-      --shadow-glow: 0 0 60px rgba(244, 114, 182, 0.08), 0 0 120px rgba(167, 139, 250, 0.06);
-      --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-spring: cubic-bezier(0.2, 0.9, 0.2, 1);
+      /* Dark Theme (Default) */
+      --md-sys-color-primary: #D0BCFF;
+      --md-sys-color-on-primary: #381E72;
+      --md-sys-color-primary-container: #4F378B;
+      --md-sys-color-on-primary-container: #EADDFF;
+      --md-sys-color-secondary: #CCC2DC;
+      --md-sys-color-on-secondary: #332D41;
+      --md-sys-color-secondary-container: #4A4458;
+      --md-sys-color-on-secondary-container: #E8DEF8;
+      --md-sys-color-tertiary: #EFB8C8;
+      --md-sys-color-on-tertiary: #492532;
+      --md-sys-color-tertiary-container: #633B48;
+      --md-sys-color-on-tertiary-container: #FFD8E4;
+      --md-sys-color-error: #F2B8B5;
+      --md-sys-color-on-error: #601410;
+      --md-sys-color-error-container: #8C1D18;
+      --md-sys-color-on-error-container: #F9DEDC;
+      --md-sys-color-background: #141218;
+      --md-sys-color-on-background: #E6E0E9;
+      --md-sys-color-surface: #141218;
+      --md-sys-color-on-surface: #E6E0E9;
+      --md-sys-color-surface-variant: #49454F;
+      --md-sys-color-on-surface-variant: #CAC4D0;
+      --md-sys-color-outline: #938F99;
+      --md-sys-color-outline-variant: #49454F;
+      
+      /* Tonal Surfaces */
+      --md-sys-color-surface-container-lowest: #0F0D13;
+      --md-sys-color-surface-container-low: #1D1B20;
+      --md-sys-color-surface-container: #211F26;
+      --md-sys-color-surface-container-high: #2B2930;
+      --md-sys-color-surface-container-highest: #36343B;
+
+      /* Elevations */
+      --md-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+      --md-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+      --md-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
+      
+      --radius-full: 9999px;
+      --radius-extra-large: 28px;
+      --radius-large: 16px;
+      --transition-standard: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+      --transition-emphasized: all 0.5s cubic-bezier(0.2, 0, 0, 1);
     }
 
     body.light {
-      --bg-dark: #f5f5f7;
-      --bg-surface: #ffffff;
-      --glass-bg: rgba(255, 255, 255, 0.55);
-      --glass-border: rgba(0, 0, 0, 0.08);
-      --glass-hover: rgba(255, 255, 255, 0.70);
-      --accent-primary: #ec4899;
-      --accent-secondary: #8b5cf6;
-      --accent-tertiary: #3b82f6;
-      --accent-warm: #f97316;
-      --gradient-accent: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
-      --gradient-accent-reverse: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-      --text-primary: rgba(0, 0, 0, 0.90);
-      --text-secondary: rgba(0, 0, 0, 0.60);
-      --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-strong: 0 16px 48px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 60px rgba(236, 72, 153, 0.06), 0 0 120px rgba(139, 92, 246, 0.04);
-      --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+      /* Light Theme */
+      --md-sys-color-primary: #6750A4;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #EADDFF;
+      --md-sys-color-on-primary-container: #21005D;
+      --md-sys-color-secondary: #625B71;
+      --md-sys-color-on-secondary: #FFFFFF;
+      --md-sys-color-secondary-container: #E8DEF8;
+      --md-sys-color-on-secondary-container: #1D192B;
+      --md-sys-color-tertiary: #7D5260;
+      --md-sys-color-on-tertiary: #FFFFFF;
+      --md-sys-color-tertiary-container: #FFD8E4;
+      --md-sys-color-on-tertiary-container: #31111D;
+      --md-sys-color-error: #B3261E;
+      --md-sys-color-on-error: #FFFFFF;
+      --md-sys-color-error-container: #F9DEDC;
+      --md-sys-color-on-error-container: #410E0B;
+      --md-sys-color-background: #FEF7FF;
+      --md-sys-color-on-background: #1D1B20;
+      --md-sys-color-surface: #FEF7FF;
+      --md-sys-color-on-surface: #1D1B20;
+      --md-sys-color-surface-variant: #E7E0EC;
+      --md-sys-color-on-surface-variant: #49454F;
+      --md-sys-color-outline: #79747E;
+      --md-sys-color-outline-variant: #CAC4D0;
+
+      /* Tonal Surfaces */
+      --md-sys-color-surface-container-lowest: #FFFFFF;
+      --md-sys-color-surface-container-low: #F7F2FA;
+      --md-sys-color-surface-container: #F3EDF7;
+      --md-sys-color-surface-container-high: #ECE6F0;
+      --md-sys-color-surface-container-highest: #E6E0E9;
+      
+      --md-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.05), 0px 1px 2px 0px rgba(0, 0, 0, 0.10);
+      --md-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.05), 0px 1px 2px 0px rgba(0, 0, 0, 0.10);
+      --md-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.05), 0px 1px 3px 0px rgba(0, 0, 0, 0.10);
+      
+      --theme-color: #FEF7FF;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0 }
     html, body { height: 100% }
 
     body {
-      margin: 0;
-      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-primary);
+      font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
       transition: background-color 0.4s ease, color 0.4s ease;
+      line-height: 1.5;
     }
 
-    .bg {
+    /* MD3 Expressive blurred background blobs */
+    .bg-blobs {
       position: fixed;
       inset: 0;
-      background: var(--bg-dark);
       pointer-events: none;
       z-index: 0;
-      transition: background 0.4s ease;
+      overflow: hidden;
+      background-color: var(--md-sys-color-background);
+      transition: background-color 0.4s ease;
     }
 
-    .bg::before {
+    .bg-blobs::before, .bg-blobs::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background:
-        radial-gradient(ellipse at 10% 15%, rgba(244, 114, 182, 0.14), transparent 40%),
-        radial-gradient(ellipse at 90% 10%, rgba(167, 139, 250, 0.12), transparent 45%),
-        radial-gradient(ellipse at 20% 55%, rgba(96, 165, 250, 0.10), transparent 40%),
-        radial-gradient(ellipse at 80% 65%, rgba(251, 146, 60, 0.09), transparent 44%),
-        radial-gradient(ellipse at 50% 90%, rgba(244, 114, 182, 0.08), transparent 48%),
-        radial-gradient(ellipse at 45% 35%, rgba(167, 139, 250, 0.06), transparent 50%);
-      opacity: 1;
-      animation: meshFloat 22s ease-in-out infinite alternate;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      animation: drift 20s infinite alternate ease-in-out;
     }
 
-    .bg::after {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
-      background:
-        radial-gradient(circle at 30% 40%, rgba(244, 114, 182, 0.06), transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(96, 165, 250, 0.05), transparent 50%);
-      animation: floatDrift 28s ease-in-out infinite alternate;
-      pointer-events: none;
+    .bg-blobs::before {
+      top: -10%; left: -10%;
+      width: 60vw; height: 60vw;
+      background: var(--md-sys-color-primary);
     }
 
-    body.light .bg::before {
-      background:
-        radial-gradient(ellipse at 10% 15%, rgba(236, 72, 153, 0.08), transparent 40%),
-        radial-gradient(ellipse at 90% 10%, rgba(139, 92, 246, 0.07), transparent 45%),
-        radial-gradient(ellipse at 20% 55%, rgba(59, 130, 246, 0.06), transparent 40%),
-        radial-gradient(ellipse at 80% 65%, rgba(249, 115, 22, 0.05), transparent 44%),
-        radial-gradient(ellipse at 50% 90%, rgba(236, 72, 153, 0.04), transparent 48%),
-        radial-gradient(ellipse at 45% 35%, rgba(139, 92, 246, 0.03), transparent 50%);
+    .bg-blobs::after {
+      bottom: -10%; right: -10%;
+      width: 70vw; height: 70vw;
+      background: var(--md-sys-color-tertiary);
+      animation-delay: -10s;
     }
 
-    body.light .bg::after {
-      background:
-        radial-gradient(circle at 30% 40%, rgba(236, 72, 153, 0.04), transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.03), transparent 50%);
+    body.light .bg-blobs::before, body.light .bg-blobs::after {
+      opacity: 0.25;
     }
 
-    @keyframes meshFloat {
-      0% { opacity: 0.8; transform: scale(1) translateY(0) }
-      50% { opacity: 1; transform: scale(1.06) translateY(-2%) }
-      100% { opacity: 0.85; transform: scale(1) translateY(0) }
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5%, 10%) scale(1.1); }
     }
 
-    @keyframes floatDrift {
-      0% { transform: translate(0, 0) rotate(0deg) }
-      33% { transform: translate(3%, -2%) rotate(1deg) }
-      66% { transform: translate(-2%, 3%) rotate(-1deg) }
-      100% { transform: translate(1%, -1%) rotate(0.5deg) }
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.6 }
-      50% { opacity: 1 }
-    }
-
-    .glass {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--shadow-elevated), var(--shadow-glow), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
-    }
-
-    body.light .glass {
-      border-top: 1px solid rgba(255, 255, 255, 0.50);
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.30);
-    }
-
+    /* MD3 App Bar (Floating) */
     .site-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      padding: 14px 18px;
+      padding: 12px 24px;
       max-width: 1200px;
-      margin: 18px auto 0;
+      margin: 16px auto 0;
       position: sticky;
-      top: 14px;
+      top: 16px;
       z-index: 90;
-      border-radius: 22px;
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(10, 10, 14, 0.50);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55), var(--shadow-glow);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
-      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      border-radius: var(--radius-full);
+      background-color: var(--md-sys-color-surface-container);
+      box-shadow: var(--md-elevation-2);
+      transition: var(--transition-standard);
     }
 
-    body.light .site-header {
-      background: rgba(255, 255, 255, 0.60);
-      border-top: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    }
-
-    .site-header::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 24px;
-      background: linear-gradient(120deg, rgba(244, 114, 182, 0.35), rgba(167, 139, 250, 0.30), rgba(96, 165, 250, 0.25));
-      opacity: 0.20;
-      pointer-events: none;
-      filter: blur(14px);
-      z-index: -1;
-      animation: glowPulse 8s ease-in-out infinite;
-    }
-
-    body.light .site-header::before {
-      background: linear-gradient(120deg, rgba(236, 72, 153, 0.15), rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.10));
-      opacity: 0.15;
-    }
-
-    .brand { display: flex; align-items: center; gap: 14px }
-    .brand h1 { font-size: 20px; margin: 0; font-weight: 600; letter-spacing: -0.02em }
-    .brand-archive {
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .brand-tune { color: var(--text-primary) }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand h1 { font-size: 22px; margin: 0; font-weight: 500; color: var(--md-sys-color-on-surface); }
     
-    /* Custom Logo / Icon Styling replacement */
-    .logo, .footer-logo { 
-        width: 48px; height: 48px; 
-        display: flex; align-items: center; justify-content: center;
-        font-size: 40px;
-        background: var(--gradient-accent); 
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-        filter: drop-shadow(0 2px 8px rgba(244, 114, 182, 0.3));
-        user-select: none;
+    .logo { 
+      display: flex; align-items: center; justify-content: center;
+      color: var(--md-sys-color-primary);
+      font-size: 32px;
     }
-    body.light .logo, body.light .footer-logo { filter: drop-shadow(0 2px 8px rgba(236, 72, 153, 0.2)) }
-
-    .theme-toggle {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: auto;
-      border-radius: 50%;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    
+    /* Icon Buttons */
+    .icon-btn {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-full);
+      border: none;
+      background: transparent;
+      color: var(--md-sys-color-on-surface-variant);
       cursor: pointer;
-      color: var(--text-secondary);
-      transition: all 0.3s var(--transition-smooth);
-      padding: 0;
-      flex-shrink: 0;
+      transition: var(--transition-standard);
     }
 
-    .theme-toggle:hover {
-      background: var(--glass-hover);
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
-      transform: rotate(15deg);
+    .icon-btn:hover {
+      background-color: var(--md-sys-color-surface-variant);
+      color: var(--md-sys-color-on-surface);
     }
 
-    .theme-toggle span {
-      font-size: 20px;
-      transition: transform 0.4s var(--transition-spring), opacity 0.3s ease;
-    }
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    body.light .theme-toggle .icon-sun { display: block; }
+    body.light .theme-toggle .icon-moon { display: none; }
 
-    .theme-toggle .icon-sun { display: none }
-    .theme-toggle .icon-moon { display: block }
-    body.light .theme-toggle .icon-sun { display: block }
-    body.light .theme-toggle .icon-moon { display: none }
-
+    /* Navigation */
     .nav {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px;
-      border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
-      transition: background 0.4s ease, border-color 0.4s ease;
-    }
-
-    body.light .nav {
-      background: rgba(255, 255, 255, 0.50);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      gap: 8px;
     }
 
     .nav a {
-      color: var(--text-secondary);
+      color: var(--md-sys-color-on-surface-variant);
       text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 650;
-      transition: all 0.2s ease;
-      position: relative;
+      padding: 10px 16px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition-standard);
     }
 
     .nav a:hover {
-      color: var(--text-primary);
-      background: var(--glass-hover);
+      background-color: var(--md-sys-color-surface-variant);
+      color: var(--md-sys-color-on-surface);
+    }
+
+    /* MD3 Filled Button */
+    .nav a.cta, .btn-filled {
+      background-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: var(--transition-standard);
+      border: none;
+      box-shadow: var(--md-elevation-1);
+    }
+
+    .nav a.cta:hover, .btn-filled:hover {
+      box-shadow: var(--md-elevation-2);
+      transform: translateY(-1px);
+      /* Overlay blend for hover state in MD3 */
+      background-image: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08));
+    }
+
+    /* MD3 Tonal Button */
+    .btn-tonal {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: var(--transition-standard);
+      border: none;
+    }
+
+    .btn-tonal:hover {
+      background-image: linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.08));
       transform: translateY(-1px);
     }
 
-    .nav a.cta {
-      background: var(--gradient-accent);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 999px;
-      box-shadow: 0 10px 26px rgba(244, 114, 182, 0.22);
-      margin-left: 6px;
+    body.light .btn-tonal:hover {
+      background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4));
     }
 
-    .nav a.cta:hover {
-      box-shadow: 0 6px 24px rgba(244, 114, 182, 0.40);
-      transform: translateY(-1px);
-    }
+    .nav-toggle { display: none; }
 
-    .nav-toggle {
-      display: none;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      padding: 10px 12px;
-      border-radius: 999px;
-      cursor: pointer;
-      color: var(--text-secondary);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
-    }
-
-    .nav-icon { display: grid; gap: 5px }
-    .nav-icon span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--text-primary);
-      transform-origin: center;
-      transition: transform 0.22s ease, opacity 0.18s ease, width 0.22s ease;
-    }
-
-    body.nav-open .nav-icon span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
-    body.nav-open .nav-icon span:nth-child(2) { opacity: 0 }
-    body.nav-open .nav-icon span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
-
-    .nav-backdrop {
-      position: fixed;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% 15%, rgba(244, 114, 182, 0.06), transparent 55%),
-        radial-gradient(circle at 75% 75%, rgba(167, 139, 250, 0.04), transparent 52%),
-        rgba(0, 0, 0, 0.62);
-      transition: opacity 0.25s ease;
-      z-index: 80;
-      display: none;
-    }
-
-    body.light .nav-backdrop {
-      background:
-        radial-gradient(circle at 50% 15%, rgba(236, 72, 153, 0.04), transparent 55%),
-        radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.03), transparent 52%),
-        rgba(0, 0, 0, 0.25);
-    }
-
-    body.nav-open .nav-backdrop { opacity: 1; pointer-events: auto }
-    .nav.mobile-hidden { display: none }
-
+    /* Layout Sections */
     .hero {
-      min-height: 100vh;
-      padding: 80px 32px 100px;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       position: relative;
       z-index: 1;
+      padding: 40px 24px 80px;
     }
 
     .hero-content {
       display: flex;
-      gap: 48px;
+      gap: 64px;
       align-items: center;
       max-width: 1200px;
-      margin: 60px auto;
-      padding: 48px;
-      border-radius: 24px;
-      position: relative;
+      margin: 40px auto;
+      width: 100%;
     }
 
-    .hero-left { flex: 1; z-index: 2 }
-    .hero-right { flex: 0 0 380px; display: flex; justify-content: center; z-index: 2 }
+    .hero-left { flex: 1; }
+    .hero-right { flex: 0 0 320px; display: flex; justify-content: center; }
 
+    /* Badges */
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
-      background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(167, 139, 250, 0.12));
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
+      padding: 6px 12px;
+      background-color: var(--md-sys-color-tertiary-container);
+      color: var(--md-sys-color-on-tertiary-container);
+      border-radius: var(--radius-full);
       font-size: 13px;
-      font-weight: 600;
-      color: var(--accent-primary);
-      margin-bottom: 20px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      font-weight: 500;
+      margin-bottom: 24px;
     }
+    
+    .badge .material-symbols-outlined { font-size: 16px; }
 
-    .badge svg, .badge .material-symbols-outlined {
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-      color: var(--accent-warm);
-    }
-
+    /* Typography */
     .hero h2 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       margin: 0 0 16px;
-      font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.03em;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-weight: 400; /* MD3 Display typography uses regular weights */
+      line-height: 1.1;
+      color: var(--md-sys-color-on-surface);
+      letter-spacing: -0.02em;
     }
 
     .lead {
-      color: var(--text-secondary);
+      color: var(--md-sys-color-on-surface-variant);
       font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 28px;
+      line-height: 1.6;
+      margin-bottom: 32px;
       max-width: 560px;
     }
 
+    /* Tonal Stats Box */
     .stats {
       display: flex;
       gap: 32px;
-      margin: 28px 0;
-      padding: 24px 0;
-      border-top: 1px solid var(--glass-border);
-      border-bottom: 1px solid var(--glass-border);
+      margin: 32px 0;
+      padding: 24px;
+      background-color: var(--md-sys-color-surface-container-low);
+      border-radius: var(--radius-extra-large);
       flex-wrap: wrap;
     }
 
@@ -465,1597 +358,582 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      text-align: left;
     }
 
     .stat-value {
-      font-size: 26px;
-      font-weight: 700;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--md-sys-color-primary);
     }
 
     .stat-label {
-      font-size: 13px;
-      color: var(--text-secondary);
+      font-size: 12px;
+      color: var(--md-sys-color-on-surface-variant);
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .download-badges {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+    .actions { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
 
-    .download-badges img {
-      height: 50px;
-      border-radius: 8px;
-      transition: transform 0.2s ease;
-    }
-
-    .download-badges img:hover { transform: translateY(-2px) }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent-primary);
-      margin-bottom: 20px;
-    }
-
-    .hero-badge svg { width: 16px; height: 16px }
-
-    .actions { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: all 0.25s var(--transition-smooth);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .button svg, .button .material-symbols-outlined { width: 20px; height: 20px; font-size: 20px; }
-
-    .button::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.1);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .button:hover::before { opacity: 1 }
-
-    .button.primary {
-      background: var(--gradient-accent);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(244, 114, 182, 0.25), 0 8px 40px rgba(167, 139, 250, 0.15);
-    }
-
-    .button.primary:hover {
-      box-shadow: 0 8px 32px rgba(244, 114, 182, 0.4), 0 12px 48px rgba(167, 139, 250, 0.25);
-      transform: translateY(-2px);
-    }
-
-    .button.ghost {
-      border: 1.5px solid var(--glass-border);
-      color: var(--text-primary);
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .button.ghost:hover {
-      border-color: var(--accent-primary);
-      background: var(--glass-hover);
-      transform: translateY(-1px);
-    }
-
-    .highlights { display: flex; gap: 14px; list-style: none; padding: 0; margin: 0; color: var(--text-secondary) }
-    .highlights li { background: rgba(255, 255, 255, 0.02); padding: 8px 12px; border-radius: 999px; font-size: 13px }
-
+    /* Carousel / Phone Mockup (Refined to MD3 shadow instead of glass) */
     .phone-mockup {
       width: 280px;
       height: 560px;
-      border-radius: 24px;
+      border-radius: 32px;
       overflow: hidden;
-      border: 1px solid var(--glass-border);
-      box-shadow:
-        var(--shadow-strong),
-        0 0 80px rgba(244, 114, 182, 0.10),
-        0 0 120px rgba(167, 139, 250, 0.08);
-      background: rgba(0, 0, 0, 0.4);
+      background-color: var(--md-sys-color-surface-container-highest);
+      box-shadow: var(--md-elevation-3);
       position: relative;
+      border: 6px solid var(--md-sys-color-surface-container-highest);
       transform: perspective(1000px) rotateY(-5deg);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      transition: var(--transition-emphasized);
     }
 
     .phone-mockup:hover {
       transform: perspective(1000px) rotateY(0deg);
-      box-shadow:
-        var(--shadow-strong),
-        0 0 100px rgba(244, 114, 182, 0.14),
-        0 0 160px rgba(167, 139, 250, 0.10);
+      box-shadow: 0px 8px 24px 6px rgba(0, 0, 0, 0.25);
     }
 
-    body.light .phone-mockup {
-      box-shadow: var(--shadow-strong), 0 0 40px rgba(0, 0, 0, 0.08);
+    body.light .phone-mockup:hover {
+      box-shadow: 0px 8px 24px 6px rgba(0, 0, 0, 0.15);
     }
 
-    .phone-mockup img { width: 100%; height: 100%; object-fit: cover; display: block }
-
-    .carousel { width: 100%; height: 100%; position: relative; overflow: visible; perspective: 1200px; transform-style: preserve-3d }
-
+    .carousel { width: 100%; height: 100%; position: relative; overflow: visible; perspective: 1200px; transform-style: preserve-3d; border-radius: 26px; }
+    
     .slide {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      transition: transform .6s var(--transition-spring), opacity .45s ease, box-shadow .45s ease;
-      display: flex;
-      align-items: stretch;
-      contain: paint;
+      position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+      transition: var(--transition-emphasized);
+      border-radius: 26px; overflow: hidden;
       backface-visibility: hidden;
     }
 
-    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slide::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, var(--slide-dim, 0)); transition: opacity 0.45s ease; pointer-events: none; }
 
-    .slide::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: rgba(0, 0, 0, var(--slide-dim, 0));
-      pointer-events: none;
-      transition: opacity .45s ease;
-    }
-
-    .slide--center { --slide-dim: 0; transform: translate3d(0, 0, 0) scale(1) rotateY(0); z-index: 3; box-shadow: 0 20px 50px rgba(2, 6, 23, 0.6); will-change: transform }
-    .slide--right { --slide-dim: .14; transform: translate3d(12%, 0, -72px) scale(.92) rotateY(-10deg); z-index: 2; will-change: transform }
-    .slide--left { --slide-dim: .14; transform: translate3d(-12%, 0, -72px) scale(.92) rotateY(10deg); z-index: 2; will-change: transform }
-    .slide--behind { --slide-dim: .28; transform: translate3d(0, 6%, -140px) scale(.86) rotateY(0); z-index: 1; opacity: 0.95 }
-
-    body.carousel-lite .carousel { perspective: none; transform-style: flat }
-    body.carousel-lite .slide { transition: transform .42s var(--transition-spring), opacity .35s ease, box-shadow .35s ease }
-    body.carousel-lite .slide--center { transform: translate3d(0, 0, 0) scale(1) }
-    body.carousel-lite .slide--right { transform: translate3d(10%, 0, 0) scale(.95) }
-    body.carousel-lite .slide--left { transform: translate3d(-10%, 0, 0) scale(.95) }
-    body.carousel-lite .slide--behind { transform: translate3d(0, 0, 0) scale(.92); opacity: 0 }
-
-    @media (prefers-reduced-motion: reduce) {
-      .phone-mockup { transition: none; transform: none }
-      .slide { transition: none }
-      .slide--right, .slide--left, .slide--behind { opacity: 0 }
-      .slide--center { box-shadow: 0 14px 34px rgba(2, 6, 23, 0.55) }
-    }
+    .slide--center { --slide-dim: 0; transform: translate3d(0, 0, 0) scale(1) rotateY(0); z-index: 3; }
+    .slide--right { --slide-dim: .14; transform: translate3d(12%, 0, -72px) scale(.92) rotateY(-10deg); z-index: 2; }
+    .slide--left { --slide-dim: .14; transform: translate3d(-12%, 0, -72px) scale(.92) rotateY(10deg); z-index: 2; }
+    .slide--behind { --slide-dim: .3; transform: translate3d(0, 6%, -140px) scale(.86) rotateY(0); z-index: 1; opacity: 0; }
 
     .carousel-control {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(244, 114, 182, 0.15);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid var(--glass-border);
-      color: #fff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 20px;
-      transition: all 0.25s ease;
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      width: 40px; height: 40px;
+      border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none;
+      transition: var(--transition-standard);
       z-index: 10;
+      box-shadow: var(--md-elevation-1);
     }
 
     .carousel-control:hover {
-      background: rgba(244, 114, 182, 0.35);
-      border-color: var(--accent-primary);
-      transform: translateY(-50%) scale(1.1);
+      background-image: linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.08));
+      transform: translateY(-50%) scale(1.05);
     }
+    
+    body.light .carousel-control:hover { background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)); }
+    .carousel-control.prev { left: -16px; }
+    .carousel-control.next { right: -16px; }
 
-    .carousel-control.prev { left: 12px }
-    .carousel-control.next { right: 12px }
-
-    .carousel-indicators { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; display: flex; gap: 8px }
-    .carousel-indicators .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 0; cursor: pointer }
-    .carousel-indicators .indicator.active { background: var(--gradient-accent) }
-
+    /* Sections */
     .section {
       max-width: 1200px;
-      margin: 80px auto;
-      padding: 32px;
+      margin: 64px auto;
+      padding: 0 24px;
       position: relative;
       z-index: 2;
     }
 
-    .section h3 {
-      font-size: 36px;
-      font-weight: 700;
-      margin: 0 0 40px;
-      text-align: center;
-      letter-spacing: -0.02em;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
+    .section-header { text-align: center; margin-bottom: 48px; }
+    
+    .section-header h3 {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+      margin: 0 0 16px;
     }
 
     .section-subtitle {
-      color: var(--text-secondary);
-      font-size: 18px;
-      margin-top: 12px;
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 16px;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
     }
 
-    .features .cards {
+    /* MD3 Cards */
+    .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      align-items: stretch;
+      gap: 16px;
     }
 
     .card {
-      flex: 1;
-      padding: 28px;
-      border-radius: 20px;
-      transition: all 0.35s var(--transition-smooth);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      background: var(--glass-bg);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
+      padding: 24px;
+      border-radius: var(--radius-extra-large);
+      background-color: var(--md-sys-color-surface-container-low);
+      transition: var(--transition-standard);
       position: relative;
       overflow: hidden;
-    }
-
-    body.light .card {
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--gradient-accent);
-      opacity: 0;
-      transition: opacity 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-strong), 0 0 40px rgba(244, 114, 182, 0.06);
-      border-color: var(--accent-primary);
-      background: var(--glass-hover);
+      background-color: var(--md-sys-color-surface-container);
+      box-shadow: var(--md-elevation-1);
+      transform: translateY(-4px);
     }
 
-    .card:hover::before { opacity: 1 }
+    .feature-icon-container {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-large);
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
 
-    /* Custom styles for Material Icons representing features */
-    .feature-icon {
+    .feature-icon-container .material-symbols-outlined {
       font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      flex: 0 0 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(167, 139, 250, 0.08));
-      color: var(--accent-primary);
-      box-shadow: 0 2px 8px rgba(244, 114, 182, 0.15);
-      margin-right: 12px;
+      font-variation-settings: 'FILL' 1; /* Filled variant for prominent icons */
     }
 
     .card h4 {
-      display: flex;
-      align-items: center;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
       margin: 0 0 12px;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
     }
 
     .card p {
-      color: var(--text-secondary);
+      color: var(--md-sys-color-on-surface-variant);
       margin: 0;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .screenshots .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .gallery-item {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-elevated);
-      transition: all 0.35s var(--transition-smooth);
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: var(--shadow-strong), 0 0 40px rgba(244, 114, 182, 0.06);
-      border-color: var(--accent-primary);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 16px;
-      background: linear-gradient(to top, rgba(5, 5, 8, 0.85), transparent);
-      color: #fff;
-      font-weight: 600;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-overlay { opacity: 1 }
-
-    .feature-banner {
-      margin-top: 24px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-elevated);
-    }
-
-    .feature-banner img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .site-footer {
-      max-width: 1200px;
-      margin: 80px auto 40px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 20px;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .site-footer div { font-size: 15px }
-    .site-footer strong { color: var(--text-primary); font-weight: 600 }
-
-    .site-footer a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .site-footer a:hover { color: var(--accent-secondary) }
-
-    .site-footer small {
-      display: block;
-      color: var(--text-secondary);
       font-size: 14px;
     }
 
-    .footer-content {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 40px;
+    /* Screenshots Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
       margin-bottom: 32px;
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .footer-brand strong {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 4px;
-      color: var(--text-primary);
-    }
-
-    .footer-brand p {
-      margin: 0;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    .footer-links { display: flex; gap: 48px }
-
-    .footer-column {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .footer-column h5 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin: 0 0 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .footer-column a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s ease;
-    }
-
-    .footer-column a:hover { color: var(--accent-primary) }
-
-    .footer-bottom {
-      width: 100%;
-      padding-top: 32px;
-      border-top: 1px solid var(--glass-border);
-      text-align: center;
-      margin-top: auto;
-    }
-
-    .footer-bottom small {
-      color: var(--text-secondary);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .footer-bottom a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-bottom a:hover { color: var(--accent-secondary) }
-
-    .testimonials-section { margin-bottom: 36px }
-    .testimonials-section + .site-footer { margin-top: 24px }
-
-    .footer-testimonials {
-      width: 100%;
-      margin-bottom: 0;
-      padding: 28px;
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--shadow-elevated), var(--shadow-glow), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
-    }
-
-    body.light .footer-testimonials {
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-    }
-
-    .footer-testimonials-head { margin-bottom: 20px }
-
-    .footer-testimonials-head h4 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      letter-spacing: -0.02em;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .footer-testimonials-head p {
-      margin: 0;
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
-
-    .footer-testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
-    }
-
-    .footer-testimonial-card {
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 16px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-      min-height: 180px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
+    .gallery-item {
+      border-radius: var(--radius-extra-large);
+      overflow: hidden;
+      background-color: var(--md-sys-color-surface-container-high);
+      transition: var(--transition-standard);
       position: relative;
-      overflow: hidden;
-      transition: all 0.3s var(--transition-smooth);
     }
 
-    .footer-testimonial-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 3px;
-      background: var(--gradient-accent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 3px 0 0 3px;
+    .gallery-item img {
+      width: 100%; height: auto; display: block;
+      transition: var(--transition-emphasized);
     }
+    
+    .gallery-item:hover { box-shadow: var(--md-elevation-2); transform: translateY(-4px); }
+    .gallery-item:hover img { transform: scale(1.02); }
 
-    .footer-testimonial-card:hover {
-      border-color: rgba(244, 114, 182, 0.18);
-      background: var(--glass-hover);
-      transform: translateY(-2px);
+    .gallery-label {
+      position: absolute; bottom: 16px; left: 16px;
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      padding: 6px 12px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 500;
+      opacity: 0; transition: var(--transition-standard);
     }
+    .gallery-item:hover .gallery-label { opacity: 1; }
 
-    .footer-testimonial-card:hover::before { opacity: 1 }
-
-    body.light .footer-testimonial-card {
-      border-top: 1px solid rgba(255, 255, 255, 0.40);
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.20);
-    }
-
-    .footer-testimonial-message {
-      margin: 0;
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .footer-testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-testimonial-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--glass-border);
-      object-fit: cover;
-      background: var(--bg-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: var(--text-secondary);
-    }
-
-    .footer-testimonial-username {
-      color: var(--text-primary);
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .footer-testimonials-empty {
-      margin: 0;
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    .repo-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0 8px;
-    }
-
-    .topic-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: all 0.25s ease;
-    }
-
-    .topic-pill:hover {
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
-    }
-
-    .repo-meta {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-      margin-bottom: 18px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid var(--glass-border);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .repo-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 0;
-    }
-
-    .repo-meta-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .repo-meta-value {
-      font-size: 14px;
-      font-weight: 650;
-      color: var(--text-primary);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .updates .section-header { margin-bottom: 36px }
-
+    /* Updates Section */
     .updates-grid {
-      max-width: 1200px;
-      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
     }
 
     .update-card {
-      border-radius: 22px;
-      padding: 26px;
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      background: var(--glass-bg);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
-      transition: transform 0.28s var(--transition-smooth), border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body.light .update-card {
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-    }
-
-    .update-card::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(120deg, rgba(244, 114, 182, 0.25), rgba(167, 139, 250, 0.20), rgba(96, 165, 250, 0.20));
-      opacity: 0;
-      filter: blur(14px);
-      transition: opacity 0.28s ease;
-      pointer-events: none;
+      padding: 24px;
+      border-radius: var(--radius-extra-large);
+      background-color: var(--md-sys-color-surface-container);
+      transition: var(--transition-standard);
     }
 
     .update-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.14);
-      background: var(--glass-hover);
-      box-shadow: var(--shadow-strong), 0 0 40px rgba(244, 114, 182, 0.06);
+      background-color: var(--md-sys-color-surface-container-high);
     }
-
-    .update-card:hover::before { opacity: 0.9 }
 
     .update-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 16px;
     }
 
-    .update-title h4 {
-      margin: 0 0 6px;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .update-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-secondary);
-      font-size: 13px;
-    }
-
-    .update-link {
-      color: var(--text-primary);
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      font-weight: 650;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-      flex: 0 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .update-link:hover {
-      transform: translateY(-1px);
-      border-color: var(--accent-primary);
-      background: rgba(244, 114, 182, 0.08);
-    }
-
-    .update-body {
-      color: var(--text-secondary);
-      line-height: 1.65;
-      font-size: 14px;
-      white-space: normal;
-      position: relative;
-      z-index: 1;
-    }
-
-    .update-body.md {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 14;
-      overflow: hidden;
-      white-space: normal;
-    }
-
-    .update-body.md .md-h {
-      margin: 14px 0 10px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-    }
-
-    .update-body.md h3.md-h { font-size: 18px; font-weight: 800 }
-    .update-body.md h4.md-h { font-size: 16px; font-weight: 780 }
-    .update-body.md h5.md-h, .update-body.md h6.md-h { font-size: 15px; font-weight: 760 }
-
-    .update-body.md .md-p {
-      margin: 10px 0;
-      color: var(--text-secondary);
-    }
-
-    .update-body.md .md-ul {
-      margin: 10px 0 14px 18px;
-      padding: 0;
-    }
-
-    .update-body.md .md-ul li {
-      margin: 8px 0;
-      padding-left: 2px;
-      color: var(--text-secondary);
-    }
-
-    .update-body.md a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(244, 114, 182, 0.30);
-    }
-
-    .update-body.md a:hover {
-      color: var(--accent-secondary);
-      border-bottom-color: var(--accent-secondary);
-    }
+    .update-title h4 { font-size: 20px; font-weight: 500; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+    .update-meta { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--md-sys-color-on-surface-variant); }
 
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-weight: 750;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 11px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 500; text-transform: uppercase;
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
     }
 
-    .pill--success {
-      border-color: rgba(34, 197, 94, 0.35);
-      background: rgba(34, 197, 94, 0.10);
-      color: rgba(187, 247, 208, 0.95);
-    }
+    .pill--warning { background-color: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
 
-    .pill--warning {
-      border-color: rgba(245, 158, 11, 0.35);
-      background: rgba(245, 158, 11, 0.10);
-      color: rgba(254, 243, 199, 0.95);
+    .update-body {
+      font-size: 14px; color: var(--md-sys-color-on-surface-variant);
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden;
     }
-
-    .pill--neutral {
-      border-color: rgba(167, 139, 250, 0.22);
-      background: rgba(167, 139, 250, 0.08);
-      color: rgba(221, 214, 254, 0.95);
-    }
-
-    body.light .pill--success { color: rgba(22, 101, 52, 0.95) }
-    body.light .pill--warning { color: rgba(146, 64, 14, 0.95) }
-    body.light .pill--neutral { color: rgba(88, 28, 135, 0.95) }
 
     .build-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 12px 0;
-      border-top: 1px solid var(--glass-border);
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid var(--md-sys-color-outline-variant);
     }
+    .build-row:last-child { border-bottom: none; }
+    .build-label { color: var(--md-sys-color-on-surface-variant); font-size: 13px; }
+    .build-value { color: var(--md-sys-color-on-surface); font-weight: 500; font-size: 13px; }
 
-    .build-row:first-child { border-top: 0; padding-top: 4px }
-
-    .build-label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      flex: 0 0 auto;
+    /* Download Section */
+    .download-container {
+      background-color: var(--md-sys-color-surface-container-lowest);
+      border-radius: 32px; padding: 48px;
+      box-shadow: var(--md-elevation-1);
     }
-
-    .build-value {
-      color: var(--text-primary);
-      font-weight: 650;
-      text-align: right;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 100%;
-    }
-
-    .download .section-header { margin-bottom: 40px }
-    .download-container { padding: 48px; border-radius: 24px }
 
     .download-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin: 40px 0;
-      width: 100%;
-      max-width: 100%;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px; margin: 40px 0;
     }
 
     .download-option {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: left;
-      transition: all 0.35s var(--transition-smooth);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-      background-image: var(--noise-texture);
-      background-repeat: repeat;
-      background-size: 256px 256px;
-    }
-
-    body.light .download-option {
-      border-top: 1px solid rgba(255, 255, 255, 0.40);
-      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.20);
-    }
-
-    .download-option::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--gradient-accent);
-      opacity: 0;
-      transition: opacity 0.35s ease;
+      background-color: var(--md-sys-color-surface-container);
+      padding: 32px; border-radius: var(--radius-extra-large);
+      transition: var(--transition-standard);
+      display: flex; flex-direction: column;
     }
 
     .download-option:hover {
+      background-color: var(--md-sys-color-surface-container-high);
       transform: translateY(-4px);
-      border-color: var(--accent-primary);
-      background: var(--glass-hover);
-      box-shadow: var(--shadow-strong), 0 0 40px rgba(244, 114, 182, 0.06);
     }
 
-    .download-option:hover::before { opacity: 1 }
+    .download-option h4 { font-size: 22px; font-weight: 500; color: var(--md-sys-color-on-surface); margin: 16px 0 8px; }
+    .download-option p { font-size: 14px; color: var(--md-sys-color-on-surface-variant); margin-bottom: 24px; flex: 1; }
+    .download-option .btn-filled, .download-option .btn-tonal { width: 100%; justify-content: center; }
 
-    .download-badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      letter-spacing: 0.05em;
+    .alt-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    
+    /* Footer */
+    .site-footer {
+      max-width: 1200px; margin: 64px auto 32px; padding: 32px 24px;
+      border-radius: var(--radius-extra-large);
+      background-color: var(--md-sys-color-surface-container-low);
     }
 
-    .download-badge.stable {
-      background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(167, 139, 250, 0.15));
-      color: var(--accent-primary);
-      border: 1px solid var(--accent-primary);
+    .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 32px; }
+    .footer-brand h2 { font-size: 18px; font-weight: 500; color: var(--md-sys-color-on-surface); margin: 0 0 4px; }
+    .footer-brand p { font-size: 14px; color: var(--md-sys-color-on-surface-variant); margin: 0; }
+    .footer-links { display: flex; gap: 48px; }
+    .footer-column { display: flex; flex-direction: column; gap: 12px; }
+    .footer-column h5 { font-size: 14px; font-weight: 500; color: var(--md-sys-color-on-surface); margin: 0; }
+    .footer-column a { color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-size: 14px; transition: var(--transition-standard); }
+    .footer-column a:hover { color: var(--md-sys-color-primary); }
+
+    .footer-bottom {
+      text-align: center; padding-top: 24px; border-top: 1px solid var(--md-sys-color-outline-variant);
+      font-size: 12px; color: var(--md-sys-color-on-surface-variant);
     }
+    .footer-bottom a { color: var(--md-sys-color-primary); text-decoration: none; }
 
-    .download-badge.nightly {
-      background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.15));
-      color: var(--accent-secondary);
-      border: 1px solid var(--accent-secondary);
-    }
-
-    .download-option h4 {
-      font-size: 24px;
-      margin: 0 0 12px;
-      color: var(--text-primary);
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .download-option p {
-      color: var(--text-secondary);
-      margin: 0 0 20px;
-      font-size: 15px;
-      line-height: 1.7;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      flex: 1;
-    }
-
-    .download-option .button {
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .download-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    .download-meta .separator { opacity: 0.4 }
-
-    .download-alternatives {
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--glass-border);
-      text-align: center;
-    }
-
-    .download-alternatives h4 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: var(--text-primary);
-    }
-
-    .alt-links {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .alt-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .alt-link:hover {
-      border-color: var(--accent-primary);
-      color: var(--text-primary);
-      transform: translateY(-2px);
-    }
-
-    .alt-link .material-symbols-outlined { font-size: 20px }
-
-    .feature-graphic {
-      margin-top: 32px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--glass-border);
-    }
-
-    .feature-graphic img { width: 100%; display: block }
-
-    @media (max-width: 1100px) {
-      .features .cards { grid-template-columns: repeat(2, 1fr); gap: 20px }
-      .section { margin: 60px auto; padding: 24px }
-      .hero-content { gap: 36px; padding: 36px }
-    }
-
-    @media (max-width: 768px) {
-      .hero-content { flex-direction: column-reverse; padding: 24px; gap: 32px }
-      .hero-right { flex: 0 0 auto }
-      .hero h2 { font-size: 36px; text-align: center }
-      .lead { text-align: center; margin: 0 auto 24px }
-      .actions { justify-content: center; width: 100%; flex-direction: column }
-      .actions .button { width: 100%; justify-content: center }
-      .stats { justify-content: center }
-      .screenshots .gallery { flex-direction: column; gap: 16px }
-      .screenshots img { width: 100% }
-      .features .cards { grid-template-columns: 1fr; gap: 16px }
-      .section { margin: 48px auto; padding: 20px }
-      .section h3 { font-size: 28px; margin-bottom: 32px }
-      .section-subtitle { font-size: 16px }
-      .download-options { grid-template-columns: 1fr; gap: 20px }
-      .download-container { padding: 32px 24px }
-      .download-option { padding: 24px }
-      .download-option h4 { font-size: 20px }
-      .footer-testimonials { padding: 22px; text-align: center }
-      .footer-testimonials-head h4 { font-size: 25px }
-      .footer-testimonial-author { justify-content: center }
-      .footer-content { flex-direction: column; align-items: center; text-align: center }
-      .footer-brand { flex-direction: column; text-align: center }
-      .footer-links { flex-direction: column; gap: 24px; align-items: center }
-      .footer-column { align-items: center; text-align: center }
-      .site-footer { flex-direction: column; text-align: center; gap: 16px }
-    }
-
+    /* Media Queries */
     @media (max-width: 900px) {
+      .hero-content { flex-direction: column; text-align: center; gap: 40px; }
+      .hero-right { width: 100%; }
+      .stats { justify-content: center; }
+      .actions { justify-content: center; }
+      .nav { display: none; } /* Could implement a drawer here for mobile */
+      .nav-toggle { display: flex; }
+      
       .site-header {
-        padding: 12px 14px;
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-        margin: 14px 14px 0;
-        top: 10px;
+        margin: 8px 16px 0;
+        padding: 8px 16px;
       }
-      .brand { flex: 1 }
-      .nav-backdrop { display: block }
-      .nav {
-        display: flex;
-        position: fixed;
-        top: 84px;
-        left: 14px;
-        right: 14px;
-        flex-direction: column;
-        gap: 8px;
-        padding: 14px;
-        border-radius: 22px;
-        border: 1px solid var(--glass-border);
-        background: rgba(14, 14, 20, 0.75);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        box-shadow: 0 28px 70px rgba(0, 0, 0, 0.70), var(--shadow-glow);
-        opacity: 0;
-        transform: translateY(-10px) scale(0.985);
-        pointer-events: none;
-        transition: opacity 0.22s ease, transform 0.22s ease;
-        z-index: 120;
-      }
-      body.light .nav {
-        background: rgba(255, 255, 255, 0.80);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
-      }
-      .nav.mobile-panel {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-      }
-      .nav a {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 14px 14px;
-        border-radius: 16px;
-        font-size: 16px;
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-      }
-      .nav a:hover {
-        transform: none;
-        background: var(--glass-hover);
-        border-color: rgba(244, 114, 182, 0.22);
-      }
-      .nav a.cta {
-        margin-left: 0;
-        text-align: center;
-        justify-content: center;
-        border: 0;
-        background: var(--gradient-accent);
-        box-shadow: 0 16px 40px rgba(244, 114, 182, 0.22);
-      }
-      .nav-toggle { display: inline-flex; margin-left: auto }
-      .hero { padding: 40px 24px 60px }
-      .hero-content { gap: 24px; margin: 40px auto; padding: 28px; border-radius: 18px }
-      .hero h2 { font-size: 32px }
-      .lead { font-size: 16px }
-      .phone-mockup { width: 240px; height: 480px }
-      .stats { gap: 24px }
-      .download-options { grid-template-columns: 1fr; gap: 20px }
-      .footer-links { gap: 32px }
-      .repo-meta { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-      .updates-grid { grid-template-columns: 1fr }
-      .footer-links { width: 100%; justify-content: center; align-items: center; text-align: center; }
     }
 
-    @media (max-width: 480px) {
-      .site-header { padding: 16px }
-      .brand h1 { font-size: 18px }
-      .logo { width: 40px; height: 40px; font-size: 32px; }
-      .theme-toggle { width: 38px; height: 38px }
-      .hero { padding: 32px 16px 48px }
-      .hero-content { padding: 20px; border-radius: 16px }
-      .hero h2 { font-size: 28px; line-height: 1.2 }
-      .lead { font-size: 15px }
-      .actions { gap: 12px }
-      .actions .button { width: 100%; text-align: center; padding: 12px 20px; font-size: 14px }
-      .phone-mockup { width: 260px; height: 520px; transform: none }
-      .card h4 { font-size: 16px }
-      .card p { font-size: 14px }
-      .section { padding: 20px 16px }
-      .section h3 { font-size: 24px }
-      .section-subtitle { font-size: 15px }
-      .stats { gap: 16px; flex-direction: column; align-items: flex-start }
-      .stat-value { font-size: 20px }
-      .download-options { gap: 16px }
-      .download-container { padding: 24px 16px }
-      .download-option { padding: 16px; min-height: auto }
-      .download-option h4 { font-size: 17px; margin-bottom: 8px }
-      .download-option p { font-size: 13px; margin-bottom: 16px; line-height: 1.5 }
-      .download-option .button { font-size: 13px; padding: 10px 16px; white-space: normal; height: auto; min-height: 40px }
-      .download-meta { flex-wrap: wrap; font-size: 12px; margin-bottom: 16px }
-      .download-badge { font-size: 11px; padding: 4px 10px }
-      .download-alternatives { margin-top: 32px; padding-top: 24px }
-      .alt-links { flex-direction: column }
-      .alt-link { width: 100%; justify-content: center }
-      .footer-testimonials { padding: 18px }
-      .footer-testimonials-head h4 { font-size: 22px }
-      .footer-testimonials-grid { grid-template-columns: 1fr; gap: 12px }
-      .footer-testimonial-card { min-height: auto }
-      .footer-links { gap: 20px }
-      .footer-bottom small { font-size: 12px }
+    @media (max-width: 600px) {
+      .download-container { padding: 32px 24px; }
+      .footer-content { flex-direction: column; align-items: center; text-align: center; }
+      .footer-links { flex-direction: column; align-items: center; gap: 32px; }
     }
 
     [data-aos] { will-change: transform, opacity; }
-
     @media (prefers-reduced-motion: reduce) {
-      .bg::before, .bg::after { animation: none; }
-      .site-header::before { animation: none; }
+      .bg-blobs::before, .bg-blobs::after { animation: none; }
       [data-aos] { transition: none !important; transform: none !important; opacity: 1 !important; }
     }
   </style>
 </head>
 <body>
-  <div class="bg"></div>
+  <!-- MD3 Expressive Blurred Background -->
+  <div class="bg-blobs"></div>
   
   <header class="site-header">
-    <div class="brand">
+    <a href="/" class="brand">
       <span class="material-symbols-outlined logo">queue_music</span>
-      <h1>
-        <span class="brand-archive">Archive</span><span class="brand-tune">Tune</span>
-      </h1>
+      <h1>AvidTune</h1>
+    </a>
+    <div style="display: flex; gap: 8px;">
+      <nav class="nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#updates">Updates</a>
+        <a href="#download" class="cta">Download</a>
+      </nav>
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme">
+        <span class="material-symbols-outlined icon-moon">dark_mode</span>
+        <span class="material-symbols-outlined icon-sun">light_mode</span>
+      </button>
+      <button class="icon-btn nav-toggle" aria-label="Toggle navigation">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
     </div>
-    <button class="theme-toggle" aria-label="Toggle theme">
-      <span class="material-symbols-outlined icon-moon">dark_mode</span>
-      <span class="material-symbols-outlined icon-sun">light_mode</span>
-    </button>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span class="nav-icon" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-    </button>
-    <nav class="nav" aria-label="Primary">
-      <a href="#features">Features</a>
-      <a href="#screenshots">Screenshots</a>
-      <a href="#updates">Updates</a>
-      <a href="#download" class="cta">Download</a>
-    </nav>
   </header>
-  <div class="nav-backdrop" aria-hidden="true"></div>
 
-  <main class="hero">
-    <section class="hero-content glass" data-aos="fade-up">
-      <div class="hero-left">
-        <div class="badge" data-aos="fade-up" data-aos-delay="100">
-          <span class="material-symbols-outlined">auto_awesome</span>
-          <span id="repo-badge-text">Material 3 Expressive Design</span>
-        </div>
-        <h2 data-aos="fade-up" data-aos-delay="200">Enhanced Music Streaming for Android</h2>
-        <p class="lead" id="repo-lead" data-aos="fade-up" data-aos-delay="300">Experience YouTube Music like never before with advanced features — seamless background playback, offline downloads, live synchronized lyrics, and beautiful Material 3 theming.</p>
+  <main>
+    <section class="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <div class="hero-left">
+          <div class="badge" data-aos="fade-up" data-aos-delay="100">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span>Material Design 3 Expressive</span>
+          </div>
+          <h2 data-aos="fade-up" data-aos-delay="200">Enhanced Music Streaming for Android</h2>
+          <p class="lead" data-aos="fade-up" data-aos-delay="300">Experience YouTube Music like never before. Seamless background playback, offline downloads, live synchronized lyrics, and adaptive Material 3 theming.</p>
 
-        <div class="repo-topics" id="repo-topics" aria-label="Repository topics"></div>
+          <div class="stats" data-aos="fade-up" data-aos-delay="400">
+            <div class="stat-item">
+              <div class="stat-value" id="github-stars">—</div>
+              <div class="stat-label">Stars</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="latest-version">—</div>
+              <div class="stat-label">Latest Version</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="github-forks">—</div>
+              <div class="stat-label">Forks</div>
+            </div>
+          </div>
 
-        <div class="stats" data-aos="fade-up" data-aos-delay="400">
-          <div class="stat-item">
-            <div class="stat-value" id="github-stars">—</div>
-            <div class="stat-label">Stars</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="latest-version">—</div>
-            <div class="stat-label">Latest Version</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="github-forks">—</div>
-            <div class="stat-label">Forks</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">Android 8+</div>
-            <div class="stat-label">Compatibility</div>
-          </div>
-        </div>
-
-        <div class="repo-meta" aria-label="Repository metadata">
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">License</span>
-            <span class="repo-meta-value" id="repo-license">—</span>
-          </div>
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">Open Issues</span>
-            <span class="repo-meta-value" id="github-issues">—</span>
-          </div>
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">Last Update</span>
-            <span class="repo-meta-value" id="repo-updated">—</span>
-          </div>
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">Default Branch</span>
-            <span class="repo-meta-value" id="repo-branch">—</span>
+          <div class="actions" data-aos="fade-up" data-aos-delay="500">
+            <a href="#download" class="btn-filled">
+              <span class="material-symbols-outlined">download</span>
+              Download APK
+            </a>
+            <a href="https://github.com/cgens67/avidtune" class="btn-tonal" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined">code</span>
+              View on GitHub
+            </a>
           </div>
         </div>
 
-        <div class="actions" data-aos="fade-up" data-aos-delay="500">
-          <a href="https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk" class="button primary">
-            <span class="material-symbols-outlined">download</span>
-            Download
-          </a>
-          <a href="https://github.com/koiverse/ArchiveTune" class="button ghost" target="_blank" rel="noopener">
-            <span class="material-symbols-outlined">code</span>
-            View on GitHub
-          </a>
-        </div>
-
-        <div class="download-badges">
-          <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" rel="noopener">
-            <img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="60">
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-right" data-aos="fade-left" data-aos-delay="400">
-        <div class="phone-mockup" aria-roledescription="carousel">
-          <div class="carousel">
-            <div class="slide active"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Home screen with music library"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing with live lyrics"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Song details and options"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_4.jpg" alt="Search interface"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_5.jpg" alt="Settings and customization"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_6.jpg" alt="Theme customization"></div>
+        <div class="hero-right" data-aos="fade-left" data-aos-delay="400">
+          <div class="phone-mockup" aria-roledescription="carousel">
+            <div class="carousel">
+              <div class="slide active"><img src="https://raw.githubusercontent.com/cgens67/avidtune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Home screen" onerror="this.src='https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg'"></div>
+              <div class="slide"><img src="https://raw.githubusercontent.com/cgens67/avidtune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing" onerror="this.src='https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg'"></div>
+              <div class="slide"><img src="https://raw.githubusercontent.com/cgens67/avidtune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Options" onerror="this.src='https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg'"></div>
+            </div>
+            <button class="carousel-control prev" aria-label="Previous slide"><span class="material-symbols-outlined">chevron_left</span></button>
+            <button class="carousel-control next" aria-label="Next slide"><span class="material-symbols-outlined">chevron_right</span></button>
           </div>
-          <button class="carousel-control prev" aria-label="Previous slide">‹</button>
-          <button class="carousel-control next" aria-label="Next slide">›</button>
         </div>
       </div>
     </section>
 
-    <section id="features" class="section features">
-      <h3 data-aos="fade-up">Features</h3>
-      <div class="cards">
-        <article class="card glass">
-          <h4>
-            <span class="material-symbols-outlined feature-icon">download_for_offline</span>
-            <span class="feature-title" data-feature-title="0">Offline downloads</span>
-          </h4>
-          <p data-feature-desc="0">Cache songs for offline playback with configurable quality and storage management.</p>
-        </article>
-        <article class="card glass">
-          <h4>
-            <span class="material-symbols-outlined feature-icon">lyrics</span>
-            <span class="feature-title" data-feature-title="1">Live lyrics</span>
-          </h4>
-          <p data-feature-desc="1">Follow along with synchronized lyrics in the player and lock screen widgets.</p>
-        </article>
-        <article class="card glass">
-          <h4>
-            <span class="material-symbols-outlined feature-icon">palette</span>
-            <span class="feature-title" data-feature-title="2">Themeable UI</span>
-          </h4>
-          <p data-feature-desc="2">Light, dark, black and dynamic themes built on Material 3 design.</p>
-        </article>
-        <article class="card glass">
-          <h4>
-            <span class="material-symbols-outlined feature-icon">sports_esports</span>
-            <span class="feature-title" data-feature-title="3">Highly Customizable Discord Rich Presence</span>
-          </h4>
-          <p data-feature-desc="3">Tailor exactly how your presence appears in Discord, with detailed fields, artwork selection, timestamps and flexible formatting options so you can show what matters.</p>
-        </article>
-        <article class="card glass">
-          <h4>
-            <span class="material-symbols-outlined feature-icon">translate</span>
-            <span class="feature-title" data-feature-title="4">Smart RPC Translation</span>
-          </h4>
-          <p data-feature-desc="4">Automatically translate your Rich Presence text before it’s sent to Discord — making your activity accessible across languages and audiences.</p>
-        </article>
-        <article class="card glass">
-          <h4>
-            <span class="material-symbols-outlined feature-icon">subtitles</span>
-            <span class="feature-title" data-feature-title="5">Lyrics Translation Support</span>
-          </h4>
-          <p data-feature-desc="5">Translate lyrics directly inside ArchiveTune so listeners can follow along in their preferred language.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="screenshots" class="section screenshots">
+    <section id="features" class="section">
       <div class="section-header" data-aos="fade-up">
-        <h3>See It In Action</h3>
-        <p class="section-subtitle">Beautiful, intuitive interface designed for music lovers</p>
+        <h3>Core Features</h3>
+        <p class="section-subtitle">Everything you need for an audiophile-grade experience.</p>
+      </div>
+      <div class="cards">
+        <article class="card" data-aos="fade-up">
+          <div class="feature-icon-container">
+            <span class="material-symbols-outlined">download_for_offline</span>
+          </div>
+          <h4>Offline Downloads</h4>
+          <p>Cache songs for offline playback with configurable quality and intelligent storage management.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon-container">
+            <span class="material-symbols-outlined">lyrics</span>
+          </div>
+          <h4>Live Lyrics</h4>
+          <p>Follow along with perfectly synchronized lyrics natively integrated into the player UI.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-icon-container">
+            <span class="material-symbols-outlined">palette</span>
+          </div>
+          <h4>MD3 Dynamic Theming</h4>
+          <p>Gorgeous light, dark, and true black themes that automatically adapt to your system colors.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon-container">
+            <span class="material-symbols-outlined">sports_esports</span>
+          </div>
+          <h4>Discord Rich Presence</h4>
+          <p>Show off what you're listening to. Highly customizable fields, artwork, and timestamps.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon-container">
+            <span class="material-symbols-outlined">translate</span>
+          </div>
+          <h4>RPC Translation</h4>
+          <p>Automatically translate your Rich Presence activity text making it accessible across languages.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="500">
+          <div class="feature-icon-container">
+            <span class="material-symbols-outlined">subtitles</span>
+          </div>
+          <h4>Lyrics Translation</h4>
+          <p>Translate track lyrics instantly inside AvidTune to follow along in your native language.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screenshots" class="section">
+      <div class="section-header" data-aos="fade-up">
+        <h3>Interface</h3>
       </div>
       <div class="gallery">
         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
-          <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Music library home screen">
-          <div class="gallery-overlay">
-            <span>Music Player</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/cgens67/avidtune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" onerror="this.src='https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg'" alt="Music library">
+          <div class="gallery-label">Home / Library</div>
         </div>
         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150">
-          <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing with lyrics">
-          <div class="gallery-overlay">
-            <span>Live Lyrics</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/cgens67/avidtune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" onerror="this.src='https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg'" alt="Now playing">
+          <div class="gallery-label">Now Playing</div>
         </div>
         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-          <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Song options and details">
-          <div class="gallery-overlay">
-            <span>Theme Customization</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/cgens67/avidtune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" onerror="this.src='https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg'" alt="Settings">
+          <div class="gallery-label">Customization</div>
         </div>
-      </div>
-      <div class="feature-banner" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/dev/fastlane/metadata/android/en-US/images/ArchiveTuneBanner.png" alt="ArchiveTune feature showcase">
       </div>
     </section>
 
-    <section id="updates" class="section updates">
+    <section id="updates" class="section">
       <div class="section-header" data-aos="fade-up">
-        <h3>Live from GitHub</h3>
-        <p class="section-subtitle">Release notes, build freshness, and project health — updated automatically</p>
+        <h3>Live Activity</h3>
+        <p class="section-subtitle">Pulled directly from the cgens67/avidtune repository.</p>
       </div>
 
       <div class="updates-grid">
-        <article class="update-card glass" data-aos="fade-up" data-aos-delay="0">
+        <article class="update-card" data-aos="fade-up" data-aos-delay="0">
           <div class="update-header">
             <div class="update-title">
               <h4>Latest Release</h4>
               <div class="update-meta">
-                <span class="pill" id="release-tag">—</span>
-                <span class="separator">•</span>
-                <span id="release-date">—</span>
+                <span class="pill" id="release-tag">Fetching...</span>
               </div>
             </div>
-            <a class="update-link" id="release-link" href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener">View</a>
+            <a class="btn-tonal" style="padding: 8px 16px; border-radius: 8px;" href="https://github.com/cgens67/avidtune/releases" target="_blank" rel="noopener">View</a>
           </div>
-          <div class="update-body md" id="release-notes">—</div>
+          <div class="update-body" id="release-notes">Fetching latest release info from GitHub...</div>
         </article>
 
-        <article class="update-card glass" data-aos="fade-up" data-aos-delay="150">
+        <article class="update-card" data-aos="fade-up" data-aos-delay="150">
           <div class="update-header">
             <div class="update-title">
               <h4>Dev Build</h4>
               <div class="update-meta">
-                <span class="pill pill--warning" id="build-status">Development</span>
-                <span class="separator">•</span>
-                <span id="build-updated">Automated Build</span>
+                <span class="pill pill--warning">Nightly</span>
               </div>
             </div>
-            <a class="update-link" href="https://github.com/koiverse/ArchiveTune/actions" target="_blank" rel="noopener">Actions</a>
+            <a class="btn-tonal" style="padding: 8px 16px; border-radius: 8px;" href="https://github.com/cgens67/avidtune/actions" target="_blank" rel="noopener">Actions</a>
           </div>
           <div class="update-body">
             <div class="build-row">
-              <span class="build-label">Artifact</span>
-              <span class="build-value" id="nightly-size-inline">—</span>
+              <span class="build-label">Status</span>
+              <span class="build-value">Automated Build</span>
             </div>
             <div class="build-row">
-              <span class="build-label">Commit</span>
-              <span class="build-value" id="build-commit">—</span>
+              <span class="build-label">Latest Commit</span>
+              <span class="build-value" id="build-commit">Fetching...</span>
             </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section id="download" class="section download">
-      <div class="download-container glass" data-aos="fade-up">
-        <div class="section-header">
-          <h3>Get ArchiveTune</h3>
-          <p class="section-subtitle">Choose the version that's right for you</p>
+    <section id="download" class="section">
+      <div class="download-container" data-aos="fade-up">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <h3>Get AvidTune</h3>
+          <p class="section-subtitle">Available completely free and open-source.</p>
         </div>
         
         <div class="download-options">
           <div class="download-option" data-aos="fade-up" data-aos-delay="0">
-            <div class="download-badge stable">Recommended</div>
-            <h4>Stable Release</h4>
-            <p>Production-ready build, thoroughly tested and optimized for daily use. Perfect for users who want reliability.</p>
-            <div class="download-meta">
-              <span class="version" id="download-version">—</span>
-              <span class="separator">•</span>
-              <span class="size" id="download-size">—</span>
-            </div>
-            <a class="button primary" href="https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk">
-              <span class="material-symbols-outlined">download</span>
-              Download Stable APK
+            <div class="badge" style="width: max-content;">Stable</div>
+            <h4>Official Release</h4>
+            <p>Production-ready build, tested and optimized for daily use. Recommended for most users.</p>
+            <a class="btn-filled" href="https://github.com/cgens67/avidtune/releases/latest">
+              <span class="material-symbols-outlined">download</span> Download APK
             </a>
           </div>
           
           <div class="download-option" data-aos="fade-up" data-aos-delay="150">
-            <div class="download-badge nightly">Bleeding Edge</div>
-            <h4>Nightly Builds</h4>
-            <p>Latest features and fixes from the development branch. May contain experimental features and occasional bugs.</p>
-            <div class="download-meta">
-              <span class="version">Dev Branch</span>
-              <span class="separator">•</span>
-              <span class="size" id="nightly-size">—</span>
-            </div>
-            <a class="button ghost" href="https://nightly.link/koiverse/ArchiveTune/workflows/build/dev?preview" target="_blank" rel="noopener">
-              <span class="material-symbols-outlined">code_blocks</span>
-              Get Nightly Build
+            <div class="badge" style="background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); width: max-content;">Nightly</div>
+            <h4>Bleeding Edge</h4>
+            <p>The absolute latest features and fixes direct from the main branch. May contain bugs.</p>
+            <a class="btn-tonal" href="https://nightly.link/cgens67/avidtune/workflows/build/dev?preview" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined">science</span> Get Nightly
             </a>
           </div>
         </div>
 
-        <div class="download-alternatives">
-          <h4>Other Options</h4>
+        <div style="text-align: center; margin-top: 32px;">
           <div class="alt-links">
             <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" rel="noopener" class="alt-link">
-              <span class="material-symbols-outlined">android</span>
-              IzzyOnDroid F-Droid Repo
+              <span class="material-symbols-outlined">android</span> IzzyOnDroid F-Droid
             </a>
-            <a href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener" class="alt-link">
-              <span class="material-symbols-outlined">source_notes</span>
-              All Releases on GitHub
+            <a href="https://github.com/cgens67/avidtune/releases" target="_blank" rel="noopener" class="alt-link">
+              <span class="material-symbols-outlined">folder_zip</span> All GitHub Releases
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section testimonials-section" aria-labelledby="footer-testimonials-title">
-      <div class="footer-testimonials glass" data-aos="fade-up">
-        <div class="footer-testimonials-head">
-          <h4 id="footer-testimonials-title">What users say</h4>
-          <p>Loved by listeners who use ArchiveTune every day.</p>
-        </div>
-        <div class="footer-testimonials-grid" id="footer-testimonials-grid">
-           <!-- Populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <footer class="site-footer glass" data-aos="fade-up">
+    <footer class="site-footer" data-aos="fade-up">
         <div class="footer-content">
           <div class="footer-brand">
-            <span class="material-symbols-outlined footer-logo">queue_music</span>
-            <div>
-              <strong>ArchiveTune</strong>
-              <p id="footer-tagline">Enhanced Music Streaming for Android</p>
-            </div>
+            <h2>AvidTune</h2>
+            <p>Enhanced Music Streaming Client for Android</p>
           </div>
           
           <div class="footer-links">
             <div class="footer-column">
               <h5>Project</h5>
-              <a href="https://github.com/koiverse/ArchiveTune" target="_blank" rel="noopener">Source Code</a>
-              <a href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener">Releases</a>
-              <a href="https://github.com/koiverse/ArchiveTune/issues" target="_blank" rel="noopener">Issue Tracker</a>
+              <a href="https://github.com/cgens67/avidtune" target="_blank" rel="noopener">Source Code</a>
+              <a href="https://github.com/cgens67/avidtune/releases" target="_blank" rel="noopener">Releases</a>
+              <a href="https://github.com/cgens67/avidtune/issues" target="_blank" rel="noopener">Issues</a>
             </div>
             <div class="footer-column">
-              <h5>Community</h5>
-              <a href="https://github.com/koiverse/ArchiveTune/discussions" target="_blank" rel="noopener">Discussions</a>
-              <a href="https://github.com/koiverse/ArchiveTune/blob/main/README.md" target="_blank" rel="noopener">Documentation</a>
-              <a href="https://github.com/koiverse/ArchiveTune/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+              <h5>Resources</h5>
+              <a href="https://github.com/cgens67/avidtune/blob/main/README.md" target="_blank" rel="noopener">Documentation</a>
+              <a href="https://github.com/cgens67/avidtune/blob/main/LICENSE" target="_blank" rel="noopener">GPL-3.0 License</a>
             </div>
           </div>
         </div>
         
         <div class="footer-bottom">
-          <small>
-            Made with <span style="color: #f472b6;">❤</span> by Koiverse • 
-            Not affiliated with YouTube or Google • 
-            Licensed under <a href="https://github.com/koiverse/ArchiveTune/blob/main/LICENSE" target="_blank" rel="noopener">GPL-3.0</a>
-          </small>
+          <p>Not affiliated with YouTube or Google. Designed with Material 3.</p>
         </div>
     </footer>
   </main>
@@ -2063,25 +941,18 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     // --- Initialize AOS Animations ---
-    AOS.init({ duration: 600, once: true });
+    AOS.init({ duration: 600, once: true, offset: 50 });
 
     // --- Theme Toggler ---
     const themeBtn = document.querySelector('.theme-toggle');
+    // Defaulting to system preference if light class isn't strictly needed on load
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+       document.body.classList.add('light');
+    }
+    
     themeBtn.addEventListener('click', () => {
       document.body.classList.toggle('light');
     });
-
-    // --- Mobile Nav ---
-    const navBtn = document.querySelector('.nav-toggle');
-    const navBackdrop = document.querySelector('.nav-backdrop');
-    const nav = document.querySelector('.nav');
-    
-    function toggleNav() {
-      document.body.classList.toggle('nav-open');
-      nav.classList.toggle('mobile-panel');
-    }
-    navBtn.addEventListener('click', toggleNav);
-    navBackdrop.addEventListener('click', toggleNav);
 
     // --- Hero Carousel ---
     const slides = document.querySelectorAll('.slide');
@@ -2112,88 +983,46 @@
     
     updateCarousel();
 
-    // --- GitHub API Fetcher ---
+    // --- GitHub API Fetcher for cgens67/avidtune ---
     async function fetchGitHubData() {
       try {
         // Repo Stats
-        const repoRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune');
+        const repoRes = await fetch('https://api.github.com/repos/cgens67/avidtune');
         if(repoRes.ok) {
           const repo = await repoRes.json();
           document.getElementById('github-stars').textContent = repo.stargazers_count;
           document.getElementById('github-forks').textContent = repo.forks_count;
-          document.getElementById('github-issues').textContent = repo.open_issues_count;
-          document.getElementById('repo-license').textContent = repo.license ? repo.license.spdx_id : 'Unknown';
-          document.getElementById('repo-updated').textContent = new Date(repo.pushed_at).toLocaleDateString();
-          document.getElementById('repo-branch').textContent = repo.default_branch;
-
-          // Populate topics
-          const topicsDiv = document.getElementById('repo-topics');
-          if(repo.topics) {
-            repo.topics.forEach(topic => {
-              const span = document.createElement('span');
-              span.className = 'topic-pill';
-              span.textContent = topic;
-              topicsDiv.appendChild(span);
-            });
-          }
         }
         
         // Latest Release
-        const releaseRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune/releases/latest');
+        const releaseRes = await fetch('https://api.github.com/repos/cgens67/avidtune/releases/latest');
         if(releaseRes.ok) {
           const release = await releaseRes.json();
           const vLabel = release.tag_name || 'Latest';
           document.getElementById('latest-version').textContent = vLabel;
           document.getElementById('release-tag').textContent = vLabel;
-          document.getElementById('download-version').textContent = vLabel;
-          document.getElementById('release-date').textContent = new Date(release.published_at).toLocaleDateString();
-          
-          if(release.assets && release.assets.length > 0) {
-            const sizeMb = (release.assets[0].size / (1024 * 1024)).toFixed(1);
-            document.getElementById('download-size').textContent = `${sizeMb} MB`;
-          }
 
-          // Very simple Markdown to HTML for the notes
-          let notes = release.body || 'No release notes available.';
-          notes = notes.substring(0, 300) + '...'; // Truncate to save space
-          document.getElementById('release-notes').innerHTML = `<div class="md-p">${notes.replace(/\n/g, '<br>')}</div>`;
+          let notes = release.body || 'No release notes provided.';
+          notes = notes.substring(0, 200) + (notes.length > 200 ? '...' : '');
+          document.getElementById('release-notes').innerHTML = notes.replace(/\n/g, '<br>');
         }
 
         // Commits for Dev Build
-        const commitRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune/commits?per_page=1');
+        const commitRes = await fetch('https://api.github.com/repos/cgens67/avidtune/commits?per_page=1');
         if(commitRes.ok) {
           const commits = await commitRes.json();
           if(commits.length > 0) {
              const hash = commits[0].sha.substring(0, 7);
-             document.getElementById('build-commit').textContent = hash;
+             document.getElementById('build-commit').innerHTML = `<a href="${commits[0].html_url}" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none;">${hash}</a>`;
           }
         }
 
       } catch (err) {
-        console.warn('Failed to fetch GitHub data:', err);
+        console.warn('Failed to fetch GitHub data. It may be a private repo or hitting rate limits.', err);
+        document.getElementById('release-notes').textContent = 'Cannot fetch release notes at this time.';
       }
     }
     fetchGitHubData();
-
-    // --- Dummy Testimonials (to populate empty grid) ---
-    const testimonials = [
-      { name: "Audiophile99", icon: "headphones", msg: "The UI is gorgeous and the background playback works flawlessly. Exactly what I was looking for!" },
-      { name: "RhythmRider", icon: "speaker", msg: "Material 3 implementation is 10/10. Downloads are super fast and lyric sync is spot on." },
-      { name: "DevEnthusiast", icon: "code", msg: "An amazing open source alternative. The Discord RPC integration is a game-changer." }
-    ];
-
-    const tGrid = document.getElementById('footer-testimonials-grid');
-    testimonials.forEach(t => {
-      tGrid.innerHTML += `
-        <div class="footer-testimonial-card">
-          <p class="footer-testimonial-message">"${t.msg}"</p>
-          <div class="footer-testimonial-author">
-            <div class="footer-testimonial-avatar material-symbols-outlined">${t.icon}</div>
-            <span class="footer-testimonial-username">${t.name}</span>
-          </div>
-        </div>
-      `;
-    });
   </script>
 </body>
 </html>
