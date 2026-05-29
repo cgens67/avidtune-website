@@ -6,25 +6,23 @@
   <title>ArchiveTune – Enhanced Music Streaming Client for Android | Background Playback & Offline Downloads</title>
   <meta name="description" content="ArchiveTune is a feature-rich music streaming client for Android with Material 3 design, background playback, offline downloads, live synchronized lyrics, and Discord Rich Presence integration. Free and open-source.">
   <meta name="theme-color" content="#a78bfa">
-  
-  <!-- Fallback Favicon to keep it single-file -->
+
+  <!-- Fallback Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Material Icons -->
+  <!-- Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  
+  <!-- AOS Animation Library CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       AOS CSS (Inlined)
-       ========================================================================== */
-    [data-aos][data-aos][data-aos-duration="50"],body[data-aos-duration="50"] [data-aos]{transition-duration:50ms}[data-aos][data-aos][data-aos-delay="50"],body[data-aos-delay="50"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="50"].aos-animate,body[data-aos-delay="50"] [data-aos].aos-animate{transition-delay:50ms}[data-aos][data-aos][data-aos-duration="100"],body[data-aos-duration="100"] [data-aos]{transition-duration:.1s}[data-aos][data-aos][data-aos-delay="100"],body[data-aos-delay="100"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="100"].aos-animate,body[data-aos-delay="100"] [data-aos].aos-animate{transition-delay:.1s}[data-aos][data-aos][data-aos-duration="150"],body[data-aos-duration="150"] [data-aos]{transition-duration:.15s}[data-aos][data-aos][data-aos-delay="150"],body[data-aos-delay="150"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="150"].aos-animate,body[data-aos-delay="150"] [data-aos].aos-animate{transition-delay:.15s}[data-aos][data-aos][data-aos-duration="200"],body[data-aos-duration="200"] [data-aos]{transition-duration:.2s}[data-aos][data-aos][data-aos-delay="200"],body[data-aos-delay="200"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="200"].aos-animate,body[data-aos-delay="200"] [data-aos].aos-animate{transition-delay:.2s}[data-aos][data-aos][data-aos-duration="250"],body[data-aos-duration="250"] [data-aos]{transition-duration:.25s}[data-aos][data-aos][data-aos-delay="250"],body[data-aos-delay="250"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="250"].aos-animate,body[data-aos-delay="250"] [data-aos].aos-animate{transition-delay:.25s}[data-aos][data-aos][data-aos-duration="300"],body[data-aos-duration="300"] [data-aos]{transition-duration:.3s}[data-aos][data-aos][data-aos-delay="300"],body[data-aos-delay="300"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="300"].aos-animate,body[data-aos-delay="300"] [data-aos].aos-animate{transition-delay:.3s}[data-aos][data-aos][data-aos-duration="350"],body[data-aos-duration="350"] [data-aos]{transition-duration:.35s}[data-aos][data-aos][data-aos-delay="350"],body[data-aos-delay="350"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="350"].aos-animate,body[data-aos-delay="350"] [data-aos].aos-animate{transition-delay:.35s}[data-aos][data-aos][data-aos-duration="400"],body[data-aos-duration="400"] [data-aos]{transition-duration:.4s}[data-aos][data-aos][data-aos-delay="400"],body[data-aos-delay="400"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="400"].aos-animate,body[data-aos-delay="400"] [data-aos].aos-animate{transition-delay:.4s}[data-aos][data-aos][data-aos-duration="450"],body[data-aos-duration="450"] [data-aos]{transition-duration:.45s}[data-aos][data-aos][data-aos-delay="450"],body[data-aos-delay="450"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="450"].aos-animate,body[data-aos-delay="450"] [data-aos].aos-animate{transition-delay:.45s}[data-aos][data-aos][data-aos-duration="500"],body[data-aos-duration="500"] [data-aos]{transition-duration:.5s}[data-aos][data-aos][data-aos-delay="500"],body[data-aos-delay="500"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="500"].aos-animate,body[data-aos-delay="500"] [data-aos].aos-animate{transition-delay:.5s}[data-aos][data-aos][data-aos-duration="550"],body[data-aos-duration="550"] [data-aos]{transition-duration:.55s}[data-aos][data-aos][data-aos-delay="550"],body[data-aos-delay="550"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="550"].aos-animate,body[data-aos-delay="550"] [data-aos].aos-animate{transition-delay:.55s}[data-aos][data-aos][data-aos-duration="600"],body[data-aos-duration="600"] [data-aos]{transition-duration:.6s}[data-aos][data-aos][data-aos-delay="600"],body[data-aos-delay="600"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="600"].aos-animate,body[data-aos-delay="600"] [data-aos].aos-animate{transition-delay:.6s}[data-aos][data-aos][data-aos-duration="650"],body[data-aos-duration="650"] [data-aos]{transition-duration:.65s}[data-aos][data-aos][data-aos-delay="650"],body[data-aos-delay="650"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="650"].aos-animate,body[data-aos-delay="650"] [data-aos].aos-animate{transition-delay:.65s}[data-aos][data-aos][data-aos-duration="700"],body[data-aos-duration="700"] [data-aos]{transition-duration:.7s}[data-aos][data-aos][data-aos-delay="700"],body[data-aos-delay="700"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="700"].aos-animate,body[data-aos-delay="700"] [data-aos].aos-animate{transition-delay:.7s}[data-aos][data-aos][data-aos-duration="750"],body[data-aos-duration="750"] [data-aos]{transition-duration:.75s}[data-aos][data-aos][data-aos-delay="750"],body[data-aos-delay="750"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="750"].aos-animate,body[data-aos-delay="750"] [data-aos].aos-animate{transition-delay:.75s}[data-aos][data-aos][data-aos-duration="800"],body[data-aos-duration="800"] [data-aos]{transition-duration:.8s}[data-aos][data-aos][data-aos-delay="800"],body[data-aos-delay="800"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="800"].aos-animate,body[data-aos-delay="800"] [data-aos].aos-animate{transition-delay:.8s}[data-aos][data-aos][data-aos-duration="850"],body[data-aos-duration="850"] [data-aos]{transition-duration:.85s}[data-aos][data-aos][data-aos-delay="850"],body[data-aos-delay="850"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="850"].aos-animate,body[data-aos-delay="850"] [data-aos].aos-animate{transition-delay:.85s}[data-aos][data-aos][data-aos-duration="900"],body[data-aos-duration="900"] [data-aos]{transition-duration:.9s}[data-aos][data-aos][data-aos-delay="900"],body[data-aos-delay="900"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="900"].aos-animate,body[data-aos-delay="900"] [data-aos].aos-animate{transition-delay:.9s}[data-aos][data-aos][data-aos-duration="950"],body[data-aos-duration="950"] [data-aos]{transition-duration:.95s}[data-aos][data-aos][data-aos-delay="950"],body[data-aos-delay="950"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="950"].aos-animate,body[data-aos-delay="950"] [data-aos].aos-animate{transition-delay:.95s}[data-aos][data-aos][data-aos-duration="1000"],body[data-aos-duration="1000"] [data-aos]{transition-duration:1s}[data-aos][data-aos][data-aos-delay="1000"],body[data-aos-delay="1000"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1000"].aos-animate,body[data-aos-delay="1000"] [data-aos].aos-animate{transition-delay:1s}[data-aos][data-aos][data-aos-duration="1050"],body[data-aos-duration="1050"] [data-aos]{transition-duration:1.05s}[data-aos][data-aos][data-aos-delay="1050"],body[data-aos-delay="1050"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1050"].aos-animate,body[data-aos-delay="1050"] [data-aos].aos-animate{transition-delay:1.05s}[data-aos][data-aos][data-aos-duration="1100"],body[data-aos-duration="1100"] [data-aos]{transition-duration:1.1s}[data-aos][data-aos][data-aos-delay="1100"],body[data-aos-delay="1100"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1100"].aos-animate,body[data-aos-delay="1100"] [data-aos].aos-animate{transition-delay:1.1s}[data-aos][data-aos][data-aos-duration="1150"],body[data-aos-duration="1150"] [data-aos]{transition-duration:1.15s}[data-aos][data-aos][data-aos-delay="1150"],body[data-aos-delay="1150"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1150"].aos-animate,body[data-aos-delay="1150"] [data-aos].aos-animate{transition-delay:1.15s}[data-aos][data-aos][data-aos-duration="1200"],body[data-aos-duration="1200"] [data-aos]{transition-duration:1.2s}[data-aos][data-aos][data-aos-delay="1200"],body[data-aos-delay="1200"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1200"].aos-animate,body[data-aos-delay="1200"] [data-aos].aos-animate{transition-delay:1.2s}[data-aos][data-aos][data-aos-duration="1250"],body[data-aos-duration="1250"] [data-aos]{transition-duration:1.25s}[data-aos][data-aos][data-aos-delay="1250"],body[data-aos-delay="1250"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1250"].aos-animate,body[data-aos-delay="1250"] [data-aos].aos-animate{transition-delay:1.25s}[data-aos][data-aos][data-aos-duration="1300"],body[data-aos-duration="1300"] [data-aos]{transition-duration:1.3s}[data-aos][data-aos][data-aos-delay="1300"],body[data-aos-delay="1300"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1300"].aos-animate,body[data-aos-delay="1300"] [data-aos].aos-animate{transition-delay:1.3s}[data-aos][data-aos][data-aos-duration="1350"],body[data-aos-duration="1350"] [data-aos]{transition-duration:1.35s}[data-aos][data-aos][data-aos-delay="1350"],body[data-aos-delay="1350"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1350"].aos-animate,body[data-aos-delay="1350"] [data-aos].aos-animate{transition-delay:1.35s}[data-aos][data-aos][data-aos-duration="1400"],body[data-aos-duration="1400"] [data-aos]{transition-duration:1.4s}[data-aos][data-aos][data-aos-delay="1400"],body[data-aos-delay="1400"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1400"].aos-animate,body[data-aos-delay="1400"] [data-aos].aos-animate{transition-delay:1.4s}[data-aos][data-aos][data-aos-duration="1450"],body[data-aos-duration="1450"] [data-aos]{transition-duration:1.45s}[data-aos][data-aos][data-aos-delay="1450"],body[data-aos-delay="1450"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1450"].aos-animate,body[data-aos-delay="1450"] [data-aos].aos-animate{transition-delay:1.45s}[data-aos][data-aos][data-aos-duration="1500"],body[data-aos-duration="1500"] [data-aos]{transition-duration:1.5s}[data-aos][data-aos][data-aos-delay="1500"],body[data-aos-delay="1500"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1500"].aos-animate,body[data-aos-delay="1500"] [data-aos].aos-animate{transition-delay:1.5s}[data-aos][data-aos][data-aos-duration="1550"],body[data-aos-duration="1550"] [data-aos]{transition-duration:1.55s}[data-aos][data-aos][data-aos-delay="1550"],body[data-aos-delay="1550"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1550"].aos-animate,body[data-aos-delay="1550"] [data-aos].aos-animate{transition-delay:1.55s}[data-aos][data-aos][data-aos-duration="1600"],body[data-aos-duration="1600"] [data-aos]{transition-duration:1.6s}[data-aos][data-aos][data-aos-delay="1600"],body[data-aos-delay="1600"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1600"].aos-animate,body[data-aos-delay="1600"] [data-aos].aos-animate{transition-delay:1.6s}[data-aos][data-aos][data-aos-duration="1650"],body[data-aos-duration="1650"] [data-aos]{transition-duration:1.65s}[data-aos][data-aos][data-aos-delay="1650"],body[data-aos-delay="1650"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1650"].aos-animate,body[data-aos-delay="1650"] [data-aos].aos-animate{transition-delay:1.65s}[data-aos][data-aos][data-aos-duration="1700"],body[data-aos-duration="1700"] [data-aos]{transition-duration:1.7s}[data-aos][data-aos][data-aos-delay="1700"],body[data-aos-delay="1700"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1700"].aos-animate,body[data-aos-delay="1700"] [data-aos].aos-animate{transition-delay:1.7s}[data-aos][data-aos][data-aos-duration="1750"],body[data-aos-duration="1750"] [data-aos]{transition-duration:1.75s}[data-aos][data-aos][data-aos-delay="1750"],body[data-aos-delay="1750"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1750"].aos-animate,body[data-aos-delay="1750"] [data-aos].aos-animate{transition-delay:1.75s}[data-aos][data-aos][data-aos-duration="1800"],body[data-aos-duration="1800"] [data-aos]{transition-duration:1.8s}[data-aos][data-aos][data-aos-delay="1800"],body[data-aos-delay="1800"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1800"].aos-animate,body[data-aos-delay="1800"] [data-aos].aos-animate{transition-delay:1.8s}[data-aos][data-aos][data-aos-duration="1850"],body[data-aos-duration="1850"] [data-aos]{transition-duration:1.85s}[data-aos][data-aos][data-aos-delay="1850"],body[data-aos-delay="1850"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1850"].aos-animate,body[data-aos-delay="1850"] [data-aos].aos-animate{transition-delay:1.85s}[data-aos][data-aos][data-aos-duration="1900"],body[data-aos-duration="1900"] [data-aos]{transition-duration:1.9s}[data-aos][data-aos][data-aos-delay="1900"],body[data-aos-delay="1900"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1900"].aos-animate,body[data-aos-delay="1900"] [data-aos].aos-animate{transition-delay:1.9s}[data-aos][data-aos][data-aos-duration="1950"],body[data-aos-duration="1950"] [data-aos]{transition-duration:1.95s}[data-aos][data-aos][data-aos-delay="1950"],body[data-aos-delay="1950"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1950"].aos-animate,body[data-aos-delay="1950"] [data-aos].aos-animate{transition-delay:1.95s}[data-aos][data-aos][data-aos-duration="2000"],body[data-aos-duration="2000"] [data-aos]{transition-duration:2s}[data-aos][data-aos][data-aos-delay="2000"],body[data-aos-delay="2000"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2000"].aos-animate,body[data-aos-delay="2000"] [data-aos].aos-animate{transition-delay:2s}[data-aos][data-aos][data-aos-duration="2050"],body[data-aos-duration="2050"] [data-aos]{transition-duration:2.05s}[data-aos][data-aos][data-aos-delay="2050"],body[data-aos-delay="2050"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2050"].aos-animate,body[data-aos-delay="2050"] [data-aos].aos-animate{transition-delay:2.05s}[data-aos][data-aos][data-aos-duration="2100"],body[data-aos-duration="2100"] [data-aos]{transition-duration:2.1s}[data-aos][data-aos][data-aos-delay="2100"],body[data-aos-delay="2100"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2100"].aos-animate,body[data-aos-delay="2100"] [data-aos].aos-animate{transition-delay:2.1s}[data-aos][data-aos][data-aos-duration="2150"],body[data-aos-duration="2150"] [data-aos]{transition-duration:2.15s}[data-aos][data-aos][data-aos-delay="2150"],body[data-aos-delay="2150"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2150"].aos-animate,body[data-aos-delay="2150"] [data-aos].aos-animate{transition-delay:2.15s}[data-aos][data-aos][data-aos-duration="2200"],body[data-aos-duration="2200"] [data-aos]{transition-duration:2.2s}[data-aos][data-aos][data-aos-delay="2200"],body[data-aos-delay="2200"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2200"].aos-animate,body[data-aos-delay="2200"] [data-aos].aos-animate{transition-delay:2.2s}[data-aos][data-aos][data-aos-duration="2250"],body[data-aos-duration="2250"] [data-aos]{transition-duration:2.25s}[data-aos][data-aos][data-aos-delay="2250"],body[data-aos-delay="2250"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2250"].aos-animate,body[data-aos-delay="2250"] [data-aos].aos-animate{transition-delay:2.25s}[data-aos][data-aos][data-aos-duration="2300"],body[data-aos-duration="2300"] [data-aos]{transition-duration:2.3s}[data-aos][data-aos][data-aos-delay="2300"],body[data-aos-delay="2300"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2300"].aos-animate,body[data-aos-delay="2300"] [data-aos].aos-animate{transition-delay:2.3s}[data-aos][data-aos][data-aos-duration="2350"],body[data-aos-duration="2350"] [data-aos]{transition-duration:2.35s}[data-aos][data-aos][data-aos-delay="2350"],body[data-aos-delay="2350"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2350"].aos-animate,body[data-aos-delay="2350"] [data-aos].aos-animate{transition-delay:2.35s}[data-aos][data-aos][data-aos-duration="2400"],body[data-aos-duration="2400"] [data-aos]{transition-duration:2.4s}[data-aos][data-aos][data-aos-delay="2400"],body[data-aos-delay="2400"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2400"].aos-animate,body[data-aos-delay="2400"] [data-aos].aos-animate{transition-delay:2.4s}[data-aos][data-aos][data-aos-duration="2450"],body[data-aos-duration="2450"] [data-aos]{transition-duration:2.45s}[data-aos][data-aos][data-aos-delay="2450"],body[data-aos-delay="2450"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2450"].aos-animate,body[data-aos-delay="2450"] [data-aos].aos-animate{transition-delay:2.45s}[data-aos][data-aos][data-aos-duration="2500"],body[data-aos-duration="2500"] [data-aos]{transition-duration:2.5s}[data-aos][data-aos][data-aos-delay="2500"],body[data-aos-delay="2500"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2500"].aos-animate,body[data-aos-delay="2500"] [data-aos].aos-animate{transition-delay:2.5s}[data-aos][data-aos][data-aos-duration="2550"],body[data-aos-duration="2550"] [data-aos]{transition-duration:2.55s}[data-aos][data-aos][data-aos-delay="2550"],body[data-aos-delay="2550"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2550"].aos-animate,body[data-aos-delay="2550"] [data-aos].aos-animate{transition-delay:2.55s}[data-aos][data-aos][data-aos-duration="2600"],body[data-aos-duration="2600"] [data-aos]{transition-duration:2.6s}[data-aos][data-aos][data-aos-delay="2600"],body[data-aos-delay="2600"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2600"].aos-animate,body[data-aos-delay="2600"] [data-aos].aos-animate{transition-delay:2.6s}[data-aos][data-aos][data-aos-duration="2650"],body[data-aos-duration="2650"] [data-aos]{transition-duration:2.65s}[data-aos][data-aos][data-aos-delay="2650"],body[data-aos-delay="2650"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2650"].aos-animate,body[data-aos-delay="2650"] [data-aos].aos-animate{transition-delay:2.65s}[data-aos][data-aos][data-aos-duration="2700"],body[data-aos-duration="2700"] [data-aos]{transition-duration:2.7s}[data-aos][data-aos][data-aos-delay="2700"],body[data-aos-delay="2700"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2700"].aos-animate,body[data-aos-delay="2700"] [data-aos].aos-animate{transition-delay:2.7s}[data-aos][data-aos][data-aos-duration="2750"],body[data-aos-duration="2750"] [data-aos]{transition-duration:2.75s}[data-aos][data-aos][data-aos-delay="2750"],body[data-aos-delay="2750"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2750"].aos-animate,body[data-aos-delay="2750"] [data-aos].aos-animate{transition-delay:2.75s}[data-aos][data-aos][data-aos-duration="2800"],body[data-aos-duration="2800"] [data-aos]{transition-duration:2.8s}[data-aos][data-aos][data-aos-delay="2800"],body[data-aos-delay="2800"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2800"].aos-animate,body[data-aos-delay="2800"] [data-aos].aos-animate{transition-delay:2.8s}[data-aos][data-aos][data-aos-duration="2850"],body[data-aos-duration="2850"] [data-aos]{transition-duration:2.85s}[data-aos][data-aos][data-aos-delay="2850"],body[data-aos-delay="2850"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2850"].aos-animate,body[data-aos-delay="2850"] [data-aos].aos-animate{transition-delay:2.85s}[data-aos][data-aos][data-aos-duration="2900"],body[data-aos-duration="2900"] [data-aos]{transition-duration:2.9s}[data-aos][data-aos][data-aos-delay="2900"],body[data-aos-delay="2900"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2900"].aos-animate,body[data-aos-delay="2900"] [data-aos].aos-animate{transition-delay:2.9s}[data-aos][data-aos][data-aos-duration="2950"],body[data-aos-duration="2950"] [data-aos]{transition-duration:2.95s}[data-aos][data-aos][data-aos-delay="2950"],body[data-aos-delay="2950"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2950"].aos-animate,body[data-aos-delay="2950"] [data-aos].aos-animate{transition-delay:2.95s}[data-aos][data-aos][data-aos-duration="3000"],body[data-aos-duration="3000"] [data-aos]{transition-duration:3s}[data-aos][data-aos][data-aos-delay="3000"],body[data-aos-delay="3000"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="3000"].aos-animate,body[data-aos-delay="3000"] [data-aos].aos-animate{transition-delay:3s}[data-aos][data-aos][data-aos-easing=linear],body[data-aos-easing=linear] [data-aos]{transition-timing-function:cubic-bezier(.25,.25,.75,.75)}[data-aos][data-aos][data-aos-easing=ease],body[data-aos-easing=ease] [data-aos]{transition-timing-function:ease}[data-aos][data-aos][data-aos-easing=ease-in],body[data-aos-easing=ease-in] [data-aos]{transition-timing-function:ease-in}[data-aos][data-aos][data-aos-easing=ease-out],body[data-aos-easing=ease-out] [data-aos]{transition-timing-function:ease-out}[data-aos][data-aos][data-aos-easing=ease-in-out],body[data-aos-easing=ease-in-out] [data-aos]{transition-timing-function:ease-in-out}[data-aos][data-aos][data-aos-easing=ease-in-back],body[data-aos-easing=ease-in-back] [data-aos]{transition-timing-function:cubic-bezier(.6,-.28,.735,.045)}[data-aos][data-aos][data-aos-easing=ease-out-back],body[data-aos-easing=ease-out-back] [data-aos]{transition-timing-function:cubic-bezier(.175,.885,.32,1.275)}[data-aos][data-aos][data-aos-easing=ease-in-out-back],body[data-aos-easing=ease-in-out-back] [data-aos]{transition-timing-function:cubic-bezier(.68,-.55,.265,1.55)}[data-aos][data-aos][data-aos-easing=ease-in-sine],body[data-aos-easing=ease-in-sine] [data-aos]{transition-timing-function:cubic-bezier(.47,0,.745,.715)}[data-aos][data-aos][data-aos-easing=ease-out-sine],body[data-aos-easing=ease-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.39,.575,.565,1)}[data-aos][data-aos][data-aos-easing=ease-in-out-sine],body[data-aos-easing=ease-in-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.445,.05,.55,.95)}[data-aos][data-aos][data-aos-easing=ease-in-quad],body[data-aos-easing=ease-in-quad] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}[data-aos][data-aos][data-aos-easing=ease-out-quad],body[data-aos-easing=ease-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}[data-aos][data-aos][data-aos-easing=ease-in-out-quad],body[data-aos-easing=ease-in-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}[data-aos][data-aos][data-aos-easing=ease-in-cubic],body[data-aos-easing=ease-in-cubic] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}[data-aos][data-aos][data-aos-easing=ease-out-cubic],body[data-aos-easing=ease-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}[data-aos][data-aos][data-aos-easing=ease-in-out-cubic],body[data-aos-easing=ease-in-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}[data-aos][data-aos][data-aos-easing=ease-in-quart],body[data-aos-easing=ease-in-quart] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}[data-aos][data-aos][data-aos-easing=ease-out-quart],body[data-aos-easing=ease-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}[data-aos][data-aos][data-aos-easing=ease-in-out-quart],body[data-aos-easing=ease-in-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}[data-aos^=fade][data-aos^=fade]{opacity:0;transition-property:opacity,transform}[data-aos^=fade][data-aos^=fade].aos-animate{opacity:1;transform:translateZ(0)}[data-aos=fade-up]{transform:translate3d(0,100px,0)}[data-aos=fade-down]{transform:translate3d(0,-100px,0)}[data-aos=fade-right]{transform:translate3d(-100px,0,0)}[data-aos=fade-left]{transform:translate3d(100px,0,0)}[data-aos=fade-up-right]{transform:translate3d(-100px,100px,0)}[data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}[data-aos=fade-down-right]{transform:translate3d(-100px,-100px,0)}[data-aos=fade-down-left]{transform:translate3d(100px,-100px,0)}[data-aos^=zoom][data-aos^=zoom]{opacity:0;transition-property:opacity,transform}[data-aos^=zoom][data-aos^=zoom].aos-animate{opacity:1;transform:translateZ(0) scale(1)}[data-aos=zoom-in]{transform:scale(.6)}[data-aos=zoom-in-up]{transform:translate3d(0,100px,0) scale(.6)}[data-aos=zoom-in-down]{transform:translate3d(0,-100px,0) scale(.6)}[data-aos=zoom-in-right]{transform:translate3d(-100px,0,0) scale(.6)}[data-aos=zoom-in-left]{transform:translate3d(100px,0,0) scale(.6)}[data-aos=zoom-out]{transform:scale(1.2)}[data-aos=zoom-out-up]{transform:translate3d(0,100px,0) scale(1.2)}[data-aos=zoom-out-down]{transform:translate3d(0,-100px,0) scale(1.2)}[data-aos=zoom-out-right]{transform:translate3d(-100px,0,0) scale(1.2)}[data-aos=zoom-out-left]{transform:translate3d(100px,0,0) scale(1.2)}[data-aos^=slide][data-aos^=slide]{transition-property:transform}[data-aos^=slide][data-aos^=slide].aos-animate{transform:translateZ(0)}[data-aos=slide-up]{transform:translate3d(0,100%,0)}[data-aos=slide-down]{transform:translate3d(0,-100%,0)}[data-aos=slide-right]{transform:translate3d(-100%,0,0)}[data-aos=slide-left]{transform:translate3d(100%,0,0)}[data-aos^=flip][data-aos^=flip]{backface-visibility:hidden;transition-property:transform}[data-aos=flip-left]{transform:perspective(2500px) rotateY(-100deg)}[data-aos=flip-left].aos-animate{transform:perspective(2500px) rotateY(0)}[data-aos=flip-right]{transform:perspective(2500px) rotateY(100deg)}[data-aos=flip-right].aos-animate{transform:perspective(2500px) rotateY(0)}[data-aos=flip-up]{transform:perspective(2500px) rotateX(-100deg)}[data-aos=flip-up].aos-animate{transform:perspective(2500px) rotateX(0)}[data-aos=flip-down]{transform:perspective(2500px) rotateX(100deg)}[data-aos=flip-down].aos-animate{transform:perspective(2500px) rotateX(0)}
-
-    /* ==========================================================================
-       Main style.css (Inlined)
+       ORIGINAL STYLE.CSS
        ========================================================================== */
     :root {
       --bg-dark: #050508;
@@ -233,9 +231,18 @@
       background-clip: text;
     }
     .brand-tune { color: var(--text-primary) }
-    .logo { width: 48px; height: 48px; filter: drop-shadow(0 2px 8px rgba(244, 114, 182, 0.3)) }
     
-    body.light .logo { filter: drop-shadow(0 2px 8px rgba(236, 72, 153, 0.2)) }
+    /* Custom Logo / Icon Styling replacement */
+    .logo, .footer-logo { 
+        width: 48px; height: 48px; 
+        display: flex; align-items: center; justify-content: center;
+        font-size: 40px;
+        background: var(--gradient-accent); 
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        filter: drop-shadow(0 2px 8px rgba(244, 114, 182, 0.3));
+        user-select: none;
+    }
+    body.light .logo, body.light .footer-logo { filter: drop-shadow(0 2px 8px rgba(236, 72, 153, 0.2)) }
 
     .theme-toggle {
       width: 42px;
@@ -268,10 +275,10 @@
       transition: transform 0.4s var(--transition-spring), opacity 0.3s ease;
     }
 
-    .theme-toggle .icon-sun { display: none; }
-    .theme-toggle .icon-moon { display: block; }
-    body.light .theme-toggle .icon-sun { display: block; }
-    body.light .theme-toggle .icon-moon { display: none; }
+    .theme-toggle .icon-sun { display: none }
+    .theme-toggle .icon-moon { display: block }
+    body.light .theme-toggle .icon-sun { display: block }
+    body.light .theme-toggle .icon-moon { display: none }
 
     .nav {
       display: flex;
@@ -417,6 +424,13 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
+    .badge svg, .badge .material-symbols-outlined {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+      color: var(--accent-warm);
+    }
+
     .hero h2 {
       font-size: clamp(2.4rem, 5vw, 3.6rem);
       margin: 0 0 16px;
@@ -486,6 +500,22 @@
 
     .download-badges img:hover { transform: translateY(-2px) }
 
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 20px;
+    }
+
+    .hero-badge svg { width: 16px; height: 16px }
+
     .actions { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap }
 
     .button {
@@ -502,6 +532,8 @@
       position: relative;
       overflow: hidden;
     }
+
+    .button svg, .button .material-symbols-outlined { width: 20px; height: 20px; font-size: 20px; }
 
     .button::before {
       content: '';
@@ -538,6 +570,9 @@
       background: var(--glass-hover);
       transform: translateY(-1px);
     }
+
+    .highlights { display: flex; gap: 14px; list-style: none; padding: 0; margin: 0; color: var(--text-secondary) }
+    .highlights li { background: rgba(255, 255, 255, 0.02); padding: 8px 12px; border-radius: 999px; font-size: 13px }
 
     .phone-mockup {
       width: 280px;
@@ -601,6 +636,20 @@
     .slide--left { --slide-dim: .14; transform: translate3d(-12%, 0, -72px) scale(.92) rotateY(10deg); z-index: 2; will-change: transform }
     .slide--behind { --slide-dim: .28; transform: translate3d(0, 6%, -140px) scale(.86) rotateY(0); z-index: 1; opacity: 0.95 }
 
+    body.carousel-lite .carousel { perspective: none; transform-style: flat }
+    body.carousel-lite .slide { transition: transform .42s var(--transition-spring), opacity .35s ease, box-shadow .35s ease }
+    body.carousel-lite .slide--center { transform: translate3d(0, 0, 0) scale(1) }
+    body.carousel-lite .slide--right { transform: translate3d(10%, 0, 0) scale(.95) }
+    body.carousel-lite .slide--left { transform: translate3d(-10%, 0, 0) scale(.95) }
+    body.carousel-lite .slide--behind { transform: translate3d(0, 0, 0) scale(.92); opacity: 0 }
+
+    @media (prefers-reduced-motion: reduce) {
+      .phone-mockup { transition: none; transform: none }
+      .slide { transition: none }
+      .slide--right, .slide--left, .slide--behind { opacity: 0 }
+      .slide--center { box-shadow: 0 14px 34px rgba(2, 6, 23, 0.55) }
+    }
+
     .carousel-control {
       position: absolute;
       top: 50%;
@@ -630,6 +679,10 @@
 
     .carousel-control.prev { left: 12px }
     .carousel-control.next { right: 12px }
+
+    .carousel-indicators { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; display: flex; gap: 8px }
+    .carousel-indicators .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 0; cursor: pointer }
+    .carousel-indicators .indicator.active { background: var(--gradient-accent) }
 
     .section {
       max-width: 1200px;
@@ -716,25 +769,25 @@
 
     .card:hover::before { opacity: 1 }
 
-    /* Custom styles for Material Icons */
-    span.feature-icon {
-      font-size: 28px;
-      color: var(--accent-primary);
-      display: inline-flex;
+    /* Custom styles for Material Icons representing features */
+    .feature-icon {
+      font-size: 24px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      flex: 0 0 48px;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
       border-radius: 12px;
       background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(167, 139, 250, 0.08));
-      margin-bottom: 16px;
+      color: var(--accent-primary);
+      box-shadow: 0 2px 8px rgba(244, 114, 182, 0.15);
+      margin-right: 12px;
     }
 
     .card h4 {
       display: flex;
       align-items: center;
-      gap: 12px;
       margin: 0 0 12px;
       font-size: 18px;
       font-weight: 600;
@@ -904,6 +957,153 @@
       line-height: 1.6;
     }
 
+    .footer-bottom a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom a:hover { color: var(--accent-secondary) }
+
+    .testimonials-section { margin-bottom: 36px }
+    .testimonials-section + .site-footer { margin-top: 24px }
+
+    .footer-testimonials {
+      width: 100%;
+      margin-bottom: 0;
+      padding: 28px;
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--shadow-elevated), var(--shadow-glow), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      background-image: var(--noise-texture);
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    body.light .footer-testimonials {
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-testimonials-head { margin-bottom: 20px }
+
+    .footer-testimonials-head h4 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: -0.02em;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-testimonials-head p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .footer-testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .footer-testimonial-card {
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 180px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      background-image: var(--noise-texture);
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--transition-smooth);
+    }
+
+    .footer-testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gradient-accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .footer-testimonial-card:hover {
+      border-color: rgba(244, 114, 182, 0.18);
+      background: var(--glass-hover);
+      transform: translateY(-2px);
+    }
+
+    .footer-testimonial-card:hover::before { opacity: 1 }
+
+    body.light .footer-testimonial-card {
+      border-top: 1px solid rgba(255, 255, 255, 0.40);
+      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.20);
+    }
+
+    .footer-testimonial-message {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .footer-testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-testimonial-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      object-fit: cover;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text-secondary);
+    }
+
+    .footer-testimonial-username {
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .footer-testimonials-empty {
+      margin: 0;
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
     .repo-topics {
       display: flex;
       flex-wrap: wrap;
@@ -926,6 +1126,11 @@
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       transition: all 0.25s ease;
+    }
+
+    .topic-pill:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
     }
 
     .repo-meta {
@@ -997,12 +1202,25 @@
       box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
     }
 
+    .update-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(120deg, rgba(244, 114, 182, 0.25), rgba(167, 139, 250, 0.20), rgba(96, 165, 250, 0.20));
+      opacity: 0;
+      filter: blur(14px);
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+
     .update-card:hover {
       transform: translateY(-4px);
       border-color: rgba(255, 255, 255, 0.14);
       background: var(--glass-hover);
       box-shadow: var(--shadow-strong), 0 0 40px rgba(244, 114, 182, 0.06);
     }
+
+    .update-card:hover::before { opacity: 0.9 }
 
     .update-header {
       display: flex;
@@ -1058,6 +1276,52 @@
       z-index: 1;
     }
 
+    .update-body.md {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 14;
+      overflow: hidden;
+      white-space: normal;
+    }
+
+    .update-body.md .md-h {
+      margin: 14px 0 10px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .update-body.md h3.md-h { font-size: 18px; font-weight: 800 }
+    .update-body.md h4.md-h { font-size: 16px; font-weight: 780 }
+    .update-body.md h5.md-h, .update-body.md h6.md-h { font-size: 15px; font-weight: 760 }
+
+    .update-body.md .md-p {
+      margin: 10px 0;
+      color: var(--text-secondary);
+    }
+
+    .update-body.md .md-ul {
+      margin: 10px 0 14px 18px;
+      padding: 0;
+    }
+
+    .update-body.md .md-ul li {
+      margin: 8px 0;
+      padding-left: 2px;
+      color: var(--text-secondary);
+    }
+
+    .update-body.md a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(244, 114, 182, 0.30);
+    }
+
+    .update-body.md a:hover {
+      color: var(--accent-secondary);
+      border-bottom-color: var(--accent-secondary);
+    }
+
     .pill {
       display: inline-flex;
       align-items: center;
@@ -1072,6 +1336,58 @@
       background: var(--glass-bg);
     }
 
+    .pill--success {
+      border-color: rgba(34, 197, 94, 0.35);
+      background: rgba(34, 197, 94, 0.10);
+      color: rgba(187, 247, 208, 0.95);
+    }
+
+    .pill--warning {
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.10);
+      color: rgba(254, 243, 199, 0.95);
+    }
+
+    .pill--neutral {
+      border-color: rgba(167, 139, 250, 0.22);
+      background: rgba(167, 139, 250, 0.08);
+      color: rgba(221, 214, 254, 0.95);
+    }
+
+    body.light .pill--success { color: rgba(22, 101, 52, 0.95) }
+    body.light .pill--warning { color: rgba(146, 64, 14, 0.95) }
+    body.light .pill--neutral { color: rgba(88, 28, 135, 0.95) }
+
+    .build-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .build-row:first-child { border-top: 0; padding-top: 4px }
+
+    .build-label {
+      color: var(--text-secondary);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      flex: 0 0 auto;
+    }
+
+    .build-value {
+      color: var(--text-primary);
+      font-weight: 650;
+      text-align: right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .download .section-header { margin-bottom: 40px }
     .download-container { padding: 48px; border-radius: 24px }
 
     .download-options {
@@ -1080,6 +1396,7 @@
       gap: 24px;
       margin: 40px 0;
       width: 100%;
+      max-width: 100%;
     }
 
     .download-option {
@@ -1097,10 +1414,27 @@
       min-width: 0;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      background-image: var(--noise-texture);
+      background-repeat: repeat;
+      background-size: 256px 256px;
     }
 
     body.light .download-option {
       border-top: 1px solid rgba(255, 255, 255, 0.40);
+      box-shadow: var(--shadow-elevated), inset 0 0 0 1px rgba(255, 255, 255, 0.20);
+    }
+
+    .download-option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-accent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
 
     .download-option:hover {
@@ -1109,6 +1443,8 @@
       background: var(--glass-hover);
       box-shadow: var(--shadow-strong), 0 0 40px rgba(244, 114, 182, 0.06);
     }
+
+    .download-option:hover::before { opacity: 1 }
 
     .download-badge {
       display: inline-block;
@@ -1137,6 +1473,8 @@
       font-size: 24px;
       margin: 0 0 12px;
       color: var(--text-primary);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .download-option p {
@@ -1144,7 +1482,16 @@
       margin: 0 0 20px;
       font-size: 15px;
       line-height: 1.7;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
       flex: 1;
+    }
+
+    .download-option .button {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .download-meta {
@@ -1154,6 +1501,21 @@
       margin-bottom: 20px;
       font-size: 14px;
       color: var(--text-secondary);
+    }
+
+    .download-meta .separator { opacity: 0.4 }
+
+    .download-alternatives {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--glass-border);
+      text-align: center;
+    }
+
+    .download-alternatives h4 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
     }
 
     .alt-links {
@@ -1177,6 +1539,7 @@
       font-weight: 500;
       transition: all 0.25s ease;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .alt-link:hover {
@@ -1185,10 +1548,49 @@
       transform: translateY(-2px);
     }
 
+    .alt-link .material-symbols-outlined { font-size: 20px }
+
+    .feature-graphic {
+      margin-top: 32px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+    }
+
+    .feature-graphic img { width: 100%; display: block }
+
     @media (max-width: 1100px) {
       .features .cards { grid-template-columns: repeat(2, 1fr); gap: 20px }
       .section { margin: 60px auto; padding: 24px }
       .hero-content { gap: 36px; padding: 36px }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content { flex-direction: column-reverse; padding: 24px; gap: 32px }
+      .hero-right { flex: 0 0 auto }
+      .hero h2 { font-size: 36px; text-align: center }
+      .lead { text-align: center; margin: 0 auto 24px }
+      .actions { justify-content: center; width: 100%; flex-direction: column }
+      .actions .button { width: 100%; justify-content: center }
+      .stats { justify-content: center }
+      .screenshots .gallery { flex-direction: column; gap: 16px }
+      .screenshots img { width: 100% }
+      .features .cards { grid-template-columns: 1fr; gap: 16px }
+      .section { margin: 48px auto; padding: 20px }
+      .section h3 { font-size: 28px; margin-bottom: 32px }
+      .section-subtitle { font-size: 16px }
+      .download-options { grid-template-columns: 1fr; gap: 20px }
+      .download-container { padding: 32px 24px }
+      .download-option { padding: 24px }
+      .download-option h4 { font-size: 20px }
+      .footer-testimonials { padding: 22px; text-align: center }
+      .footer-testimonials-head h4 { font-size: 25px }
+      .footer-testimonial-author { justify-content: center }
+      .footer-content { flex-direction: column; align-items: center; text-align: center }
+      .footer-brand { flex-direction: column; text-align: center }
+      .footer-links { flex-direction: column; gap: 24px; align-items: center }
+      .footer-column { align-items: center; text-align: center }
+      .site-footer { flex-direction: column; text-align: center; gap: 16px }
     }
 
     @media (max-width: 900px) {
@@ -1241,30 +1643,77 @@
         background: var(--glass-bg);
         border: 1px solid var(--glass-border);
       }
+      .nav a:hover {
+        transform: none;
+        background: var(--glass-hover);
+        border-color: rgba(244, 114, 182, 0.22);
+      }
       .nav a.cta {
         margin-left: 0;
         text-align: center;
         justify-content: center;
         border: 0;
         background: var(--gradient-accent);
+        box-shadow: 0 16px 40px rgba(244, 114, 182, 0.22);
       }
       .nav-toggle { display: inline-flex; margin-left: auto }
       .hero { padding: 40px 24px 60px }
-      .hero-content { flex-direction: column-reverse; gap: 24px; padding: 28px; }
+      .hero-content { gap: 24px; margin: 40px auto; padding: 28px; border-radius: 18px }
+      .hero h2 { font-size: 32px }
+      .lead { font-size: 16px }
       .phone-mockup { width: 240px; height: 480px }
+      .stats { gap: 24px }
+      .download-options { grid-template-columns: 1fr; gap: 20px }
+      .footer-links { gap: 32px }
+      .repo-meta { grid-template-columns: repeat(2, minmax(0, 1fr)) }
       .updates-grid { grid-template-columns: 1fr }
+      .footer-links { width: 100%; justify-content: center; align-items: center; text-align: center; }
     }
 
     @media (max-width: 480px) {
       .site-header { padding: 16px }
       .brand h1 { font-size: 18px }
+      .logo { width: 40px; height: 40px; font-size: 32px; }
+      .theme-toggle { width: 38px; height: 38px }
+      .hero { padding: 32px 16px 48px }
+      .hero-content { padding: 20px; border-radius: 16px }
       .hero h2 { font-size: 28px; line-height: 1.2 }
-      .actions .button { width: 100%; }
-      .stats { flex-direction: column; align-items: flex-start }
-      .download-options { grid-template-columns: 1fr; gap: 20px }
-      .footer-links { flex-direction: column; text-align: center; }
-      .footer-column { align-items: center; }
-      .footer-brand { flex-direction: column; text-align: center; }
+      .lead { font-size: 15px }
+      .actions { gap: 12px }
+      .actions .button { width: 100%; text-align: center; padding: 12px 20px; font-size: 14px }
+      .phone-mockup { width: 260px; height: 520px; transform: none }
+      .card h4 { font-size: 16px }
+      .card p { font-size: 14px }
+      .section { padding: 20px 16px }
+      .section h3 { font-size: 24px }
+      .section-subtitle { font-size: 15px }
+      .stats { gap: 16px; flex-direction: column; align-items: flex-start }
+      .stat-value { font-size: 20px }
+      .download-options { gap: 16px }
+      .download-container { padding: 24px 16px }
+      .download-option { padding: 16px; min-height: auto }
+      .download-option h4 { font-size: 17px; margin-bottom: 8px }
+      .download-option p { font-size: 13px; margin-bottom: 16px; line-height: 1.5 }
+      .download-option .button { font-size: 13px; padding: 10px 16px; white-space: normal; height: auto; min-height: 40px }
+      .download-meta { flex-wrap: wrap; font-size: 12px; margin-bottom: 16px }
+      .download-badge { font-size: 11px; padding: 4px 10px }
+      .download-alternatives { margin-top: 32px; padding-top: 24px }
+      .alt-links { flex-direction: column }
+      .alt-link { width: 100%; justify-content: center }
+      .footer-testimonials { padding: 18px }
+      .footer-testimonials-head h4 { font-size: 22px }
+      .footer-testimonials-grid { grid-template-columns: 1fr; gap: 12px }
+      .footer-testimonial-card { min-height: auto }
+      .footer-links { gap: 20px }
+      .footer-bottom small { font-size: 12px }
+    }
+
+    [data-aos] { will-change: transform, opacity; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg::before, .bg::after { animation: none; }
+      .site-header::before { animation: none; }
+      [data-aos] { transition: none !important; transform: none !important; opacity: 1 !important; }
     }
   </style>
 </head>
@@ -1273,7 +1722,7 @@
   
   <header class="site-header">
     <div class="brand">
-      <svg class="logo" viewBox="0 0 100 100" fill="var(--accent-primary)"><circle cx="50" cy="50" r="50"/></svg>
+      <span class="material-symbols-outlined logo">queue_music</span>
       <h1>
         <span class="brand-archive">Archive</span><span class="brand-tune">Tune</span>
       </h1>
@@ -1302,11 +1751,13 @@
     <section class="hero-content glass" data-aos="fade-up">
       <div class="hero-left">
         <div class="badge" data-aos="fade-up" data-aos-delay="100">
-          <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
+          <span class="material-symbols-outlined">auto_awesome</span>
           <span id="repo-badge-text">Material 3 Expressive Design</span>
         </div>
         <h2 data-aos="fade-up" data-aos-delay="200">Enhanced Music Streaming for Android</h2>
         <p class="lead" id="repo-lead" data-aos="fade-up" data-aos-delay="300">Experience YouTube Music like never before with advanced features — seamless background playback, offline downloads, live synchronized lyrics, and beautiful Material 3 theming.</p>
+
+        <div class="repo-topics" id="repo-topics" aria-label="Repository topics"></div>
 
         <div class="stats" data-aos="fade-up" data-aos-delay="400">
           <div class="stat-item">
@@ -1330,16 +1781,24 @@
         <div class="repo-meta" aria-label="Repository metadata">
           <div class="repo-meta-item">
             <span class="repo-meta-label">License</span>
-            <span class="repo-meta-value" id="repo-license">GPL-3.0</span>
+            <span class="repo-meta-value" id="repo-license">—</span>
           </div>
           <div class="repo-meta-item">
             <span class="repo-meta-label">Open Issues</span>
             <span class="repo-meta-value" id="github-issues">—</span>
           </div>
+          <div class="repo-meta-item">
+            <span class="repo-meta-label">Last Update</span>
+            <span class="repo-meta-value" id="repo-updated">—</span>
+          </div>
+          <div class="repo-meta-item">
+            <span class="repo-meta-label">Default Branch</span>
+            <span class="repo-meta-value" id="repo-branch">—</span>
+          </div>
         </div>
 
         <div class="actions" data-aos="fade-up" data-aos-delay="500">
-          <a href="https://github.com/koiverse/ArchiveTune/releases/latest" class="button primary">
+          <a href="https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk" class="button primary">
             <span class="material-symbols-outlined">download</span>
             Download
           </a>
@@ -1348,20 +1807,23 @@
             View on GitHub
           </a>
         </div>
+
+        <div class="download-badges">
+          <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" rel="noopener">
+            <img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="60">
+          </a>
+        </div>
       </div>
 
       <div class="hero-right" data-aos="fade-left" data-aos-delay="400">
         <div class="phone-mockup" aria-roledescription="carousel">
           <div class="carousel">
-            <div class="slide active">
-              <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Home screen">
-            </div>
-            <div class="slide">
-              <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing">
-            </div>
-            <div class="slide">
-              <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Options">
-            </div>
+            <div class="slide active"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Home screen with music library"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing with live lyrics"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Song details and options"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_4.jpg" alt="Search interface"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_5.jpg" alt="Settings and customization"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_6.jpg" alt="Theme customization"></div>
           </div>
           <button class="carousel-control prev" aria-label="Previous slide">‹</button>
           <button class="carousel-control next" aria-label="Next slide">›</button>
@@ -1372,48 +1834,78 @@
     <section id="features" class="section features">
       <h3 data-aos="fade-up">Features</h3>
       <div class="cards">
-        <article class="card glass" data-aos="fade-up">
+        <article class="card glass">
           <h4>
             <span class="material-symbols-outlined feature-icon">download_for_offline</span>
-            <span>Offline downloads</span>
+            <span class="feature-title" data-feature-title="0">Offline downloads</span>
           </h4>
-          <p>Cache songs for offline playback with configurable quality and storage management.</p>
+          <p data-feature-desc="0">Cache songs for offline playback with configurable quality and storage management.</p>
         </article>
-        <article class="card glass" data-aos="fade-up" data-aos-delay="100">
+        <article class="card glass">
           <h4>
             <span class="material-symbols-outlined feature-icon">lyrics</span>
-            <span>Live lyrics</span>
+            <span class="feature-title" data-feature-title="1">Live lyrics</span>
           </h4>
-          <p>Follow along with synchronized lyrics in the player and lock screen widgets.</p>
+          <p data-feature-desc="1">Follow along with synchronized lyrics in the player and lock screen widgets.</p>
         </article>
-        <article class="card glass" data-aos="fade-up" data-aos-delay="200">
+        <article class="card glass">
           <h4>
             <span class="material-symbols-outlined feature-icon">palette</span>
-            <span>Themeable UI</span>
+            <span class="feature-title" data-feature-title="2">Themeable UI</span>
           </h4>
-          <p>Light, dark, black and dynamic themes built on Material 3 design.</p>
+          <p data-feature-desc="2">Light, dark, black and dynamic themes built on Material 3 design.</p>
         </article>
-        <article class="card glass" data-aos="fade-up" data-aos-delay="300">
+        <article class="card glass">
           <h4>
             <span class="material-symbols-outlined feature-icon">sports_esports</span>
-            <span>Discord Rich Presence</span>
+            <span class="feature-title" data-feature-title="3">Highly Customizable Discord Rich Presence</span>
           </h4>
-          <p>Tailor exactly how your presence appears in Discord, with detailed fields and artwork.</p>
+          <p data-feature-desc="3">Tailor exactly how your presence appears in Discord, with detailed fields, artwork selection, timestamps and flexible formatting options so you can show what matters.</p>
         </article>
-        <article class="card glass" data-aos="fade-up" data-aos-delay="400">
+        <article class="card glass">
           <h4>
             <span class="material-symbols-outlined feature-icon">translate</span>
-            <span>Smart RPC Translation</span>
+            <span class="feature-title" data-feature-title="4">Smart RPC Translation</span>
           </h4>
-          <p>Automatically translate your Rich Presence text before it’s sent to Discord.</p>
+          <p data-feature-desc="4">Automatically translate your Rich Presence text before it’s sent to Discord — making your activity accessible across languages and audiences.</p>
         </article>
-        <article class="card glass" data-aos="fade-up" data-aos-delay="500">
+        <article class="card glass">
           <h4>
             <span class="material-symbols-outlined feature-icon">subtitles</span>
-            <span>Lyrics Translation Support</span>
+            <span class="feature-title" data-feature-title="5">Lyrics Translation Support</span>
           </h4>
-          <p>Translate lyrics directly inside ArchiveTune so listeners can follow along.</p>
+          <p data-feature-desc="5">Translate lyrics directly inside ArchiveTune so listeners can follow along in their preferred language.</p>
         </article>
+      </div>
+    </section>
+
+    <section id="screenshots" class="section screenshots">
+      <div class="section-header" data-aos="fade-up">
+        <h3>See It In Action</h3>
+        <p class="section-subtitle">Beautiful, intuitive interface designed for music lovers</p>
+      </div>
+      <div class="gallery">
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
+          <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Music library home screen">
+          <div class="gallery-overlay">
+            <span>Music Player</span>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150">
+          <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing with lyrics">
+          <div class="gallery-overlay">
+            <span>Live Lyrics</span>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+          <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Song options and details">
+          <div class="gallery-overlay">
+            <span>Theme Customization</span>
+          </div>
+        </div>
+      </div>
+      <div class="feature-banner" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/dev/fastlane/metadata/android/en-US/images/ArchiveTuneBanner.png" alt="ArchiveTune feature showcase">
       </div>
     </section>
 
@@ -1429,12 +1921,14 @@
             <div class="update-title">
               <h4>Latest Release</h4>
               <div class="update-meta">
-                <span class="pill" id="release-tag">Fetching...</span>
+                <span class="pill" id="release-tag">—</span>
+                <span class="separator">•</span>
+                <span id="release-date">—</span>
               </div>
             </div>
-            <a class="update-link" href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener">View</a>
+            <a class="update-link" id="release-link" href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener">View</a>
           </div>
-          <div class="update-body" id="release-notes">Fetching latest release info from GitHub...</div>
+          <div class="update-body md" id="release-notes">—</div>
         </article>
 
         <article class="update-card glass" data-aos="fade-up" data-aos-delay="150">
@@ -1442,13 +1936,22 @@
             <div class="update-title">
               <h4>Dev Build</h4>
               <div class="update-meta">
-                <span class="pill">Nightly</span>
+                <span class="pill pill--warning" id="build-status">Development</span>
+                <span class="separator">•</span>
+                <span id="build-updated">Automated Build</span>
               </div>
             </div>
             <a class="update-link" href="https://github.com/koiverse/ArchiveTune/actions" target="_blank" rel="noopener">Actions</a>
           </div>
           <div class="update-body">
-            <p>Bleeding edge updates are available directly from GitHub Actions.</p>
+            <div class="build-row">
+              <span class="build-label">Artifact</span>
+              <span class="build-value" id="nightly-size-inline">—</span>
+            </div>
+            <div class="build-row">
+              <span class="build-label">Commit</span>
+              <span class="build-value" id="build-commit">—</span>
+            </div>
           </div>
         </article>
       </div>
@@ -1467,9 +1970,12 @@
             <h4>Stable Release</h4>
             <p>Production-ready build, thoroughly tested and optimized for daily use. Perfect for users who want reliability.</p>
             <div class="download-meta">
-              <span class="version" id="download-version">Latest</span>
+              <span class="version" id="download-version">—</span>
+              <span class="separator">•</span>
+              <span class="size" id="download-size">—</span>
             </div>
-            <a class="button primary" href="https://github.com/koiverse/ArchiveTune/releases/latest">
+            <a class="button primary" href="https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk">
+              <span class="material-symbols-outlined">download</span>
               Download Stable APK
             </a>
           </div>
@@ -1480,8 +1986,11 @@
             <p>Latest features and fixes from the development branch. May contain experimental features and occasional bugs.</p>
             <div class="download-meta">
               <span class="version">Dev Branch</span>
+              <span class="separator">•</span>
+              <span class="size" id="nightly-size">—</span>
             </div>
             <a class="button ghost" href="https://nightly.link/koiverse/ArchiveTune/workflows/build/dev?preview" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined">code_blocks</span>
               Get Nightly Build
             </a>
           </div>
@@ -1491,9 +2000,11 @@
           <h4>Other Options</h4>
           <div class="alt-links">
             <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" rel="noopener" class="alt-link">
+              <span class="material-symbols-outlined">android</span>
               IzzyOnDroid F-Droid Repo
             </a>
             <a href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener" class="alt-link">
+              <span class="material-symbols-outlined">source_notes</span>
               All Releases on GitHub
             </a>
           </div>
@@ -1501,12 +2012,25 @@
       </div>
     </section>
 
+    <section class="section testimonials-section" aria-labelledby="footer-testimonials-title">
+      <div class="footer-testimonials glass" data-aos="fade-up">
+        <div class="footer-testimonials-head">
+          <h4 id="footer-testimonials-title">What users say</h4>
+          <p>Loved by listeners who use ArchiveTune every day.</p>
+        </div>
+        <div class="footer-testimonials-grid" id="footer-testimonials-grid">
+           <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
     <footer class="site-footer glass" data-aos="fade-up">
         <div class="footer-content">
           <div class="footer-brand">
+            <span class="material-symbols-outlined footer-logo">queue_music</span>
             <div>
               <strong>ArchiveTune</strong>
-              <p>Enhanced Music Streaming for Android</p>
+              <p id="footer-tagline">Enhanced Music Streaming for Android</p>
             </div>
           </div>
           
@@ -1536,7 +2060,11 @@
     </footer>
   </main>
 
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
+    // --- Initialize AOS Animations ---
+    AOS.init({ duration: 600, once: true });
+
     // --- Theme Toggler ---
     const themeBtn = document.querySelector('.theme-toggle');
     themeBtn.addEventListener('click', () => {
@@ -1562,11 +2090,12 @@
     let currentSlide = 0;
 
     function updateCarousel() {
+      const len = slides.length;
       slides.forEach((slide, index) => {
-        slide.className = 'slide';
+        slide.className = 'slide'; // reset classes
         if (index === currentSlide) slide.classList.add('slide--center', 'active');
-        else if (index === (currentSlide - 1 + slides.length) % slides.length) slide.classList.add('slide--left');
-        else if (index === (currentSlide + 1) % slides.length) slide.classList.add('slide--right');
+        else if (index === (currentSlide - 1 + len) % len) slide.classList.add('slide--left');
+        else if (index === (currentSlide + 1) % len) slide.classList.add('slide--right');
         else slide.classList.add('slide--behind');
       });
     }
@@ -1586,14 +2115,30 @@
     // --- GitHub API Fetcher ---
     async function fetchGitHubData() {
       try {
+        // Repo Stats
         const repoRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune');
         if(repoRes.ok) {
           const repo = await repoRes.json();
           document.getElementById('github-stars').textContent = repo.stargazers_count;
           document.getElementById('github-forks').textContent = repo.forks_count;
           document.getElementById('github-issues').textContent = repo.open_issues_count;
+          document.getElementById('repo-license').textContent = repo.license ? repo.license.spdx_id : 'Unknown';
+          document.getElementById('repo-updated').textContent = new Date(repo.pushed_at).toLocaleDateString();
+          document.getElementById('repo-branch').textContent = repo.default_branch;
+
+          // Populate topics
+          const topicsDiv = document.getElementById('repo-topics');
+          if(repo.topics) {
+            repo.topics.forEach(topic => {
+              const span = document.createElement('span');
+              span.className = 'topic-pill';
+              span.textContent = topic;
+              topicsDiv.appendChild(span);
+            });
+          }
         }
         
+        // Latest Release
         const releaseRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune/releases/latest');
         if(releaseRes.ok) {
           const release = await releaseRes.json();
@@ -1601,25 +2146,54 @@
           document.getElementById('latest-version').textContent = vLabel;
           document.getElementById('release-tag').textContent = vLabel;
           document.getElementById('download-version').textContent = vLabel;
-          document.getElementById('release-notes').textContent = release.name || 'New release available.';
+          document.getElementById('release-date').textContent = new Date(release.published_at).toLocaleDateString();
+          
+          if(release.assets && release.assets.length > 0) {
+            const sizeMb = (release.assets[0].size / (1024 * 1024)).toFixed(1);
+            document.getElementById('download-size').textContent = `${sizeMb} MB`;
+          }
+
+          // Very simple Markdown to HTML for the notes
+          let notes = release.body || 'No release notes available.';
+          notes = notes.substring(0, 300) + '...'; // Truncate to save space
+          document.getElementById('release-notes').innerHTML = `<div class="md-p">${notes.replace(/\n/g, '<br>')}</div>`;
         }
+
+        // Commits for Dev Build
+        const commitRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune/commits?per_page=1');
+        if(commitRes.ok) {
+          const commits = await commitRes.json();
+          if(commits.length > 0) {
+             const hash = commits[0].sha.substring(0, 7);
+             document.getElementById('build-commit').textContent = hash;
+          }
+        }
+
       } catch (err) {
         console.warn('Failed to fetch GitHub data:', err);
       }
     }
-    
     fetchGitHubData();
 
-    // --- Simple Intersection Observer (Replacement for AOS logic) ---
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('aos-animate');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    // --- Dummy Testimonials (to populate empty grid) ---
+    const testimonials = [
+      { name: "Audiophile99", icon: "headphones", msg: "The UI is gorgeous and the background playback works flawlessly. Exactly what I was looking for!" },
+      { name: "RhythmRider", icon: "speaker", msg: "Material 3 implementation is 10/10. Downloads are super fast and lyric sync is spot on." },
+      { name: "DevEnthusiast", icon: "code", msg: "An amazing open source alternative. The Discord RPC integration is a game-changer." }
+    ];
 
-    document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+    const tGrid = document.getElementById('footer-testimonials-grid');
+    testimonials.forEach(t => {
+      tGrid.innerHTML += `
+        <div class="footer-testimonial-card">
+          <p class="footer-testimonial-message">"${t.msg}"</p>
+          <div class="footer-testimonial-author">
+            <div class="footer-testimonial-avatar material-symbols-outlined">${t.icon}</div>
+            <span class="footer-testimonial-username">${t.name}</span>
+          </div>
+        </div>
+      `;
+    });
   </script>
 </body>
 </html>
