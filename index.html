@@ -1,242 +1,288 @@
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from archivetune.koiiverse.cloud/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 May 2026 18:59:19 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ArchiveTune – Enhanced Music Streaming Client for Android | Background Playback & Offline Downloads</title>
-  <meta name="description"
-    content="ArchiveTune is a feature-rich music streaming client for Android with Material 3 design, background playback, offline downloads, live synchronized lyrics, and Discord Rich Presence integration. Free and open-source.">
-  <meta name="keywords"
-    content="ArchiveTune, YouTube Music, Android music player, offline music, background playback, live lyrics, Material 3, music streaming, open source, Discord Rich Presence, lyrics translation">
-  <meta name="author" content="Koiverse">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <title>ArchiveTune – Enhanced Music Streaming Client for Android</title>
+  <meta name="description" content="ArchiveTune is a feature-rich music streaming client for Android with Material 3 design, background playback, offline downloads, live synchronized lyrics, and Discord Rich Presence integration.">
   <meta name="theme-color" content="#a78bfa">
-  <link rel="canonical" href="index.html">
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="index.html">
-  <meta property="og:site_name" content="ArchiveTune">
-  <meta property="og:title" content="ArchiveTune – Enhanced Music Streaming Client for Android">
-  <meta property="og:description"
-    content="Enhanced Music Streaming Client for Android with background playback, offline downloads, live synchronized lyrics, and beautiful Material 3 theming. Free and open-source.">
-  <meta property="og:image" content="assets/image/banner.png">
-  <meta property="og:image:alt" content="ArchiveTune - Enhanced Music Streaming Client">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="en_US">
+  <!-- Fallback Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ArchiveTune – Enhanced Music Streaming Client for Android">
-  <meta name="twitter:description"
-    content="Enhanced Music Streaming Client for Android with background playback, offline downloads, live synchronized lyrics, and beautiful Material 3 theming.">
-  <meta name="twitter:image" content="assets/image/banner.png">
-  <meta name="twitter:image:alt" content="ArchiveTune interface showcasing music player features">
-
-  <!-- Additional Meta Tags -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="ArchiveTune">
-  <meta name="application-name" content="ArchiveTune">
-  <meta name="format-detection" content="telephone=no">
-
-  <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://archivetune.koiiverse.cloud/#app",
-        "name": "ArchiveTune",
-        "alternateName": "ArchiveTune Music Player",
-        "description": "Enhanced Music Streaming Client for Android with background playback, offline downloads, live synchronized lyrics, and Material 3 theming",
-        "url": "https://archivetune.koiiverse.cloud",
-        "applicationCategory": "MultimediaApplication",
-        "applicationSubCategory": "MusicApplication",
-        "operatingSystem": "Android 8.0+",
-        "inLanguage": "en",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "downloadUrl": "https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk",
-        "softwareVersion": "latest",
-        "sameAs": [
-          "https://github.com/koiverse/ArchiveTune"
-        ],
-        "image": {
-          "@id": "https://archivetune.koiiverse.cloud/#primaryimage"
-        },
-        "featureList": [
-          "Background playback",
-          "Offline downloads",
-          "Live synchronized lyrics",
-          "Material 3 design themes",
-          "Discord Rich Presence",
-          "Lyrics translation",
-          "Customizable interface"
-        ],
-        "screenshot": [
-          "https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg",
-          "../raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg",
-          "../raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg"
-        ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "100",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "author": {
-          "@id": "https://archivetune.koiiverse.cloud/#organization"
-        },
-        "datePublished": "2024-01-01",
-        "dateModified": "2024-12-18",
-        "license": "https://www.gnu.org/licenses/gpl-3.0.html",
-        "publisher": {
-          "@id": "https://archivetune.koiiverse.cloud/#organization"
-        }
-      },
-      {
-        "@type": "ImageObject",
-        "@id": "https://archivetune.koiiverse.cloud/#primaryimage",
-        "url": "https://archivetune.koiiverse.cloud/assets/image/banner.png",
-        "width": 1200,
-        "height": 630
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://archivetune.koiiverse.cloud/#organization",
-        "name": "Koiverse",
-        "url": "https://github.com/koiverse",
-        "logo": "https://archivetune.koiiverse.cloud/favicon.svg",
-        "sameAs": [
-          "https://github.com/koiverse/ArchiveTune"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://archivetune.koiiverse.cloud/#website",
-        "name": "ArchiveTune",
-        "url": "https://archivetune.koiiverse.cloud",
-        "description": "Enhanced Music Streaming Client for Android",
-        "publisher": {
-          "@id": "https://archivetune.koiiverse.cloud/#organization"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://github.com/koiverse/ArchiveTune/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://archivetune.koiiverse.cloud/#webpage",
-        "url": "https://archivetune.koiiverse.cloud",
-        "name": "ArchiveTune – Enhanced Music Streaming Client for Android",
-        "description": "ArchiveTune is a feature-rich music streaming client for Android with Material 3 design, background playback, offline downloads, live synchronized lyrics, and Discord Rich Presence integration. Free and open-source.",
-        "inLanguage": "en",
-        "isPartOf": {
-          "@id": "https://archivetune.koiiverse.cloud/#website"
-        },
-        "publisher": {
-          "@id": "https://archivetune.koiiverse.cloud/#organization"
-        },
-        "primaryImageOfPage": {
-          "@id": "https://archivetune.koiiverse.cloud/#primaryimage"
-        },
-        "about": {
-          "@id": "https://archivetune.koiiverse.cloud/#app"
-        },
-        "breadcrumb": {
-          "@id": "https://archivetune.koiiverse.cloud/#breadcrumb"
-        }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://archivetune.koiiverse.cloud/#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://archivetune.koiiverse.cloud"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Features",
-            "item": "https://archivetune.koiiverse.cloud#features"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Download",
-            "item": "https://archivetune.koiiverse.cloud#download"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any">
-  <link rel="shortcut icon" href="favicon.svg">
+  <!-- Fonts & Material Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link href="../unpkg.com/aos%402.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  
+  <!-- AOS Animation CSS (via CDN to save space) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       Main style.css (Inlined)
+       ========================================================================== */
+    :root {
+      --bg-dark: #050508;
+      --bg-surface: #0e0e14;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-hover: rgba(255, 255, 255, 0.08);
+      --accent-primary: #f472b6;
+      --accent-secondary: #a78bfa;
+      --accent-tertiary: #60a5fa;
+      --accent-warm: #fb923c;
+      --gradient-accent: linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa);
+      --text-primary: rgba(255, 255, 255, 0.95);
+      --text-secondary: rgba(255, 255, 255, 0.65);
+      --glass-blur: 28px;
+      --radius: 16px;
+      --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.45);
+      --shadow-strong: 0 16px 48px rgba(0, 0, 0, 0.65);
+      --shadow-glow: 0 0 60px rgba(244, 114, 182, 0.08), 0 0 120px rgba(167, 139, 250, 0.06);
+      --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: cubic-bezier(0.2, 0.9, 0.2, 1);
+    }
+
+    body.light {
+      --bg-dark: #f5f5f7;
+      --bg-surface: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --glass-hover: rgba(255, 255, 255, 0.70);
+      --accent-primary: #ec4899;
+      --accent-secondary: #8b5cf6;
+      --accent-tertiary: #3b82f6;
+      --text-primary: rgba(0, 0, 0, 0.90);
+      --text-secondary: rgba(0, 0, 0, 0.60);
+      --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-strong: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html, body { height: 100% }
+
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      pointer-events: none;
+      z-index: 0;
+      transition: background 0.4s ease;
+    }
+    .bg::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 15%, rgba(244, 114, 182, 0.14), transparent 40%),
+        radial-gradient(ellipse at 90% 10%, rgba(167, 139, 250, 0.12), transparent 45%),
+        radial-gradient(ellipse at 20% 55%, rgba(96, 165, 250, 0.10), transparent 40%);
+      animation: meshFloat 22s ease-in-out infinite alternate;
+    }
+    @keyframes meshFloat {
+      0% { opacity: 0.8; transform: scale(1) translateY(0) }
+      50% { opacity: 1; transform: scale(1.06) translateY(-2%) }
+      100% { opacity: 0.85; transform: scale(1) translateY(0) }
+    }
+
+    .glass {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--shadow-elevated), var(--shadow-glow);
+      background-image: var(--noise-texture);
+    }
+    body.light .glass { box-shadow: var(--shadow-elevated); }
+
+    .site-header {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; padding: 14px 18px; max-width: 1200px; margin: 18px auto 0;
+      position: sticky; top: 14px; z-index: 90; border-radius: 22px;
+      background: rgba(10, 10, 14, 0.50); backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+    }
+    body.light .site-header { background: rgba(255, 255, 255, 0.60); }
+
+    .brand { display: flex; align-items: center; gap: 14px }
+    .brand h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em }
+    .brand-archive { background: var(--gradient-accent); -webkit-background-clip: text; color: transparent; }
+    
+    .theme-toggle {
+      width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+      margin-left: auto; border-radius: 50%; border: 1px solid var(--glass-border);
+      background: var(--glass-bg); cursor: pointer; color: var(--text-secondary);
+    }
+    .theme-toggle:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
+    .theme-toggle .icon-sun { display: none; }
+    body.light .theme-toggle .icon-sun { display: block; }
+    body.light .theme-toggle .icon-moon { display: none; }
+
+    .nav {
+      display: flex; gap: 6px; padding: 6px; border-radius: 999px;
+      background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(18px);
+    }
+    .nav a { color: var(--text-secondary); text-decoration: none; padding: 10px 14px; border-radius: 999px; font-weight: 650; }
+    .nav a:hover { color: var(--text-primary); background: var(--glass-hover); }
+    .nav a.cta { background: var(--gradient-accent); color: #fff; }
+
+    .nav-toggle { display: none; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 10px 12px; border-radius: 99px; cursor: pointer; color: var(--text-secondary); }
+    .nav-icon span { display: block; width: 22px; height: 2px; margin: 5px 0; background: var(--text-primary); transition: 0.2s; }
+    body.nav-open .nav-icon span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+    body.nav-open .nav-icon span:nth-child(2) { opacity: 0 }
+    body.nav-open .nav-icon span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
+    
+    .nav-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; pointer-events: none; z-index: 80; transition: 0.3s; }
+    body.nav-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+
+    .hero { min-height: 100vh; padding: 80px 32px 100px; display: flex; flex-direction: column; position: relative; z-index: 1; }
+    .hero-content { display: flex; gap: 48px; align-items: center; max-width: 1200px; margin: 60px auto; padding: 48px; border-radius: 24px; }
+    .hero-left { flex: 1; z-index: 2 }
+    .hero-right { flex: 0 0 380px; display: flex; justify-content: center; z-index: 2 }
+
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(244, 114, 182, 0.12); border: 1px solid var(--glass-border); border-radius: 24px; font-size: 13px; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; }
+    .hero h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin: 0 0 16px; font-weight: 700; line-height: 1.12; background: var(--gradient-accent); -webkit-background-clip: text; color: transparent; }
+    .lead { color: var(--text-secondary); font-size: 18px; line-height: 1.7; margin-bottom: 28px; max-width: 560px; }
+
+    .stats { display: flex; gap: 32px; margin: 28px 0; padding: 24px 0; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-value { font-size: 26px; font-weight: 700; background: var(--gradient-accent); -webkit-background-clip: text; color: transparent; }
+    .stat-label { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; }
+
+    .actions { display: flex; gap: 16px; flex-wrap: wrap }
+    .button { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 16px; transition: 0.25s; }
+    .button.primary { background: var(--gradient-accent); color: #fff; box-shadow: 0 4px 20px rgba(244, 114, 182, 0.25); }
+    .button.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(244, 114, 182, 0.4); }
+    .button.ghost { border: 1.5px solid var(--glass-border); color: var(--text-primary); background: var(--glass-bg); }
+    .button.ghost:hover { border-color: var(--accent-primary); transform: translateY(-1px); }
+
+    .phone-mockup { width: 280px; height: 560px; border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; position: relative; transform: perspective(1000px) rotateY(-5deg); transition: 0.5s; }
+    .phone-mockup:hover { transform: perspective(1000px) rotateY(0deg); }
+    .carousel { width: 100%; height: 100%; position: relative; perspective: 1200px; transform-style: preserve-3d }
+    .slide { position: absolute; inset: 0; transition: transform 0.6s var(--transition-spring), opacity 0.45s; display: flex; backface-visibility: hidden; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .slide--center { transform: translate3d(0, 0, 0) scale(1) rotateY(0); z-index: 3; }
+    .slide--right { transform: translate3d(12%, 0, -72px) scale(.92) rotateY(-10deg); z-index: 2; opacity: 0.7; }
+    .slide--left { transform: translate3d(-12%, 0, -72px) scale(.92) rotateY(10deg); z-index: 2; opacity: 0.7; }
+    .slide--behind { transform: translate3d(0, 6%, -140px) scale(.86); z-index: 1; opacity: 0; }
+
+    .carousel-control { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(244, 114, 182, 0.15); border: 1px solid var(--glass-border); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 24px; z-index: 10; border: none; }
+    .carousel-control.prev { left: 12px }
+    .carousel-control.next { right: 12px }
+
+    .section { max-width: 1200px; margin: 80px auto; padding: 32px; position: relative; z-index: 2; }
+    .section h3 { font-size: 36px; margin: 0 0 40px; text-align: center; background: var(--gradient-accent); -webkit-background-clip: text; color: transparent; }
+    
+    .features .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .card { padding: 28px; border-radius: 20px; transition: 0.35s; border: 1px solid var(--glass-border); background: var(--glass-bg); position: relative; }
+    .card:hover { transform: translateY(-8px); border-color: var(--accent-primary); }
+    
+    .feature-icon { font-size: 28px; color: var(--accent-primary); background: rgba(244, 114, 182, 0.12); padding: 12px; border-radius: 12px; margin-bottom: 16px; display: inline-block;}
+    .card h4 { display: flex; align-items: center; gap: 12px; font-size: 18px; margin: 0 0 12px; }
+    .card p { color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+    .updates-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .update-card { border-radius: 22px; padding: 26px; border: 1px solid var(--glass-border); background: var(--glass-bg); transition: 0.28s; }
+    .update-card:hover { transform: translateY(-4px); border-color: var(--accent-primary); }
+    .update-header { display: flex; justify-content: space-between; margin-bottom: 14px; }
+    .update-title h4 { margin: 0 0 6px; font-size: 18px; }
+    .pill { display: inline-flex; padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(34, 197, 94, 0.35); background: rgba(34, 197, 94, 0.10); color: #bbf7d0; }
+    body.light .pill { color: #166534; }
+    .update-link { padding: 8px 14px; border-radius: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary); text-decoration: none; font-size: 14px;}
+    .update-body { color: var(--text-secondary); line-height: 1.65; font-size: 14px; }
+
+    .download-container { padding: 48px; border-radius: 24px; text-align: center; }
+    .download-options { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; text-align: left;}
+    .download-option { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 32px; transition: 0.3s; }
+    .download-option:hover { transform: translateY(-4px); border-color: var(--accent-primary); }
+    .download-badge { display: inline-block; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 16px; border: 1px solid var(--accent-primary); color: var(--accent-primary); }
+    .download-option h4 { font-size: 24px; margin: 0 0 12px; }
+    .download-option p { color: var(--text-secondary); margin: 0 0 20px; line-height: 1.6; }
+
+    .alt-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px;}
+    .alt-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-secondary); text-decoration: none; font-size: 14px; }
+    .alt-link:hover { border-color: var(--accent-primary); color: var(--text-primary); }
+
+    .site-footer { max-width: 1200px; margin: 80px auto 40px; padding: 32px; border-radius: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+    .footer-brand p { color: var(--text-secondary); font-size: 14px; margin-top: 8px; }
+    .footer-links { display: flex; gap: 48px; }
+    .footer-column { display: flex; flex-direction: column; gap: 12px; }
+    .footer-column h5 { font-size: 14px; color: var(--text-primary); margin: 0; text-transform: uppercase;}
+    .footer-column a { color: var(--text-secondary); text-decoration: none; font-size: 14px; }
+    .footer-column a:hover { color: var(--accent-primary); }
+    .footer-bottom { width: 100%; text-align: center; border-top: 1px solid var(--glass-border); padding-top: 32px; color: var(--text-secondary); font-size: 13px;}
+    .footer-bottom a { color: var(--accent-primary); text-decoration: none; }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 900px) {
+      .site-header { flex-direction: row; padding: 12px 14px; margin: 14px 14px 0; }
+      .nav-toggle { display: block; }
+      .nav { position: fixed; top: 84px; left: 14px; right: 14px; flex-direction: column; background: rgba(14, 14, 20, 0.95); padding: 14px; opacity: 0; pointer-events: none; z-index: 100; }
+      body.light .nav { background: rgba(255, 255, 255, 0.95); }
+      .nav.mobile-panel { opacity: 1; pointer-events: auto; }
+      .nav a { width: 100%; text-align: left; }
+      .hero-content { flex-direction: column-reverse; text-align: center; padding: 24px; }
+      .stats, .actions { justify-content: center; }
+      .phone-mockup { width: 240px; height: 480px; }
+      .updates-grid, .download-options { grid-template-columns: 1fr; }
+      .footer-links { width: 100%; justify-content: center; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero h2 { font-size: 32px; }
+      .actions .button { width: 100%; justify-content: center; }
+      .stats { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
 <body>
   <div class="bg"></div>
   
   <header class="site-header">
     <div class="brand">
-      <img src="assets/logo.svg" alt="ArchiveTune" class="logo">
-      <h1>
-        <span class="brand-archive">Archive</span><span class="brand-tune">Tune</span>
-      </h1>
+      <span class="material-symbols-outlined" style="font-size: 32px; color: var(--accent-primary);">queue_music</span>
+      <h1><span class="brand-archive">Archive</span><span class="brand-tune">Tune</span></h1>
     </div>
+    
     <button class="theme-toggle" aria-label="Toggle theme">
-      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span class="material-symbols-outlined icon-moon">dark_mode</span>
+      <span class="material-symbols-outlined icon-sun">light_mode</span>
     </button>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span class="nav-icon" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+    
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span class="nav-icon"><span></span><span></span><span></span></span>
     </button>
-    <nav class="nav" aria-label="Primary">
+    
+    <nav class="nav">
       <a href="#features">Features</a>
-      <a href="#screenshots">Screenshots</a>
       <a href="#updates">Updates</a>
       <a href="#download" class="cta">Download</a>
     </nav>
   </header>
-  <div class="nav-backdrop" aria-hidden="true"></div>
+  
+  <div class="nav-backdrop"></div>
 
   <main class="hero">
     <section class="hero-content glass" data-aos="fade-up">
       <div class="hero-left">
         <div class="badge" data-aos="fade-up" data-aos-delay="100">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-          <span id="repo-badge-text">Material 3 Expressive Design</span>
+          <span class="material-symbols-outlined" style="font-size: 16px;">auto_awesome</span>
+          <span>Material 3 Expressive Design</span>
         </div>
+        
         <h2 data-aos="fade-up" data-aos-delay="200">Enhanced Music Streaming for Android</h2>
-        <p class="lead" id="repo-lead" data-aos="fade-up" data-aos-delay="300">Experience YouTube Music like never before with advanced features — seamless background playback, offline downloads, live synchronized lyrics, and beautiful Material 3 theming.</p>
-
-        <div class="repo-topics" id="repo-topics" aria-label="Repository topics"></div>
+        <p class="lead" data-aos="fade-up" data-aos-delay="300">Experience YouTube Music like never before with advanced features — seamless background playback, offline downloads, live synchronized lyrics, and beautiful Material 3 theming.</p>
 
         <div class="stats" data-aos="fade-up" data-aos-delay="400">
           <div class="stat-item">
@@ -248,190 +294,94 @@
             <div class="stat-label">Latest Version</div>
           </div>
           <div class="stat-item">
-            <div class="stat-value" id="github-forks">—</div>
-            <div class="stat-label">Forks</div>
-          </div>
-          <div class="stat-item">
             <div class="stat-value">Android 8+</div>
             <div class="stat-label">Compatibility</div>
           </div>
         </div>
 
-        <div class="repo-meta" aria-label="Repository metadata">
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">License</span>
-            <span class="repo-meta-value" id="repo-license">—</span>
-          </div>
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">Open Issues</span>
-            <span class="repo-meta-value" id="github-issues">—</span>
-          </div>
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">Last Update</span>
-            <span class="repo-meta-value" id="repo-updated">—</span>
-          </div>
-          <div class="repo-meta-item">
-            <span class="repo-meta-label">Default Branch</span>
-            <span class="repo-meta-value" id="repo-branch">—</span>
-          </div>
-        </div>
-
         <div class="actions" data-aos="fade-up" data-aos-delay="500">
-          <a href="https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk" class="button primary">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
-            Download
+          <a href="https://github.com/koiverse/ArchiveTune/releases/latest" class="button primary">
+            <span class="material-symbols-outlined">download</span>
+            Download APK
           </a>
           <a href="https://github.com/koiverse/ArchiveTune" class="button ghost" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg>
+            <!-- Simple generic code/repo icon -->
+            <span class="material-symbols-outlined">code</span>
             View on GitHub
-          </a>
-        </div>
-
-        <div class="download-badges">
-          <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" rel="noopener">
-            <img src="../gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="60">
           </a>
         </div>
       </div>
 
       <div class="hero-right" data-aos="fade-left" data-aos-delay="400">
-        <div class="phone-mockup" aria-roledescription="carousel">
+        <div class="phone-mockup">
           <div class="carousel">
-            <div class="slide active"><img src="../raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Home screen with music library" loading="eager" decoding="async" fetchpriority="high" width="280" height="560"></div>
-            <div class="slide"><img data-src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'280'%20height%3D'560'%20viewBox%3D'0%200%20280%20560'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%2310162a'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23060a16'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'280'%20height%3D'560'%20rx%3D'24'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" alt="Now playing with live lyrics" loading="lazy" decoding="async" width="280" height="560"></div>
-            <div class="slide"><img data-src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'280'%20height%3D'560'%20viewBox%3D'0%200%20280%20560'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%2310162a'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23060a16'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'280'%20height%3D'560'%20rx%3D'24'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" alt="Song details and options" loading="lazy" decoding="async" width="280" height="560"></div>
-            <div class="slide"><img data-src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_4.jpg" src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'280'%20height%3D'560'%20viewBox%3D'0%200%20280%20560'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%2310162a'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23060a16'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'280'%20height%3D'560'%20rx%3D'24'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" alt="Search interface" loading="lazy" decoding="async" width="280" height="560"></div>
-            <div class="slide"><img data-src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_5.jpg" src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'280'%20height%3D'560'%20viewBox%3D'0%200%20280%20560'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%2310162a'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23060a16'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'280'%20height%3D'560'%20rx%3D'24'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" alt="Settings and customization" loading="lazy" decoding="async" width="280" height="560"></div>
-            <div class="slide"><img data-src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_6.jpg" src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'280'%20height%3D'560'%20viewBox%3D'0%200%20280%20560'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%2310162a'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23060a16'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'280'%20height%3D'560'%20rx%3D'24'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" alt="Theme customization" loading="lazy" decoding="async" width="280" height="560"></div>
+            <div class="slide active">
+              <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Home Screen">
+            </div>
+            <div class="slide">
+              <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Player Screen">
+            </div>
+            <div class="slide">
+              <img src="https://raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Settings Screen">
+            </div>
           </div>
-          <button class="carousel-control prev" aria-label="Previous slide">‹</button>
-          <button class="carousel-control next" aria-label="Next slide">›</button>
+          <button class="carousel-control prev">‹</button>
+          <button class="carousel-control next">›</button>
         </div>
       </div>
     </section>
 
-  <section id="features" class="section features">
+    <section id="features" class="section features">
       <h3 data-aos="fade-up">Features</h3>
       <div class="cards">
-        <article class="card glass">
-          <h4>
-            <img class="feature-icon" src="assets/icons/download.svg" alt="offline downloads icon">
-            <span class="feature-title" data-feature-title="0">Offline downloads</span>
-          </h4>
-          <p data-feature-desc="0">Cache songs for offline playback with configurable quality and storage management.</p>
+        <article class="card glass" data-aos="fade-up" data-aos-delay="0">
+          <span class="material-symbols-outlined feature-icon">offline_pin</span>
+          <h4>Offline Downloads</h4>
+          <p>Cache songs for offline playback with configurable quality and storage management.</p>
         </article>
-        <article class="card glass">
-          <h4>
-            <img class="feature-icon" src="assets/icons/lyrics.svg" alt="live lyrics icon">
-            <span class="feature-title" data-feature-title="1">Live lyrics</span>
-          </h4>
-          <p data-feature-desc="1">Follow along with synchronized lyrics in the player and lock screen widgets.</p>
+        <article class="card glass" data-aos="fade-up" data-aos-delay="100">
+          <span class="material-symbols-outlined feature-icon">lyrics</span>
+          <h4>Live Lyrics</h4>
+          <p>Follow along with synchronized lyrics in the player and lock screen widgets.</p>
         </article>
-        <article class="card glass">
-          <h4>
-            <img class="feature-icon" src="assets/icons/theme.svg" alt="themeable ui icon">
-            <span class="feature-title" data-feature-title="2">Themeable UI</span>
-          </h4>
-          <p data-feature-desc="2">Light, dark, black and dynamic themes built on Material 3 design.</p>
+        <article class="card glass" data-aos="fade-up" data-aos-delay="200">
+          <span class="material-symbols-outlined feature-icon">palette</span>
+          <h4>Themeable UI</h4>
+          <p>Light, dark, black and dynamic themes built on Material 3 design concepts.</p>
         </article>
-        <article class="card glass">
-          <h4>
-            <img class="feature-icon" src="assets/icons/presence.svg" alt="discord presence icon">
-            <span class="feature-title" data-feature-title="3">Highly Customizable Discord Rich Presence</span>
-          </h4>
-          <p data-feature-desc="3">Tailor exactly how your presence appears in Discord, with detailed fields, artwork selection, timestamps and flexible formatting options so you can show what matters.</p>
+        <article class="card glass" data-aos="fade-up" data-aos-delay="300">
+          <span class="material-symbols-outlined feature-icon">sports_esports</span>
+          <h4>Discord Presence</h4>
+          <p>Tailor exactly how your presence appears in Discord, with detailed fields and artwork.</p>
         </article>
-        <article class="card glass">
-          <h4>
-            <img class="feature-icon" src="assets/icons/translate.svg" alt="smart rpc translation icon">
-            <span class="feature-title" data-feature-title="4">Smart RPC Translation</span>
-          </h4>
-          <p data-feature-desc="4">Automatically translate your Rich Presence text before it’s sent to Discord — making your activity accessible across languages and audiences.</p>
-        </article>
-        <article class="card glass">
-          <h4>
-            <img class="feature-icon" src="assets/icons/lyrics-translate.svg" alt="lyrics translation icon">
-            <span class="feature-title" data-feature-title="5">Lyrics Translation Support</span>
-          </h4>
-          <p data-feature-desc="5">Translate lyrics directly inside ArchiveTune so listeners can follow along in their preferred language.</p>
-        </article>
-      </div>
-    </section>
-
-  <section id="screenshots" class="section screenshots">
-      <div class="section-header" data-aos="fade-up">
-        <h3>See It In Action</h3>
-        <p class="section-subtitle">Beautiful, intuitive interface designed for music lovers</p>
-      </div>
-      <div class="gallery">
-        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
-          <img src="../raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.jpg" alt="Music library home screen" loading="lazy">
-          <div class="gallery-overlay">
-            <span>Music Player</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150">
-          <img src="../raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.jpg" alt="Now playing with lyrics" loading="lazy">
-          <div class="gallery-overlay">
-            <span>Live Lyrics</span>
-          </div>
-        </div>
-        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-          <img src="../raw.githubusercontent.com/koiverse/ArchiveTune/main/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.jpg" alt="Song options and details" loading="lazy">
-          <div class="gallery-overlay">
-            <span>Theme Customization</span>
-          </div>
-        </div>
-      </div>
-      <div class="feature-banner" data-aos="fade-up" data-aos-delay="200">
-        <img src="../raw.githubusercontent.com/koiverse/ArchiveTune/dev/fastlane/metadata/android/en-US/images/ArchiveTuneBanner.png" alt="ArchiveTune feature showcase" loading="lazy">
       </div>
     </section>
 
     <section id="updates" class="section updates">
       <div class="section-header" data-aos="fade-up">
         <h3>Live from GitHub</h3>
-        <p class="section-subtitle">Release notes, build freshness, and project health — updated automatically</p>
       </div>
-
       <div class="updates-grid">
-        <article class="update-card glass" data-aos="fade-up" data-aos-delay="0">
+        <article class="update-card glass" data-aos="fade-up">
           <div class="update-header">
             <div class="update-title">
               <h4>Latest Release</h4>
-              <div class="update-meta">
-                <span class="pill" id="release-tag">—</span>
-                <span class="separator">•</span>
-                <span id="release-date">—</span>
-              </div>
+              <span class="pill" id="release-tag">Fetching...</span>
             </div>
-            <a class="update-link" id="release-link" href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener">View</a>
+            <a class="update-link" href="https://github.com/koiverse/ArchiveTune/releases" target="_blank">View</a>
           </div>
-          <div class="update-body" id="release-notes">—</div>
+          <div class="update-body" id="release-notes">Fetching latest release info from GitHub...</div>
         </article>
 
-        <article class="update-card glass" data-aos="fade-up" data-aos-delay="150">
+        <article class="update-card glass" data-aos="fade-up" data-aos-delay="100">
           <div class="update-header">
             <div class="update-title">
               <h4>Dev Build</h4>
-              <div class="update-meta">
-                <span class="pill" id="build-status">—</span>
-                <span class="separator">•</span>
-                <span id="build-updated">—</span>
-              </div>
+              <span class="pill" style="border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.10); color: #fef3c7;">Nightly</span>
             </div>
-            <a class="update-link" href="https://github.com/koiverse/ArchiveTune/actions" target="_blank" rel="noopener">Actions</a>
+            <a class="update-link" href="https://github.com/koiverse/ArchiveTune/actions" target="_blank">Actions</a>
           </div>
-          <div class="update-body">
-            <div class="build-row">
-              <span class="build-label">Artifact</span>
-              <span class="build-value" id="nightly-size-inline">—</span>
-            </div>
-            <div class="build-row">
-              <span class="build-label">Commit</span>
-              <span class="build-value" id="build-commit">—</span>
-            </div>
-          </div>
+          <div class="update-body">Bleeding edge updates are available directly from GitHub Actions. These contain experimental features.</div>
         </article>
       </div>
     </section>
@@ -440,114 +390,122 @@
       <div class="download-container glass" data-aos="fade-up">
         <div class="section-header">
           <h3>Get ArchiveTune</h3>
-          <p class="section-subtitle">Choose the version that's right for you</p>
         </div>
         
         <div class="download-options">
-          <div class="download-option" data-aos="fade-up" data-aos-delay="0">
-            <div class="download-badge stable">Recommended</div>
-            <h4>Stable Release</h4>
-            <p>Production-ready build, thoroughly tested and optimized for daily use. Perfect for users who want reliability.</p>
-            <div class="download-meta">
-              <span class="version" id="download-version">—</span>
-              <span class="separator">•</span>
-              <span class="size" id="download-size">—</span>
-            </div>
-            <a class="button primary" href="https://github.com/koiverse/ArchiveTune/releases/latest/download/ArchiveTune.apk">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-              </svg>
-              Download Stable APK
-            </a>
+          <div class="download-option">
+            <div class="download-badge stable">Stable</div>
+            <h4>Official Release</h4>
+            <p>Production-ready build, thoroughly tested and optimized for daily use.</p>
+            <a class="button primary" href="https://github.com/koiverse/ArchiveTune/releases/latest" style="width:100%">Download APK</a>
           </div>
           
-          <div class="download-option" data-aos="fade-up" data-aos-delay="150">
-            <div class="download-badge nightly">Bleeding Edge</div>
-            <h4>Nightly Builds</h4>
-            <p>Latest features and fixes from the development branch. May contain experimental features and occasional bugs.</p>
-            <div class="download-meta">
-              <span class="version">Dev Branch</span>
-              <span class="separator">•</span>
-              <span class="size" id="nightly-size">—</span>
-            </div>
-            <a class="button ghost" href="https://nightly.link/koiverse/ArchiveTune/workflows/build/dev?preview" target="_blank" rel="noopener">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-              </svg>
-              Get Nightly Build
-            </a>
+          <div class="download-option">
+            <div class="download-badge nightly" style="border-color: var(--accent-secondary); color: var(--accent-secondary);">Nightly</div>
+            <h4>Bleeding Edge</h4>
+            <p>Latest features and fixes. May contain experimental bugs.</p>
+            <a class="button ghost" href="https://nightly.link/koiverse/ArchiveTune/workflows/build/dev?preview" target="_blank" style="width:100%">Get Nightly</a>
           </div>
         </div>
 
-        <div class="download-alternatives">
-          <h4>Other Options</h4>
-          <div class="alt-links">
-            <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" rel="noopener" class="alt-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M1.5 6v12c0 1.1.9 2 2 2h17c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-17c-1.1 0-2 .9-2 2zm19 12h-17V6h17v12z"/>
-              </svg>
-              IzzyOnDroid F-Droid Repo
-            </a>
-            <a href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener" class="alt-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              All Releases on GitHub
-            </a>
-          </div>
+        <div class="alt-links">
+          <a href="https://apt.izzysoft.de/fdroid/index/apk/moe.koiverse.archivetune" target="_blank" class="alt-link">
+            <span class="material-symbols-outlined">shop</span> IzzyOnDroid
+          </a>
+          <a href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" class="alt-link">
+            <span class="material-symbols-outlined">folder_zip</span> All Releases
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section testimonials-section" aria-labelledby="footer-testimonials-title">
-      <div class="footer-testimonials glass" data-aos="fade-up">
-        <div class="footer-testimonials-head">
-          <h4 id="footer-testimonials-title">What users say</h4>
-          <p>Loved by listeners who use ArchiveTune every day.</p>
-        </div>
-        <div class="footer-testimonials-grid" id="footer-testimonials-grid"></div>
-      </div>
-    </section>
-
-    <footer class="site-footer glass" data-aos="fade-up">
+    <footer class="site-footer glass">
         <div class="footer-content">
           <div class="footer-brand">
-            <img src="assets/logo.svg" alt="ArchiveTune" class="footer-logo">
-            <div>
-              <strong>ArchiveTune</strong>
-              <p id="footer-tagline">Enhanced Music Streaming for Android</p>
-            </div>
+            <strong>ArchiveTune</strong>
+            <p>Enhanced Music Streaming</p>
           </div>
-          
           <div class="footer-links">
             <div class="footer-column">
               <h5>Project</h5>
-              <a href="https://github.com/koiverse/ArchiveTune" target="_blank" rel="noopener">Source Code</a>
-              <a href="https://github.com/koiverse/ArchiveTune/releases" target="_blank" rel="noopener">Releases</a>
-              <a href="https://github.com/koiverse/ArchiveTune/issues" target="_blank" rel="noopener">Issue Tracker</a>
+              <a href="https://github.com/koiverse/ArchiveTune">Source Code</a>
+              <a href="https://github.com/koiverse/ArchiveTune/releases">Releases</a>
             </div>
             <div class="footer-column">
               <h5>Community</h5>
-              <a href="https://github.com/koiverse/ArchiveTune/discussions" target="_blank" rel="noopener">Discussions</a>
-              <a href="https://github.com/koiverse/ArchiveTune/blob/main/README.md" target="_blank" rel="noopener">Documentation</a>
-              <a href="https://github.com/koiverse/ArchiveTune/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+              <a href="https://github.com/koiverse/ArchiveTune/discussions">Discussions</a>
+              <a href="https://github.com/koiverse/ArchiveTune/blob/main/LICENSE">License (GPL-3)</a>
             </div>
           </div>
         </div>
-        
         <div class="footer-bottom">
-          <small>
-            Made with <span style="color: #f472b6;">❤</span> by Koiverse • 
-            Not affiliated with YouTube or Google • 
-            Licensed under <a href="https://github.com/koiverse/ArchiveTune/blob/main/LICENSE" target="_blank" rel="noopener">GPL-3.0</a>
-          </small>
+          <small>Made with ❤ by Koiverse • Not affiliated with YouTube</small>
         </div>
     </footer>
   </main>
 
-  <script src="../unpkg.com/aos%402.3.4/dist/aos.js"></script>
-  <script src="assets/js/main.js"></script>
-</body>
+  <!-- AOS Script from CDN -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-<!-- Mirrored from archivetune.koiiverse.cloud/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 May 2026 18:59:26 GMT -->
+  <script>
+    // Initialize AOS
+    AOS.init({ once: true, offset: 50, duration: 600 });
+
+    // Theme Toggler
+    const themeBtn = document.querySelector('.theme-toggle');
+    themeBtn.addEventListener('click', () => document.body.classList.toggle('light'));
+
+    // Mobile Navigation
+    const navBtn = document.querySelector('.nav-toggle');
+    const navBackdrop = document.querySelector('.nav-backdrop');
+    const nav = document.querySelector('.nav');
+    
+    function toggleNav() {
+      document.body.classList.toggle('nav-open');
+      nav.classList.toggle('mobile-panel');
+    }
+    navBtn.addEventListener('click', toggleNav);
+    navBackdrop.addEventListener('click', toggleNav);
+
+    // Carousel Logic
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+    const nextBtn = document.querySelector('.carousel-control.next');
+    let currentSlide = 0;
+
+    function updateCarousel() {
+      slides.forEach((slide, index) => {
+        slide.className = 'slide';
+        if (index === currentSlide) slide.classList.add('slide--center', 'active');
+        else if (index === (currentSlide - 1 + slides.length) % slides.length) slide.classList.add('slide--left');
+        else if (index === (currentSlide + 1) % slides.length) slide.classList.add('slide--right');
+        else slide.classList.add('slide--behind');
+      });
+    }
+
+    prevBtn.addEventListener('click', () => { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateCarousel(); });
+    nextBtn.addEventListener('click', () => { currentSlide = (currentSlide + 1) % slides.length; updateCarousel(); });
+    updateCarousel();
+
+    // Fetch GitHub API Stats
+    async function fetchGitHubData() {
+      try {
+        const repoRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune');
+        if(repoRes.ok) {
+          const repo = await repoRes.json();
+          document.getElementById('github-stars').textContent = repo.stargazers_count;
+        }
+        const releaseRes = await fetch('https://api.github.com/repos/koiverse/ArchiveTune/releases/latest');
+        if(releaseRes.ok) {
+          const release = await releaseRes.json();
+          const vLabel = release.tag_name || 'Latest';
+          document.getElementById('latest-version').textContent = vLabel;
+          document.getElementById('release-tag').textContent = vLabel;
+          document.getElementById('release-notes').textContent = release.name || 'New stable release available.';
+        }
+      } catch (err) { console.warn('Failed to fetch GitHub data'); }
+    }
+    fetchGitHubData();
+  </script>
+</body>
 </html>
