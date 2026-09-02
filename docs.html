@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>AvidTune - Documentation</title>
+    <meta name="description" content="Official documentation for AvidTune — A modern YouTube Music client for Android.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.png" sizes="any">
+
+    <!-- Google Fonts: Sora, Geist, Instrument Sans, Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Geist:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "var(--text-primary)",
+                        "surface": "var(--surface-bg)",
+                        "on-surface-variant": "var(--text-muted)",
+                        "accent": {
+                            blue: '#2563eb',
+                            purple: '#4f46e5',
+                            light: 'var(--accent-light)'
+                        }
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        instrument: ['"Instrument Sans"', 'sans-serif'],
+                        geist: ["Geist", "sans-serif"]
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: 'var(--text-muted)',
+                                h1: { color: 'var(--text-primary)', fontFamily: 'Sora, sans-serif', tracking: '-0.02em' },
+                                h2: { color: 'var(--text-primary)', fontFamily: 'Sora, sans-serif', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginTop: '3.5rem' },
+                                h3: { color: 'var(--text-primary)', fontFamily: 'Geist, sans-serif', fontWeight: '600' },
+                                h4: { color: '#2563eb', fontFamily: 'Geist, sans-serif' },
+                                strong: { color: 'var(--text-primary)' },
+                                a: { color: '#2563eb', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
+                                code: { color: 'var(--text-primary)', backgroundColor: 'var(--tag-bg)', padding: '0.2rem 0.4rem', borderRadius: '0.25rem', fontWeight: '500' },
+                                'code::before': { content: '""' },
+                                'code::after': { content: '""' },
+                                blockquote: { borderLeftColor: '#2563eb', color: 'var(--text-muted)', fontStyle: 'italic' },
+                                ul: { markerColor: 'var(--text-muted)' },
+                                ol: { markerColor: 'var(--text-muted)' },
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS (AvidTune Theming + VIVI Layout logic) -->
+    <style>
+        :root {
+            /* Light Mode */
+            --bg-gradient: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
+            --text-primary: #09090b;
+            --text-muted: #475569;
+            --surface-bg: rgba(255, 255, 255, 0.75);
+            --border-color: rgba(226, 232, 240, 0.85);
+            --accent-light: #dbeafe;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --tag-border: #cbd5e1;
+            
+            /* Blob Colors - Light */
+            --blob-color-1: rgba(37, 99, 235, 0.15);
+            --blob-color-2: rgba(79, 70, 229, 0.12);
+            --blob-color-3: rgba(14, 165, 233, 0.15);
+        }
+
+        html.dark {
+            /* Dark Mode */
+            --bg-gradient: radial-gradient(circle at 50% 0%, #18181b 0%, #09090b 50%, #000000 100%);
+            --text-primary: #f8fafc;
+            --text-muted: #a1a1aa;
+            --surface-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-light: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(9, 9, 11, 0.85);
+            --tag-bg: rgba(255, 255, 255, 0.1);
+            --tag-text: #f8fafc;
+            --tag-border: rgba(255, 255, 255, 0.2);
+
+            /* Blob Colors - Dark */
+            --blob-color-1: rgba(37, 99, 235, 0.08);
+            --blob-color-2: rgba(79, 70, 229, 0.07);
+            --blob-color-3: rgba(14, 165, 233, 0.08);
+        }
+
+        body {
+            background-color: transparent !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        /* Fixed Background Container */
+        #page-background {
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh; 
+            z-index: -1;
+            background: var(--bg-gradient);
+            transition: background 0.4s ease;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Floating Background Blobs */
+        .bg-blob {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            will-change: transform; pointer-events: none; transition: background-color 0.4s ease;
+        }
+        .blob-1 {
+            width: 400px; height: 400px; background-color: var(--blob-color-1);
+            top: -10%; left: -10%; animation: blob-float-1 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blob-2 {
+            width: 500px; height: 500px; background-color: var(--blob-color-2);
+            bottom: -20%; right: -10%; animation: blob-float-2 22s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); animation-delay: -5s;
+        }
+        .blob-3 {
+            width: 350px; height: 350px; background-color: var(--blob-color-3);
+            top: 40%; left: 40%; animation: blob-float-3 28s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); animation-delay: -10s;
+        }
+        @keyframes blob-float-1 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(15vw, 15vh) scale(1.1); } 100% { transform: translate(-5vw, 25vh) scale(0.95); } }
+        @keyframes blob-float-2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-15vw, -20vh) scale(0.9); } 100% { transform: translate(-25vw, 5vh) scale(1.05); } }
+        @keyframes blob-float-3 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(10vw, -15vh) scale(1.15); } 100% { transform: translate(-10vw, -5vh) scale(0.9); } }
+
+        /* Typography & Scroll Offsets */
+        .prose-headings { scroll-margin-top: 100px; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+        /* Navbar Styles */
+        #top-navbar {
+            transition: padding 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .nav-link {
+            color: var(--text-muted) !important; padding: 8px 16px; border-radius: 50px;
+            font-size: 14px; font-weight: 500; transition: all 0.2s ease;
+        }
+        .nav-link:hover { color: var(--text-primary) !important; background-color: var(--accent-light) !important; }
+
+        /* Sidebar Scrolling */
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* Collapsible Sidebar Styles */
+        .sidebar-group.collapsed ul {
+            max-height: 0 !important; opacity: 0; margin: 0; padding-top: 0; padding-bottom: 0; pointer-events: none; border-color: transparent;
+        }
+        .sidebar-group.collapsed .chevron { transform: rotate(-90deg); }
+        .sidebar-group ul {
+            max-height: 500px; opacity: 1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden;
+        }
+        .chevron { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .nav-active {
+            color: #2563eb !important; font-weight: 600;
+        }
+        html.dark .nav-active {
+            color: #60a5fa !important;
+        }
+
+        /* Mobile Drawer */
+        .mobile-drawer-backdrop {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .mobile-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+        
+        .mobile-drawer {
+            position: fixed; top: 0; left: 0; width: 280px; max-width: 80vw; height: 100vh;
+            background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 201; transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto; overscroll-behavior: contain; border-right: 1px solid var(--border-color);
+        }
+        .mobile-drawer.open { transform: translateX(0); }
+    </style>
+</head>
+
+<body class="bg-transparent text-primary font-geist selection:bg-accent-light selection:text-accent-blue overflow-x-hidden">
+
+    <!-- Fixed Gradient Element with Blobs -->
+    <div id="page-background">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-4 px-6 md:px-12 flex justify-between items-center bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-color)] shadow-sm">
+        <div class="flex items-center gap-6">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-[8px] object-cover shadow-sm border border-slate-200 dark:border-slate-800" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzI1NjNlYiIvPjwvc3ZnPg=='" />
+                <span class="text-xl font-bold tracking-tight text-primary hidden sm:block font-sora">AvidTune Docs</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2 text-sm font-medium ml-4">
+                <a href="index.html" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">home</span> Home</a>
+                <a href="#welcome" class="nav-link text-primary bg-black/5 dark:bg-white/10"><span class="material-symbols-outlined text-[18px] mr-1.5">menu_book</span> Guide</a>
+                <a href="#chapter-6" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">build</span> Troubleshooting</a>
+            </div>
+        </div>
+        
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3">
+            <div class="hidden lg:flex items-center bg-black/5 dark:bg-white/5 border border-[var(--border-color)] rounded-full px-4 py-2 w-64 cursor-text hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-[18px] text-slate-400 mr-2">search</span>
+                <span class="text-sm text-slate-400">Search docs...</span>
+            </div>
+            
+            <!-- Theme Toggler -->
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center ml-2" aria-label="Toggle Theme">
+                <span id="theme-icon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+            </button>
+
+            <a href="https://github.com/cgens67/avidtune" target="_blank" class="hidden sm:flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-primary text-[var(--surface-bg)] text-sm font-bold hover:opacity-90 transition-opacity">
+                <span class="material-symbols-outlined text-[18px]">code</span> GitHub
+            </a>
+
+            <!-- Hamburger Button (mobile only) -->
+            <button id="mobile-menu-btn" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-[var(--border-color)] hover:bg-black/10 dark:hover:bg-white/10 transition-colors" aria-label="Open menu">
+                <span class="material-symbols-outlined text-primary text-[20px]">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="px-6 py-5 flex items-center justify-between border-b border-[var(--border-color)]">
+            <div class="flex items-center gap-3">
+                <img src="images/logo.png" alt="AvidTune" class="w-7 h-7 rounded-lg object-cover border border-slate-200 dark:border-slate-800" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzI1NjNlYiIvPjwvc3ZnPg=='" />
+                <span class="text-base font-bold text-primary tracking-tight font-sora">Docs Menu</span>
+            </div>
+            <button id="mobile-close-btn" class="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-primary text-[20px]">close</span>
+            </button>
+        </div>
+
+        <div class="px-4 py-4 flex flex-col gap-1 border-b border-[var(--border-color)]">
+            <a href="index.html" class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors py-2.5 px-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5">
+                <span class="material-symbols-outlined text-[18px]">home</span> Back to Home
+            </a>
+            <a href="https://github.com/cgens67/avidtune" target="_blank" class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors py-2.5 px-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5">
+                <span class="material-symbols-outlined text-[18px]">code</span> GitHub Repo
+            </a>
+        </div>
+
+        <div class="px-5 py-2">
+            <div class="flex flex-col gap-6 text-sm py-4">
+                <!-- Mobile Sidebar Groups (Injected dynamically or duplicated) -->
+                <div class="sidebar-group">
+                    <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center">
+                        <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">import_contacts</span> Introduction
+                        <span class="material-symbols-outlined ml-auto text-[16px] chevron">expand_more</span>
+                    </h4>
+                    <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2">
+                        <li><a href="#welcome" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Welcome</a></li>
+                        <li><a href="#features" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Key Features</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-group collapsed">
+                    <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center">
+                        <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">download</span> Installation
+                        <span class="material-symbols-outlined ml-auto text-[16px] chevron text-slate-400">expand_more</span>
+                    </h4>
+                    <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2">
+                        <li><a href="#sys-req" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">System Requirements</a></li>
+                        <li><a href="#installing" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Installing AvidTune</a></li>
+                        <li><a href="#first-launch" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">First Launch</a></li>
+                        <li><a href="#updating" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Updating</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-group collapsed">
+                    <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center">
+                        <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">settings</span> Setting Up
+                        <span class="material-symbols-outlined ml-auto text-[16px] chevron text-slate-400">expand_more</span>
+                    </h4>
+                    <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2">
+                        <li><a href="#account" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Account & Sync</a></li>
+                        <li><a href="#player-audio" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Player & Audio</a></li>
+                        <li><a href="#appearance" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Appearance</a></li>
+                        <li><a href="#privacy" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Privacy & Storage</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-group collapsed">
+                    <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center">
+                        <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">build</span> Troubleshooting
+                        <span class="material-symbols-outlined ml-auto text-[16px] chevron text-slate-400">expand_more</span>
+                    </h4>
+                    <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2">
+                        <li><a href="#playback-issues" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Playback Issues</a></li>
+                        <li><a href="#login-issues" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Login Issues</a></li>
+                        <li><a href="#app-crashes" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">App Crashes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Layout Container -->
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-8 flex gap-8 relative pt-28 pb-12">
+        
+        <!-- Left Sidebar (Desktop) -->
+        <div class="hidden lg:block w-56 shrink-0 relative">
+            <aside class="sidebar-scroll py-6 pr-4 border-r border-[var(--border-color)]" style="position: sticky; top: 100px; height: calc(100vh - 100px); overflow-y: auto;">
+                <div class="flex flex-col gap-8 text-sm pb-10">
+                    
+                    <div class="sidebar-group">
+                        <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center hover:text-accent-blue transition-colors">
+                            <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">import_contacts</span> Introduction
+                            <span class="material-symbols-outlined ml-auto text-[16px] chevron">expand_more</span>
+                        </h4>
+                        <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2 font-medium">
+                            <li><a href="#welcome" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="welcome">Welcome</a></li>
+                            <li><a href="#features" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="features">Key Features</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-group">
+                        <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center hover:text-accent-blue transition-colors">
+                            <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">download</span> Installation
+                            <span class="material-symbols-outlined ml-auto text-[16px] chevron">expand_more</span>
+                        </h4>
+                        <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2 font-medium">
+                            <li><a href="#sys-req" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="sys-req">System Requirements</a></li>
+                            <li><a href="#installing" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="installing">Installing AvidTune</a></li>
+                            <li><a href="#first-launch" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="first-launch">First Launch</a></li>
+                            <li><a href="#updating" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="updating">Updating AvidTune</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-group">
+                        <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center hover:text-accent-blue transition-colors">
+                            <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">settings</span> Setting Up
+                            <span class="material-symbols-outlined ml-auto text-[16px] chevron">expand_more</span>
+                        </h4>
+                        <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2 font-medium">
+                            <li><a href="#account" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="account">Account & Sync</a></li>
+                            <li><a href="#player-audio" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="player-audio">Player & Audio</a></li>
+                            <li><a href="#appearance" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="appearance">Appearance</a></li>
+                            <li><a href="#privacy" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="privacy">Privacy & Storage</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-group collapsed">
+                        <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center hover:text-accent-blue transition-colors">
+                            <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">build</span> Troubleshooting
+                            <span class="material-symbols-outlined ml-auto text-[16px] chevron text-slate-400">expand_more</span>
+                        </h4>
+                        <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2 font-medium">
+                            <li><a href="#playback-issues" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="playback-issues">Playback Issues</a></li>
+                            <li><a href="#login-issues" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="login-issues">Login Issues</a></li>
+                            <li><a href="#app-crashes" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar" data-target="app-crashes">App Crashes</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </aside>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 min-w-0 py-6 max-w-4xl relative z-10">
+            
+            <!-- Page Header -->
+            <div class="mb-14 border-b border-[var(--border-color)] pb-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-[var(--tag-bg)] text-primary px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--tag-border)]">Version 1.0.0</span>
+                    <span class="bg-black/5 dark:bg-white/5 text-on-surface-variant px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--border-color)]">Android Platform</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight font-sora leading-tight">Official Documentation</h1>
+                
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="index.html" class="flex items-center gap-2 bg-primary text-[var(--dialog-bg)] px-5 py-2.5 rounded-xl text-sm font-bold hover:scale-105 transition-all shadow-md">
+                        <span class="material-symbols-outlined text-[20px]">public</span> Main Website
+                    </a>
+                    <a href="https://github.com/cgens67/avidtune" target="_blank" class="flex items-center gap-2 bg-black/5 dark:bg-white/5 text-primary px-5 py-2.5 rounded-xl border border-[var(--border-color)] text-sm font-bold hover:bg-black/10 dark:hover:bg-white/10 transition-all">
+                        <span class="material-symbols-outlined text-[20px]">code</span> GitHub Repo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Markdown-like Content -->
+            <div class="prose dark:prose-invert max-w-none font-geist">
+
+                <h2 id="welcome" class="prose-headings flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">waving_hand</span> Welcome to AvidTune</h2>
+                <p>AvidTune is a modern, free, and open-source Android music streaming app designed to deliver a premium listening experience. Built with Material Design 3, it offers ad-free streaming directly from YouTube Music, deeply customizable aesthetics, and native offline playback.</p>
+                
+                <h3 id="what-is">What is AvidTune?</h3>
+                <p>Developed by <strong>cgens67</strong>, AvidTune serves as an alternative YouTube Music client focused on performance, design, and privacy. Unlike official clients, AvidTune completely removes tracking, telemetry, and advertisements.</p>
+                
+                <h3 id="features">Key Features at a Glance</h3>
+                <ul>
+                    <li><strong>Ad-Free Playback:</strong> Enjoy uninterrupted music without visual or audio advertisements.</li>
+                    <li><strong>Offline Mode:</strong> Download tracks and playlists for listening without an internet connection.</li>
+                    <li><strong>Synchronized Lyrics:</strong> Real-time lyrics that flow with your music.</li>
+                    <li><strong>Material Design 3:</strong> Fluid animations, dynamic colors, and customizable themes.</li>
+                    <li><strong>YouTube Integration:</strong> Sign in securely to sync your playlists and liked songs.</li>
+                    <li><strong>Privacy-First:</strong> No trackers, analytics, or background data collection.</li>
+                </ul>
+
+                <hr class="my-12 border-[var(--border-color)]">
+
+                <h2 id="chapter-1" class="prose-headings flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">download_for_offline</span> Chapter 1 — Installation</h2>
+                <p>This section walks you through getting AvidTune onto your Android device safely and correctly.</p>
+
+                <h3 id="sys-req">System Requirements</h3>
+                <ul>
+                    <li><strong>OS:</strong> Android 8.0 (Oreo) or higher.</li>
+                    <li><strong>Storage:</strong> ~50 MB for the base app. Recommended 1GB+ if utilizing offline caching and downloads.</li>
+                    <li><strong>Network:</strong> Internet connection required for streaming and initial login.</li>
+                </ul>
+
+                <h3 id="installing">Installing AvidTune</h3>
+                <p>Because AvidTune is a third-party YouTube client, it is not available on the Google Play Store. You must install the APK manually.</p>
+                
+                <ol>
+                    <li>Visit the <a href="https://github.com/cgens67/avidtune/releases" target="_blank">GitHub Releases</a> page.</li>
+                    <li>Download the latest <code>.apk</code> file (usually named <code>app-universal-release.apk</code>).</li>
+                    <li>Open the file on your device. You may be prompted to allow <strong>"Install from unknown sources"</strong> in your Android security settings.</li>
+                    <li>Tap Install and wait for the process to complete.</li>
+                </ol>
+
+                <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl p-5 my-8 flex gap-4 items-start shadow-sm">
+                    <span class="material-symbols-outlined text-amber-500 mt-0.5 text-2xl">warning</span>
+                    <div>
+                        <strong class="text-amber-700 dark:text-amber-400 block mb-1 text-base">Security Warning</strong>
+                        <p class="text-amber-600/90 dark:text-amber-300/80 m-0 leading-relaxed text-sm">Always download AvidTune APKs directly from the official GitHub repository. Do not trust third-party APK mirror sites as they may bundle malware.</p>
+                    </div>
+                </div>
+
+                <h3 id="first-launch">First Launch & Permissions</h3>
+                <p>On your first launch, AvidTune will request basic permissions to function optimally:</p>
+                <ul>
+                    <li><strong>Notifications:</strong> Required to show the media playback controls in your notification shade and lock screen.</li>
+                    <li><strong>Storage/Media:</strong> Required if you wish to export backups or save downloaded music to public directories.</li>
+                </ul>
+
+                <h3 id="updating">Updating AvidTune</h3>
+                <p>AvidTune includes an in-app updater. Go to <strong>Settings > About</strong> and tap "Check for updates". Alternatively, you can watch the GitHub repository for new releases and install the new APK over your existing installation.</p>
+
+                <hr class="my-12 border-[var(--border-color)]">
+
+                <h2 id="chapter-2" class="prose-headings flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">tune</span> Chapter 2 — Setting Up</h2>
+                <p>Customize AvidTune to match your preferences and synchronize your data.</p>
+
+                <h3 id="account">Account & Sync</h3>
+                <p>You can use AvidTune entirely anonymously. However, logging in allows you to access your YouTube Music library.</p>
+                <ul>
+                    <li>Navigate to <strong>Settings > Account</strong>.</li>
+                    <li>Follow the OAuth prompt to sign in securely via Google.</li>
+                    <li>Once authenticated, your Playlists, Liked Songs, and Recommendations will automatically populate in the Library tab.</li>
+                </ul>
+
+                <h3 id="player-audio">Player & Audio Quality</h3>
+                <p>AvidTune streams high-quality audio directly from YouTube's servers. Under <strong>Settings > Audio</strong>, you can set the default audio quality to prioritize data saving or maximum fidelity.</p>
+                <ul>
+                    <li><strong>Skip Silence:</strong> Automatically jumps over silent gaps at the beginning and end of tracks.</li>
+                    <li><strong>Audio Normalization:</strong> Keeps volume consistent across varying albums and eras.</li>
+                </ul>
+
+                <h3 id="appearance">Appearance & Theming</h3>
+                <p>AvidTune heavily utilizes <strong>Material Design 3 (Monet)</strong>. By default, the app's accent colors will adapt to your device's current wallpaper (on Android 12+).</p>
+                <p>You can override this in <strong>Settings > Appearance</strong> to force a specific color palette, force Dark/Light mode, or tweak the player layout (e.g., choosing between different album art sizes and player controls).</p>
+
+                <h3 id="privacy">Privacy & Storage</h3>
+                <p>Manage your footprint locally. In <strong>Settings > Privacy</strong>, you can clear your search history and listening cache.</p>
+                <p>In <strong>Settings > Storage</strong>, you can define exactly how much megabytes/gigabytes of space AvidTune is allowed to use for caching images and streaming audio. You can also wipe all offline downloads here with one tap.</p>
+
+                <hr class="my-12 border-[var(--border-color)]">
+
+                <h2 id="chapter-6" class="prose-headings flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">handyman</span> Chapter 3 — Troubleshooting</h2>
+
+                <h3 id="playback-issues">Playback Issues</h3>
+                <p><strong>Music won't play or buffers endlessly:</strong></p>
+                <ul>
+                    <li>Verify your internet connection.</li>
+                    <li>YouTube occasionally rotates their API structures. If playback breaks globally, check GitHub for a new update.</li>
+                    <li>Try clearing the app cache via Android Settings.</li>
+                </ul>
+
+                <h3 id="login-issues">Login Issues</h3>
+                <p>If Google login fails with a "Browser not secure" error, ensure your default browser is Chrome or Firefox, or try using the "Alternative Login" method provided in the app which utilizes a webview.</p>
+
+                <h3 id="app-crashes">App Crashes</h3>
+                <p>If the app crashes consistently on launch:</p>
+                <ol>
+                    <li>Go to Android Settings > Apps > AvidTune.</li>
+                    <li>Tap "Storage & Cache".</li>
+                    <li>Tap "Clear Data" (Note: This will log you out and remove local settings).</li>
+                </ol>
+
+                <div class="mt-12 bg-black/5 dark:bg-white/5 border border-[var(--border-color)] rounded-2xl p-6">
+                    <h4 class="font-bold text-primary mb-2 mt-0">Still need help?</h4>
+                    <p class="text-sm m-0">
+                        The best way to get support or report a bug is by opening an issue on our GitHub tracker. Be sure to include your Android version and the exact steps to reproduce the issue.
+                    </p>
+                    <a href="https://github.com/cgens67/avidtune/issues" target="_blank" class="inline-block mt-4 text-sm font-bold text-accent-blue hover:underline">Go to GitHub Issues &rarr;</a>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Right Sidebar (Table of Contents) -->
+        <div class="hidden xl:block w-56 shrink-0 relative">
+            <aside class="sidebar-scroll py-6 pl-6 border-l border-[var(--border-color)]" style="position: sticky; top: 100px; height: calc(100vh - 100px); overflow-y: auto;">
+                <div class="font-bold text-primary mb-6 text-xs uppercase tracking-widest font-sora">On this page</div>
+                
+                <ul id="toc-menu" class="flex flex-col gap-3 text-sm text-on-surface-variant font-medium">
+                    <li><a href="#welcome" class="hover:text-primary transition-colors toc-link block truncate">Welcome to AvidTune</a></li>
+                    <li><a href="#chapter-1" class="hover:text-primary transition-colors toc-link block truncate">Installation</a></li>
+                    <li><a href="#chapter-2" class="hover:text-primary transition-colors toc-link block truncate">Setting Up</a></li>
+                    <li><a href="#chapter-6" class="hover:text-primary transition-colors toc-link block truncate">Troubleshooting</a></li>
+                </ul>
+                
+                <!-- Helpful links card -->
+                <div class="mt-10 bg-black/5 dark:bg-white/5 border border-[var(--border-color)] rounded-2xl p-5">
+                    <div class="font-bold text-primary mb-4 text-xs uppercase tracking-widest font-sora">Helpful Links</div>
+                    <div class="flex flex-col gap-3 text-sm font-medium">
+                        <a href="https://github.com/cgens67/avidtune/releases" target="_blank" class="flex items-center gap-2 text-accent-blue hover:underline transition-all">
+                            <span class="material-symbols-outlined text-[16px]">system_update</span> Releases
+                        </a>
+                        <a href="https://github.com/cgens67/avidtune/issues" target="_blank" class="flex items-center gap-2 text-accent-blue hover:underline transition-all">
+                            <span class="material-symbols-outlined text-[16px]">bug_report</span> Report an Issue
+                        </a>
+                        <a href="https://github.com/sponsors/cgens67" target="_blank" class="flex items-center gap-2 text-pink-500 hover:underline transition-all">
+                            <span class="material-symbols-outlined text-[16px]">favorite</span> Sponsor
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Theme Management ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlElement = document.documentElement;
+
+            function applyTheme(isDark) {
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                    themeIcon.textContent = 'light_mode';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    themeIcon.textContent = 'dark_mode';
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(savedTheme ? savedTheme === 'dark' : prefersDark);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isCurrentlyDark = htmlElement.classList.contains('dark');
+                applyTheme(!isCurrentlyDark);
+            });
+
+            // --- Collapsible Sidebar ---
+            document.querySelectorAll('.sidebar-group h4').forEach(header => {
+                header.addEventListener('click', () => {
+                    header.parentElement.classList.toggle('collapsed');
+                });
+            });
+
+            // --- Mobile Drawer Menu ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            const mobileBackdrop = document.getElementById('mobile-backdrop');
+            const mobileCloseBtn = document.getElementById('mobile-close-btn');
+
+            function toggleMobileMenu() {
+                const isOpen = mobileDrawer.classList.contains('open');
+                if (isOpen) {
+                    mobileDrawer.classList.remove('open');
+                    mobileBackdrop.classList.remove('open');
+                } else {
+                    mobileDrawer.classList.add('open');
+                    mobileBackdrop.classList.add('open');
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            mobileCloseBtn.addEventListener('click', toggleMobileMenu);
+            mobileBackdrop.addEventListener('click', toggleMobileMenu);
+
+            // Close mobile menu when clicking a link inside it
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
+
+            // --- Scrollspy for Right TOC ---
+            const sections = document.querySelectorAll('.prose-headings');
+            const tocLinks = document.querySelectorAll('.toc-link');
+
+            if (sections.length > 0 && tocLinks.length > 0) {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-100px 0px -60% 0px',
+                    threshold: 0
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                            
+                            // Remove active from all
+                            tocLinks.forEach(link => link.classList.remove('nav-active'));
+                            
+                            // Add active to current
+                            const activeLink = document.querySelector(`.toc-link[href="#${id}"]`);
+                            if(activeLink) {
+                                activeLink.classList.add('nav-active');
+                            }
+                        }
+                    });
+                }, observerOptions);
+
+                sections.forEach(section => observer.observe(section));
+            }
+            
+            // --- Navbar Background effect on scroll ---
+            const navbar = document.getElementById('top-navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.remove('shadow-sm');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.add('shadow-sm');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
