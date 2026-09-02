@@ -1192,7 +1192,8 @@
                 
                 if (suffix) {
                     const suffixEl = document.createElement('span');
-                    suffixEl.textContent = suffix.startsWith(' ') ? suffix : ' ' + suffix;
+                    // Explicitly use innerHTML with &nbsp; to prevent flex from stripping the leading space
+                    suffixEl.innerHTML = '&nbsp;' + suffix.trim();
                     suffixEl.style.lineHeight = '1.2';
                     suffixEl.style.display = 'flex';
                     suffixEl.style.alignItems = 'center';
