@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en" style="scroll-behavior: smooth;">
+<html lang="en" style="scroll-behavior: smooth;">
 
 <head>
     <meta charset="utf-8">
@@ -18,18 +18,21 @@
     <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- Tailwind Configuration with Dark Mode Support -->
+    <!-- Tailwind Configuration -->
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "var(--text-main)",
+                        "primary": "var(--text-primary)",
+                        "surface": "var(--surface-bg)",
                         "on-surface-variant": "var(--text-muted)",
-                        "vivi-blue": "#afbeff",
-                        "vivi-purple": "#5669bd",
-                        "accent-blue": "#2563eb",
+                        "accent": {
+                            blue: '#2563eb',
+                            purple: '#4f46e5',
+                            light: 'var(--accent-light)'
+                        }
                     },
                     fontFamily: {
                         sora: ['Sora', 'sans-serif'],
@@ -53,44 +56,54 @@
         }
     </script>
     
-    <!-- Custom Glassmorphism, Dynamic Theming & Animations -->
+    <!-- Custom Glassmorphism, Dual Themes & Animations -->
     <style>
         :root {
-            --bg-grad: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
-            --text-main: #09090b;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
+            --text-primary: #09090b;
             --text-muted: #475569;
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(226, 232, 240, 0.8);
-            --nav-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
-            --dialog-bg: rgba(255, 255, 255, 0.96);
-            --btn-main: #09090b;
-            --btn-text: #ffffff;
-            color-scheme: light;
+            --surface-bg: rgba(255, 255, 255, 0.75);
+            --border-color: rgba(226, 232, 240, 0.85);
+            --accent-light: #dbeafe;
+            --card-hover: rgba(241, 245, 249, 0.8);
+            --dialog-bg: rgba(255, 255, 255, 0.95);
+            --dialog-btn: rgba(241, 245, 249, 0.9);
+            --mockup-border: #e2e8f0;
+            --phone-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.12);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --tag-border: #cbd5e1;
         }
 
         html.dark {
-            --bg-grad: linear-gradient(180deg, #152671 10%, #1b2c78 30%, #5669bd 100%);
-            --text-main: #ffffff;
-            --text-muted: #afbeff;
-            --glass-bg: rgba(175, 190, 255, 0.15);
-            --glass-border: rgba(175, 190, 255, 0.25);
-            --nav-grad: linear-gradient(180deg, #152671 0%, rgba(21, 38, 113, 0.98) 25%, rgba(21, 38, 113, 0) 100%);
-            --dialog-bg: rgba(27, 44, 120, 0.94);
-            --btn-main: #ffffff;
-            --btn-text: #09090b;
-            color-scheme: dark;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #152671 0%, #0d153a 50%, #050814 100%);
+            --text-primary: #ffffff;
+            --text-muted: #94a3b8;
+            --surface-bg: rgba(175, 190, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.12);
+            --accent-light: rgba(175, 190, 255, 0.15);
+            --card-hover: rgba(255, 255, 255, 0.03);
+            --dialog-bg: rgba(15, 23, 42, 0.95);
+            --dialog-btn: rgba(30, 41, 59, 0.8);
+            --mockup-border: #1e293b;
+            --phone-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --tag-bg: rgba(255, 255, 255, 0.08);
+            --tag-text: #e2e8f0;
+            --tag-border: rgba(255, 255, 255, 0.2);
         }
 
         body {
             background-color: transparent !important;
-            color: var(--text-main);
+            color: var(--text-primary);
             transition: color 0.3s ease;
         }
 
         #page-background {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw; height: 100vh; z-index: -1;
-            background: var(--bg-grad);
+            background: var(--bg-gradient);
             transition: background 0.4s ease;
             pointer-events: none;
         }
@@ -112,18 +125,18 @@
         }
 
         .glass-card, .glass-panel {
-            background: var(--glass-bg);
+            background: var(--surface-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        /* 3D Staggered Gallery / Mockups */
+        /* 3D Gallery / Mockup Perspective & Stagger Lift */
         .mockup-container {
             perspective: 1200px;
         }
@@ -140,14 +153,15 @@
         .mockup-item:hover {
             transform: translate3d(var(--px), calc(var(--py) - 28px), 0) scale(1.05);
             z-index: 50;
+            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.25);
         }
 
         .phone-frame {
-            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--phone-shadow);
         }
 
         .glow-avatar {
-            box-shadow: 0 0 30px rgba(37, 99, 235, 0.2), inset 0 0 15px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.2), inset 0 0 15px rgba(37, 99, 235, 0.1);
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -161,14 +175,7 @@
         .reveal-up { opacity: 0; will-change: opacity, transform; }
         .reveal-visible { animation: revealUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(148, 163, 184, 0.5);
-            border-radius: 999px;
-        }
-
+        /* Custom Navbar */
         @keyframes navSlideDown {
             from { transform: translateY(-100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -179,36 +186,35 @@
             transition: padding 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        #top-navbar::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 140%;
-            background: var(--nav-grad);
-            transition: background 0.4s ease;
-            pointer-events: none; z-index: -1;
-        }
-
         #top-navbar.animate-nav { animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         .nav-link {
-            padding: 8px 16px; border-radius: 50px; font-size: 15px; font-weight: 500;
-            font-family: 'Instrument Sans', sans-serif;
+            color: var(--text-muted) !important; background-color: transparent; padding: 8px 16px; border-radius: 50px;
+            font-size: 15px; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
             transition: all 0.2s ease; display: flex; align-items: center; user-select: none;
         }
-        .nav-link:hover { background-color: rgba(125, 125, 125, 0.12); }
+        .nav-link:hover { color: var(--text-primary) !important; background-color: var(--accent-light) !important; }
         .nav-link:active { transform: scale(0.97); }
 
         .mobile-menu-link {
-            font-family: 'Instrument Sans', sans-serif; font-size: 18px;
+            color: var(--text-primary) !important; font-family: 'Instrument Sans', sans-serif; font-size: 18px;
             font-weight: 500; text-decoration: none; transition: all 0.2s ease;
             display: inline-flex; align-items: center; user-select: none;
         }
 
-        /* Smooth FAQ Accordion CSS Overrides */
-        details.faq-item {
-            overflow: hidden;
-            transition: background-color 0.2s ease;
-        }
+        /* Fluid FAQ Accordion Dropdown Animation */
         details.faq-item summary::-webkit-details-marker { display: none; }
-        details.faq-item summary { list-style: none; }
+        details.faq-item {
+            border-color: var(--border-color);
+            background-color: var(--surface-bg);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        details.faq-item summary .faq-chevron {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        details.faq-item[open] summary .faq-chevron {
+            transform: rotate(180deg);
+        }
         details.faq-item .faq-content {
             overflow: hidden;
         }
@@ -223,19 +229,19 @@
         dialog::backdrop { display: none !important; }
 
         .dialog-backdrop {
-            position: absolute; inset: 0; background-color: rgba(15, 23, 42, 0);
+            position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0);
             backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
             transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
             z-index: 1; pointer-events: auto;
         }
         dialog.is-open .dialog-backdrop {
-            background-color: rgba(15, 23, 42, 0.45); backdrop-filter: blur(8px);
+            background-color: rgba(0, 0, 0, 0.45); backdrop-filter: blur(8px);
         }
 
         .helium-dialog-container {
             width: calc(100% - 32px); max-width: 400px; font-size: 16px;
             background: var(--dialog-bg); backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border); border-radius: 28px;
+            border: 1px solid var(--border-color); border-radius: 28px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             transform-origin: center; transform: scale(0.9); opacity: 0;
             transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
@@ -244,17 +250,17 @@
         dialog.is-open .helium-dialog-container { transform: scale(1); opacity: 1; }
 
         .helium-dialog-btn {
-            background: rgba(125, 125, 125, 0.08); border: 1px solid var(--glass-border);
+            background: var(--dialog-btn); border: 1px solid var(--border-color);
             border-radius: 16px; padding: 16px; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 6px;
+            align-items: center; justify-content: center; gap: 6px; color: var(--text-primary);
             font-family: 'Instrument Sans', sans-serif; text-align: center;
             user-select: none; transition: all 0.2s ease; outline: none;
         }
-        .helium-dialog-btn:hover { background-color: rgba(125, 125, 125, 0.16); transform: translateY(-2px); }
+        .helium-dialog-btn:hover { border-color: #2563eb; transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(37,99,235,0.2); }
         .helium-dialog-btn:active { transform: scale(0.98); }
 
         .helium-dialog-btn-close {
-            background: var(--btn-main) !important; color: var(--btn-text) !important; border-radius: 12px !important;
+            background: var(--text-primary) !important; color: var(--dialog-bg) !important; border-radius: 12px !important;
             padding: 12px 18px !important; width: 100%; font-family: 'Instrument Sans', sans-serif;
             font-weight: 600; font-size: 15px; cursor: pointer; transition: opacity 0.2s ease, transform 0.15s ease;
         }
@@ -274,16 +280,16 @@
     </style>
 </head>
 
-<body class="font-sora overflow-x-hidden">
+<body class="bg-transparent text-primary font-sora selection:bg-accent-light selection:text-accent-blue overflow-x-hidden">
 
-    <!-- Fixed dynamic background element -->
+    <!-- Fixed Gradient Element -->
     <div id="page-background"></div>
 
     <!-- BEGIN: Navigation -->
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
         <div class="flex items-center gap-2">
             <a href="#home" class="flex items-center gap-3">
-                <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm" decoding="async" />
+                <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" decoding="async" />
                 <span class="text-xl font-bold tracking-tight text-primary">AvidTune</span>
             </a>
         </div>
@@ -291,25 +297,24 @@
         <div class="flex items-center gap-6">
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-                <a class="nav-link text-primary" href="#features">Features</a>
-                <a class="nav-link text-primary" href="#faq">FAQ</a>
-                <a class="nav-link text-primary" href="#sponsor">Sponsor</a>
-                <a class="nav-link text-primary" href="https://github.com/cgens67/avidtune" target="_blank">GitHub</a>
+                <a class="nav-link" href="#features">Features</a>
+                <a class="nav-link" href="#faq">FAQ</a>
+                <a class="nav-link" href="#sponsor">Sponsor</a>
+                <a class="nav-link" href="https://github.com/cgens67/avidtune" target="_blank">GitHub</a>
             </div>
 
             <div class="flex items-center gap-3">
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle-btn" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-all active:scale-90" aria-label="Toggle Theme">
-                    <span id="theme-icon" class="material-symbols-outlined text-[20px] transition-transform duration-300">dark_mode</span>
+                <!-- Theme Toggler Button -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center" aria-label="Toggle Theme">
+                    <span id="theme-icon" class="material-symbols-outlined text-[20px]">dark_mode</span>
                 </button>
 
-                <!-- Download Action Button -->
-                <button class="trigger-download-modal hidden sm:inline-block bg-[var(--btn-main)] text-[var(--btn-text)] px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-all active:scale-95 shadow-md">
+                <button class="trigger-download-modal hidden sm:inline-block bg-primary text-[var(--dialog-bg)] px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-all active:scale-95 shadow-md">
                     Download
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/10 text-sm font-medium hover:bg-black/10 dark:hover:bg-white/20 transition-colors select-none">
+                <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/10 border border-slate-200 dark:border-slate-800 text-sm font-medium hover:bg-black/10 transition-colors select-none">
                     <span>Links</span>
                     <span class="material-symbols-outlined text-[18px] transition-transform duration-200" id="mobile-menu-chevron">expand_more</span>
                 </button>
@@ -317,14 +322,14 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="absolute right-6 md:right-12 top-full mt-2 z-[90] flex flex-col items-end gap-4 p-5 rounded-2xl glass-card shadow-xl transform -translate-y-4 opacity-0 transition-all duration-300 pointer-events-none md:hidden">
-            <a class="mobile-menu-link text-primary" href="#features">Features</a>
-            <a class="mobile-menu-link text-primary" href="#faq">FAQ</a>
-            <a class="mobile-menu-link text-primary" href="#sponsor">Sponsor</a>
-            <a class="mobile-menu-link text-primary flex items-center gap-1" href="https://github.com/cgens67/avidtune" target="_blank">
+        <div id="mobile-menu" class="absolute right-6 md:right-12 top-full mt-2 z-[90] flex flex-col items-end gap-4 p-5 rounded-2xl glass-card border border-[var(--border-color)] shadow-xl transform -translate-y-4 opacity-0 transition-all duration-300 pointer-events-none md:hidden">
+            <a class="mobile-menu-link" href="#features">Features</a>
+            <a class="mobile-menu-link" href="#faq">FAQ</a>
+            <a class="mobile-menu-link" href="#sponsor">Sponsor</a>
+            <a class="mobile-menu-link flex items-center gap-1" href="https://github.com/cgens67/avidtune" target="_blank">
                 GitHub <span class="material-symbols-outlined text-[16px] opacity-60">open_in_new</span>
             </a>
-            <button class="trigger-download-modal flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-5 py-2.5 rounded-full text-sm font-bold shadow-md w-full">
+            <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-5 py-2.5 rounded-full text-sm font-bold shadow-md w-full">
                 <span class="material-symbols-outlined text-[18px]">download</span> Download
             </button>
         </div>
@@ -334,7 +339,7 @@
     <main id="home" class="relative min-h-screen pt-32 pb-20 overflow-hidden">
         <!-- Hero Section -->
         <section class="container mx-auto px-6 text-center relative z-10 reveal-up">
-            <img src="images/logo.png" alt="AvidTune Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-slate-200 dark:border-white/10" decoding="async" />
+            <img src="images/logo.png" alt="AvidTune Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)]" decoding="async" />
 
             <h1 class="text-4xl md:text-[54px] font-semibold mb-6 tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[1.1] max-w-[700px] mx-auto flex items-center justify-center flex-wrap">
                 More Than Just Music
@@ -345,26 +350,26 @@
             
             <div class="flex flex-col items-center justify-center gap-3 mb-6">
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
-                    <button class="trigger-download-modal flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                         <span class="material-symbols-outlined text-[20px]">download</span>
                         Download App
                     </button>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-geist text-on-surface-variant select-none">
-                    <span class="border border-black/15 dark:border-white/20 bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
+                <div class="flex items-center gap-2 text-xs font-geist text-slate-500 select-none">
+                    <span class="border border-[var(--tag-border)] text-[var(--tag-text)] bg-[var(--tag-bg)] px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
                     <span>for Android 8.0+</span>
-                    <span class="opacity-30 mx-1">|</span>
-                    <a href="#beta-channel" class="hover:underline transition-colors flex items-center gap-1.5">
-                        <span class="border border-amber-500/40 text-amber-600 dark:text-amber-300 bg-amber-500/10 px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold tracking-wider uppercase">Beta</span>
-                        <span>Pre-release builds</span>
+                    <span class="text-slate-400 mx-1">|</span>
+                    <a href="#beta-channel" class="hover:text-primary transition-colors flex items-center gap-1.5 text-slate-500">
+                        <span class="border border-amber-500/40 text-amber-600 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/30 px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold tracking-wider uppercase">Beta</span>
+                        <span class="underline underline-offset-2">Pre-release builds</span>
                     </a>
                 </div>
-                <div class="flex items-center gap-3 text-[12px] font-geist opacity-60 select-none mt-1 flex-wrap justify-center">
+                <div class="flex items-center gap-3 text-[12px] font-geist text-slate-400 select-none mt-1 flex-wrap justify-center">
                     <div class="flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-[14px]">star</span>
                         <span id="github-stars-hero">— GitHub stars</span>
                     </div>
-                    <span class="opacity-30">|</span>
+                    <span class="text-slate-400">|</span>
                     <div class="flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-[14px]">download</span>
                         <span id="total-downloads-hero">— total downloads</span>
@@ -375,7 +380,7 @@
 
         <!-- Hero Mockup with Floating Animation -->
         <section class="relative max-w-4xl mx-auto mt-12 px-6 flex flex-col items-center justify-center reveal-up" style="transition-delay: 200ms;">
-            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-slate-200 dark:border-white/10 shadow-2xl floating-element">
+            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl floating-element">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
                 <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950">
                     <img alt="AvidTune App Preview" class="w-full h-full object-cover" src="images/lyricsscreen.jpg">
@@ -384,7 +389,7 @@
         </section>
     </main>
 
-    <!-- BEGIN: Showcase / Gallery (VIVI Style Staggered Wave Mockups) -->
+    <!-- BEGIN: Showcase / Gallery (Staggered Wave Mockups) -->
     <div id="screenshots" class="font-body-md bg-transparent w-full pt-28 pb-24">
         <section class="max-w-7xl mx-auto px-6 md:px-16 text-center mb-16 reveal-up">
             <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6 tracking-tighter leading-tight text-primary">
@@ -399,30 +404,30 @@
         <section class="relative w-full overflow-hidden pt-6 mockup-container">
             <div class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-10 px-6 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[640px] snap-x snap-mandatory py-8">
                 
-                <!-- Mockup 1 -->
+                <!-- Mockup 1: Player -->
                 <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 40px; transition-delay: 50ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-200 dark:border-white/10 bg-black overflow-hidden phone-frame">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden phone-frame">
                         <img alt="Player Screen" class="w-full h-full object-cover" src="images/playerscreen.jpg">
                     </div>
                 </div>
 
-                <!-- Mockup 2 (Center Hero) -->
+                <!-- Mockup 2: Lyrics (Center Hero) -->
                 <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 0px; transition-delay: 100ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame shadow-2xl">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame shadow-xl">
                         <img alt="Lyrics Screen" class="w-full h-full object-cover" src="images/lyricsscreen.jpg">
                     </div>
                 </div>
 
-                <!-- Mockup 3 -->
+                <!-- Mockup 3: Library -->
                 <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 20px; transition-delay: 150ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-200 dark:border-white/10 bg-black overflow-hidden phone-frame">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden phone-frame">
                         <img alt="Library Screen" class="w-full h-full object-cover" src="images/libraryscreen.jpg">
                     </div>
                 </div>
 
-                <!-- Mockup 4 -->
+                <!-- Mockup 4: Settings -->
                 <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 55px; transition-delay: 200ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-200 dark:border-white/10 bg-black overflow-hidden phone-frame">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden phone-frame">
                         <img alt="Settings Screen" class="w-full h-full object-cover" src="images/settingsscreen.jpg">
                     </div>
                 </div>
@@ -438,7 +443,7 @@
             <!-- Left: Text Content -->
             <div class="flex flex-col justify-between order-2 lg:order-1 min-h-[350px] md:min-h-[420px]">
                 <div id="carousel-content" class="transition-all duration-500 transform min-h-[260px]">
-                    <div id="slide-tagline" class="border border-black/10 dark:border-white/20 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-bold text-on-surface-variant inline-block mb-6 bg-black/5 dark:bg-white/5">
+                    <div id="slide-tagline" class="border border-[var(--tag-border)] rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--tag-text)] inline-block mb-6 bg-[var(--tag-bg)]">
                         PREMIUM EXPERIENCE
                     </div>
                     <h2 id="slide-title" class="text-4xl md:text-6xl font-bold text-primary tracking-tighter leading-[1.1] mb-6 font-geist">
@@ -457,10 +462,10 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
-                        <button id="btn-prev" class="w-12 h-12 rounded-full border border-black/15 dark:border-white/20 flex items-center justify-center text-primary hover:bg-black/5 dark:hover:bg-white/10 transition-colors group">
+                        <button id="btn-prev" class="w-12 h-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-primary hover:bg-black/5 dark:hover:bg-white/10 transition-colors group">
                             <span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
                         </button>
-                        <button id="btn-next" class="w-12 h-12 rounded-full border border-black/15 dark:border-white/20 flex items-center justify-center text-primary hover:bg-black/5 dark:hover:bg-white/10 transition-colors group">
+                        <button id="btn-next" class="w-12 h-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-primary hover:bg-black/5 dark:hover:bg-white/10 transition-colors group">
                             <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
                         </button>
                         <div class="ml-4 flex-1 max-w-[120px] h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
@@ -472,7 +477,7 @@
 
             <!-- Right: Mockup Image -->
             <div class="flex justify-center items-center order-1 lg:order-2 w-full">
-                <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-slate-200 dark:border-white/10 bg-black overflow-hidden shadow-2xl">
+                <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl shadow-black/10">
                     <div class="w-full h-full relative">
                         <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="images/lyricsscreen.jpg" alt="Feature Slide">
                     </div>
@@ -484,11 +489,11 @@
 
     <!-- BEGIN: Grid Features -->
     <section id="features" class="w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 bg-transparent reveal-up">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-black/10 dark:border-white/10 md:border-l md:border-r">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-[var(--border-color)] md:border-l md:border-r">
             
-            <div class="p-8 md:p-10 border-b border-black/10 dark:border-white/10 lg:border-r lg:col-span-2 flex flex-col justify-between min-h-[280px] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] lg:border-r lg:col-span-2 flex flex-col justify-between min-h-[280px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-accent-blue dark:text-vivi-blue font-geist tracking-widest block mb-4">01 / BRAND PROMISE</span>
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">01 / BRAND PROMISE</span>
                     <h3 class="text-2xl md:text-3xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Ad-Free & Open Source</h3>
                     <p class="text-on-surface-variant font-geist text-sm md:text-base leading-relaxed max-w-2xl">
                         Seamless background playback with high-fidelity streams from YouTube Music, completely ad-free forever. Open source code for absolute transparency.
@@ -496,9 +501,9 @@
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 border-b border-black/10 dark:border-white/10 flex flex-col justify-between min-h-[280px] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] flex flex-col justify-between min-h-[280px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-accent-blue dark:text-vivi-blue font-geist tracking-widest block mb-4">02 / CORE FUNCTION</span>
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">02 / CORE FUNCTION</span>
                     <h3 class="text-xl md:text-2xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Offline Mode</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
                         Download and cache tracks onto your device. Intelligent storage management optimizes your offline space automatically.
@@ -506,9 +511,9 @@
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 border-b border-black/10 dark:border-white/10 md:border-r flex flex-col justify-between min-h-[250px] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] md:border-r flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-accent-blue dark:text-vivi-blue font-geist tracking-widest block mb-4">03 / ECOSYSTEM</span>
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">03 / ECOSYSTEM</span>
                     <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">YouTube Integration</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
                         Sync your account to access your personalized libraries, playlists, and recommendations effortlessly.
@@ -516,19 +521,19 @@
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 border-b border-black/10 dark:border-white/10 lg:border-b-0 lg:border-r flex flex-col justify-between min-h-[250px] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-[var(--border-color)] lg:border-b-0 lg:border-r flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-accent-blue dark:text-vivi-blue font-geist tracking-widest block mb-4">04 / ETHICS</span>
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">04 / ETHICS</span>
                     <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">100% Privacy-First</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
-                        Zero trackers or unnecessary telemetry. All your history and custom preferences remain local to your device.
+                        Zero trackers or telemetry. All your history and custom preferences remain local to your device.
                     </p>
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 flex flex-col justify-between min-h-[250px] hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 flex flex-col justify-between min-h-[250px] hover:bg-[var(--card-hover)] transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-accent-blue dark:text-vivi-blue font-geist tracking-widest block mb-4">05 / PERSONALIZATION</span>
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">05 / PERSONALIZATION</span>
                     <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Material Design 3</h3>
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
                         Built with expressive Material 3 tokens, intuitive navigation, dynamic shapes, and agile playback performance.
@@ -558,27 +563,27 @@
                     </p>
                 </div>
 
-                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px]">call_split</span>
                     Contribute on GitHub
                 </a>
             </div>
 
             <!-- Right: Author -->
-            <div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end lg:border-l lg:border-black/10 dark:lg:border-white/10 lg:pl-16">
+            <div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end lg:border-l lg:border-[var(--border-color)] lg:pl-16">
                 <div class="flex flex-col items-center text-center w-full max-w-sm relative">
-                    <div class="relative w-32 h-32 rounded-full mb-6 p-1 bg-gradient-to-tr from-slate-200 dark:from-[#afbeff] to-blue-200 dark:to-[#152671] glow-avatar overflow-hidden">
-                        <img src="https://avatars.githubusercontent.com/u/237695506?v=4" alt="cgens67" class="w-full h-full object-cover rounded-full border-2 border-white dark:border-black" loading="lazy" decoding="async" />
+                    <div class="relative w-32 h-32 rounded-full mb-6 p-1 bg-gradient-to-tr from-slate-300 to-blue-300 dark:from-slate-700 dark:to-blue-900 glow-avatar overflow-hidden">
+                        <img src="https://avatars.githubusercontent.com/u/237695506?v=4" alt="cgens67" class="w-full h-full object-cover rounded-full border-2 border-white dark:border-slate-800" loading="lazy" decoding="async" />
                     </div>
 
                     <h3 class="text-2xl font-bold text-primary mb-2 tracking-tight font-geist">cgens67</h3>
-                    <p class="text-on-surface-variant text-xs font-semibold uppercase tracking-widest mb-4 font-geist">Lead Developer</p>
+                    <p class="text-slate-500 text-xs font-semibold uppercase tracking-widest mb-4 font-geist">Lead Developer</p>
 
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed mb-8">
                         Creator and lead developer. Passionate about building beautiful, open-source Android experiences.
                     </p>
 
-                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 glass-card text-primary px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
+                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-black/5 dark:bg-white/10 border border-[var(--border-color)] text-primary px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/10 dark:hover:bg-white/15 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
                         <span class="material-symbols-outlined text-[18px]">account_circle</span>
                         View Profile
                     </a>
@@ -590,9 +595,9 @@
 
     <!-- BEGIN: Sponsor Section -->
     <section id="sponsor" class="w-full max-w-4xl mx-auto px-6 md:px-12 mt-12 reveal-up">
-        <div class="flex flex-col items-center text-center border-t border-black/10 dark:border-white/10 pt-16 pb-16">
-            <div class="w-12 h-12 rounded-full bg-pink-500/10 border border-pink-500/20 flex items-center justify-center mb-6">
-                <span class="material-symbols-outlined text-pink-500 text-2xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+        <div class="flex flex-col items-center text-center border-t border-[var(--border-color)] pt-16 pb-16">
+            <div class="w-12 h-12 rounded-full bg-pink-50 dark:bg-pink-950/30 border border-pink-200 dark:border-pink-900 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-pink-600 dark:text-pink-400 text-2xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
             </div>
             
             <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-6">
@@ -604,7 +609,7 @@
             </p>
 
             <div class="flex items-center justify-center w-full">
-                <a href="https://github.com/sponsors/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <a href="https://github.com/sponsors/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px] text-pink-400" style="font-variation-settings: 'FILL' 1;">favorite</span>
                     Sponsor on GitHub
                 </a>
@@ -614,7 +619,7 @@
 
     <!-- GitHub Star Call to Action -->
     <section class="w-full max-w-4xl mx-auto px-6 md:px-12 reveal-up">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-t border-black/10 dark:border-white/10 pt-16 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-t border-[var(--border-color)] pt-16 pb-16">
             <div class="md:col-span-8 text-left">
                 <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-4">
                     Love the Project?
@@ -624,7 +629,7 @@
                 </p>
             </div>
             <div class="md:col-span-4 flex justify-start md:justify-end w-full">
-                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
                     Star on GitHub
                 </a>
@@ -634,7 +639,7 @@
 
     <!-- Ready to Try Section -->
     <section class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-28 reveal-up">
-        <div class="flex flex-col items-center text-center border-t border-black/10 dark:border-white/10 pt-16">
+        <div class="flex flex-col items-center text-center border-t border-[var(--border-color)] pt-16">
             <div class="text-primary mb-6">
                 <svg class="w-12 h-12 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
@@ -651,12 +656,12 @@
             </p>
 
             <div class="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
-                <button class="trigger-download-modal flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px]">download</span>
                     Download App
                 </button>
-                <div class="flex items-center gap-2 text-xs font-geist text-on-surface-variant select-none">
-                    <span class="border border-black/15 dark:border-white/20 bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
+                <div class="flex items-center gap-2 text-xs font-geist text-slate-500 select-none">
+                    <span class="border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
                     <span>for Android 8.0+</span>
                 </div>
             </div>
@@ -665,9 +670,9 @@
 
     <!-- Experimental Beta Section -->
     <section id="beta-channel" class="w-full max-w-4xl mx-auto px-6 md:px-12 mb-16 reveal-up">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-black/10 dark:border-white/10 pt-16 pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-[var(--border-color)] pt-16 pb-16">
             <div class="md:col-span-8 text-left">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/20 mb-4 select-none">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-300 border border-amber-200 dark:border-amber-900 mb-4 select-none">
                     <span class="material-symbols-outlined text-[14px]">science</span> Pre-releases
                 </span>
                 <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-4">
@@ -676,8 +681,8 @@
                 <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl leading-relaxed mb-6">
                     Get bleeding-edge updates built directly from the latest source code commits. Try new features and bug fixes before they release.
                 </p>
-                <div class="text-xs text-on-surface-variant leading-relaxed font-geist flex items-start gap-2 max-w-xl">
-                    <span class="material-symbols-outlined opacity-60 text-[18px] select-none shrink-0 mt-0.5">info</span>
+                <div class="text-xs text-slate-500 leading-relaxed font-geist flex items-start gap-2 max-w-xl">
+                    <span class="material-symbols-outlined text-slate-400 text-[18px] select-none shrink-0 mt-0.5">info</span>
                     <span>
                         <strong>Note:</strong> Beta builds may contain experimental features and are intended for testing and feedback.
                     </span>
@@ -685,31 +690,31 @@
             </div>
 
             <div class="md:col-span-4 flex flex-col items-start md:items-end justify-center w-full md:pt-14 select-none">
-                <a id="dl-btn-beta-section" href="#" class="flex items-center justify-center gap-2 bg-[var(--btn-main)] text-[var(--btn-text)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full">
+                <a id="dl-btn-beta-section" href="#" class="flex items-center justify-center gap-2 bg-primary text-[var(--dialog-bg)] px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:opacity-90 transition-all active:scale-95 shadow-lg w-full">
                     <span class="material-symbols-outlined text-[20px]">science</span>
-                    Download Beta (.apk)
+                    Download Beta
                 </a>
-                <div class="flex items-center gap-2 text-[10px] font-geist text-on-surface-variant opacity-60 mt-3 w-full justify-center md:justify-end">
-                    <span class="border border-black/10 dark:border-white/20 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider">Pre-release</span>
+                <div class="flex items-center gap-2 text-[10px] font-geist text-slate-400 mt-3 w-full justify-center md:justify-end">
+                    <span class="border border-[var(--tag-border)] bg-[var(--tag-bg)] px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-[var(--tag-text)]">Pre-release</span>
                     <span>Direct GitHub Build</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BEGIN: FAQ Section with True Smooth Expanding Animation -->
+    <!-- BEGIN: FAQ Section with Web Animations API Dropdowns -->
     <section id="faq" class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-32 reveal-up">
-        <div class="border-t border-black/10 dark:border-white/10 pt-16">
+        <div class="border-t border-[var(--border-color)] pt-16">
             <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-12 text-center">
                 Frequently Asked Questions
             </h2>
 
-            <div class="space-y-0 rounded-2xl border border-black/10 dark:border-white/10 overflow-hidden glass-card">
+            <div class="space-y-0 rounded-2xl border border-[var(--border-color)] overflow-hidden shadow-sm">
                 <!-- FAQ Item 1 -->
-                <details class="faq-item group border-b border-black/10 dark:border-white/10" id="faq-item-1">
+                <details class="faq-item group border-b border-[var(--border-color)]">
                     <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                         <span>What is AvidTune?</span>
-                        <span class="material-symbols-outlined opacity-60 transition-transform duration-300 faq-chevron">expand_more</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
                     </summary>
                     <div class="faq-content">
                         <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
@@ -719,10 +724,10 @@
                 </details>
 
                 <!-- FAQ Item 2 -->
-                <details class="faq-item group border-b border-black/10 dark:border-white/10" id="faq-item-2">
+                <details class="faq-item group border-b border-[var(--border-color)]">
                     <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                         <span>Is AvidTune free and ad-free?</span>
-                        <span class="material-symbols-outlined opacity-60 transition-transform duration-300 faq-chevron">expand_more</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
                     </summary>
                     <div class="faq-content">
                         <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
@@ -732,10 +737,10 @@
                 </details>
 
                 <!-- FAQ Item 3 -->
-                <details class="faq-item group border-b border-black/10 dark:border-white/10" id="faq-item-3">
+                <details class="faq-item group border-b border-[var(--border-color)]">
                     <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                         <span>Does it support offline playback?</span>
-                        <span class="material-symbols-outlined opacity-60 transition-transform duration-300 faq-chevron">expand_more</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
                     </summary>
                     <div class="faq-content">
                         <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
@@ -745,10 +750,10 @@
                 </details>
 
                 <!-- FAQ Item 4 -->
-                <details class="faq-item group border-b border-black/10 dark:border-white/10" id="faq-item-4">
+                <details class="faq-item group border-b border-[var(--border-color)]">
                     <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                         <span>Is my listening data private?</span>
-                        <span class="material-symbols-outlined opacity-60 transition-transform duration-300 faq-chevron">expand_more</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
                     </summary>
                     <div class="faq-content">
                         <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
@@ -758,10 +763,10 @@
                 </details>
 
                 <!-- FAQ Item 5 -->
-                <details class="faq-item group" id="faq-item-5">
+                <details class="faq-item group">
                     <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                         <span>How do I install or update AvidTune?</span>
-                        <span class="material-symbols-outlined opacity-60 transition-transform duration-300 faq-chevron">expand_more</span>
+                        <span class="material-symbols-outlined faq-chevron text-slate-400">expand_more</span>
                     </summary>
                     <div class="faq-content">
                         <div class="px-6 pb-6 pt-0 text-on-surface-variant font-geist text-sm md:text-base leading-relaxed">
@@ -775,19 +780,19 @@
     <!-- END: FAQ Section -->
 
     <!-- BEGIN: Footer -->
-    <footer class="border-t border-black/10 dark:border-white/10 glass-panel pt-16 pb-8 px-6 md:px-12">
+    <footer class="border-t border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] pt-16 pb-8 px-6 md:px-12">
         <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
             <!-- Logo & Description -->
             <div class="col-span-1 flex flex-col gap-6">
                 <div class="flex items-center gap-3">
-                    <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-black/10 dark:border-white/10" />
+                    <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-[var(--border-color)]" />
                     <span class="text-lg font-bold tracking-tight text-primary">AvidTune</span>
                 </div>
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-xs pr-4">
                     Crafting a clean, modern, and open-source YouTube Music experience for Android.
                 </p>
                 <div class="flex gap-4 mt-2">
-                    <a href="https://github.com/cgens67/avidtune" target="_blank" class="w-10 h-10 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 flex items-center justify-center text-primary hover:bg-black/10 dark:hover:bg-white/10 transition-colors shadow-sm">
+                    <a href="https://github.com/cgens67/avidtune" target="_blank" class="w-10 h-10 rounded-xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 flex items-center justify-center text-primary hover:bg-black/10 transition-colors shadow-sm">
                         <span class="material-symbols-outlined text-[20px]">code</span>
                     </a>
                 </div>
@@ -819,14 +824,14 @@
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed mb-6 max-w-[280px]">
                     AvidTune is released under the <strong class="text-primary font-semibold">GPL-3.0 License</strong>. We believe in free and open software.
                 </p>
-                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-primary text-xs font-semibold tracking-wide shadow-sm">
+                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 text-primary text-xs font-semibold tracking-wide shadow-sm">
                     <span class="material-symbols-outlined text-[16px] text-accent-blue">verified</span> Fully Open Source
                 </div>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="container mx-auto max-w-7xl pt-8 border-t border-black/10 dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body text-on-surface-variant">
+        <div class="container mx-auto max-w-7xl pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body text-slate-500">
             <div class="flex items-center gap-4">
                 <p>© 2026 AvidTune. All rights reserved.</p>
             </div>
@@ -838,7 +843,7 @@
     </footer>
     <!-- END: Footer -->
 
-    <!-- BEGIN: Download Modal (Latest & Beta) -->
+    <!-- BEGIN: Download Modal (Latest & Beta Options) -->
     <dialog id="download-modal" class="outline-none border-none">
         <div class="dialog-backdrop"></div>
 
@@ -855,24 +860,24 @@
                 <!-- Choice 1: Latest (Stable) -->
                 <a id="dl-latest" href="#" target="_blank" class="helium-dialog-btn select-none group">
                     <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-accent-blue">download</span>
-                    <span class="text-base font-bold text-primary">Latest</span>
-                    <span id="dl-latest-label" class="text-xs text-on-surface-variant truncate max-w-full">Stable Build</span>
+                    <span class="text-base font-bold">Latest</span>
+                    <span id="dl-latest-label" class="text-xs text-slate-500 truncate max-w-full">Stable Build</span>
                 </a>
 
-                <!-- Choice 2: Beta (Pre-release) -->
+                <!-- Choice 2: Beta (Pre-release app-universal-release.apk) -->
                 <a id="dl-beta" href="#" target="_blank" class="helium-dialog-btn select-none group">
                     <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-amber-500">science</span>
-                    <span class="text-base font-bold text-primary">Beta</span>
-                    <span id="dl-beta-label" class="text-xs text-on-surface-variant truncate max-w-full">Pre-release</span>
+                    <span class="text-base font-bold">Beta</span>
+                    <span id="dl-beta-label" class="text-xs text-slate-500 truncate max-w-full">Pre-release</span>
                 </a>
             </div>
 
             <!-- All Releases Link -->
             <a href="https://github.com/cgens67/avidtune/releases" target="_blank" class="helium-dialog-btn select-none group !flex-row !items-center !justify-start !text-left gap-3 w-full py-3 mb-2">
-                <span class="material-symbols-outlined text-2xl text-primary shrink-0">history</span>
+                <span class="material-symbols-outlined text-2xl text-slate-400 shrink-0">history</span>
                 <div class="text-left flex-1 min-w-0">
                     <span class="text-sm font-bold block leading-none mb-1 text-primary">All GitHub Releases</span>
-                    <span class="text-[11px] text-on-surface-variant leading-none block truncate">View release notes & other builds</span>
+                    <span class="text-[11px] text-slate-500 leading-none block truncate">View release notes & older APKs</span>
                 </div>
             </a>
 
@@ -887,102 +892,39 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- 1. Dark Mode / Light Mode Toggle ---
-            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            // --- 1. Theme Management (Light / Dark Mode Toggle) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
             const themeIcon = document.getElementById('theme-icon');
             const htmlElement = document.documentElement;
 
-            const applyTheme = (theme) => {
-                if (theme === 'dark') {
+            function applyTheme(isDark) {
+                if (isDark) {
                     htmlElement.classList.add('dark');
-                    htmlElement.classList.remove('light');
                     themeIcon.textContent = 'light_mode';
-                    themeIcon.style.transform = 'rotate(180deg)';
+                    localStorage.setItem('theme', 'dark');
                 } else {
-                    htmlElement.classList.add('light');
                     htmlElement.classList.remove('dark');
                     themeIcon.textContent = 'dark_mode';
-                    themeIcon.style.transform = 'rotate(0deg)';
+                    localStorage.setItem('theme', 'light');
                 }
-            };
+            }
 
-            // Check saved theme or default to light
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(savedTheme);
+            // Init theme from storage or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(savedTheme ? savedTheme === 'dark' : prefersDark);
 
             themeToggleBtn.addEventListener('click', () => {
-                const currentIsDark = htmlElement.classList.contains('dark');
-                const newTheme = currentIsDark ? 'light' : 'dark';
-                localStorage.setItem('theme', newTheme);
-                applyTheme(newTheme);
+                const isCurrentlyDark = htmlElement.classList.contains('dark');
+                applyTheme(!isCurrentlyDark);
             });
 
-            // --- 2. Reveal on Scroll (Intersection Observer) ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('reveal-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
-
-            // --- 3. Top Navbar Scroll State ---
-            const navbar = document.getElementById('top-navbar');
-            navbar.classList.add('animate-nav');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 40) {
-                    navbar.classList.add('glass-card', 'shadow-sm');
-                } else {
-                    navbar.classList.remove('glass-card', 'shadow-sm');
-                }
-            });
-
-            // --- 4. Mobile Menu Toggle ---
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuChevron = document.getElementById('mobile-menu-chevron');
-            menuBtn.addEventListener('click', () => {
-                const isHidden = mobileMenu.style.opacity === '0' || mobileMenu.style.opacity === '';
-                if (isHidden) {
-                    mobileMenu.style.opacity = '1';
-                    mobileMenu.style.transform = 'translateY(0)';
-                    mobileMenu.style.pointerEvents = 'auto';
-                    menuChevron.style.transform = 'rotate(180deg)';
-                } else {
-                    mobileMenu.style.opacity = '0';
-                    mobileMenu.style.transform = 'translateY(-16px)';
-                    mobileMenu.style.pointerEvents = 'none';
-                    menuChevron.style.transform = 'rotate(0deg)';
-                }
-            });
-
-            // --- 5. Modal Dialog Handlers ---
-            const modal = document.getElementById('download-modal');
-            const openBtns = document.querySelectorAll('.trigger-download-modal');
-            const closeBtn = document.getElementById('close-download-modal');
-            const backdrop = modal.querySelector('.dialog-backdrop');
-
-            function openModal() {
-                modal.showModal();
-                setTimeout(() => modal.classList.add('is-open'), 10);
-            }
-            function closeModal() {
-                modal.classList.remove('is-open');
-                setTimeout(() => modal.close(), 250); 
-            }
-            openBtns.forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); openModal(); }));
-            closeBtn.addEventListener('click', closeModal);
-            backdrop.addEventListener('click', closeModal);
-
-            // --- 6. Smooth Animated Accordion for FAQ ---
+            // --- 2. Ultra-Smooth Animated Accordion for FAQ ---
             class SmoothAccordion {
                 constructor(el) {
                     this.el = el;
                     this.summary = el.querySelector('summary');
                     this.content = el.querySelector('.faq-content');
-                    this.chevron = el.querySelector('.faq-chevron');
                     this.animation = null;
                     this.isClosing = false;
                     this.isExpanding = false;
@@ -1001,7 +943,6 @@
 
                 shrink() {
                     this.isClosing = true;
-                    if (this.chevron) this.chevron.style.transform = 'rotate(0deg)';
                     const startHeight = `${this.el.offsetHeight}px`;
                     const endHeight = `${this.summary.offsetHeight}px`;
 
@@ -1021,7 +962,6 @@
                 open() {
                     this.el.style.height = `${this.el.offsetHeight}px`;
                     this.el.open = true;
-                    if (this.chevron) this.chevron.style.transform = 'rotate(180deg)';
                     window.requestAnimationFrame(() => this.expand());
                 }
 
@@ -1035,7 +975,7 @@
                     this.animation = this.el.animate({
                         height: [startHeight, endHeight]
                     }, {
-                        duration: 350,
+                        duration: 380,
                         easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
                     });
 
@@ -1055,7 +995,66 @@
 
             document.querySelectorAll('details.faq-item').forEach(el => new SmoothAccordion(el));
 
-            // --- 7. GitHub API (Stats, Latest Stable & Beta Pre-release) ---
+            // --- 3. Reveal on Scroll (Intersection Observer) ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+            // --- 4. Navbar Scroll State ---
+            const navbar = document.getElementById('top-navbar');
+            navbar.classList.add('animate-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('bg-[var(--nav-bg)]', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-[var(--border-color)]');
+                } else {
+                    navbar.classList.remove('bg-[var(--nav-bg)]', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-[var(--border-color)]');
+                }
+            });
+
+            // --- 5. Mobile Menu Toggle ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuChevron = document.getElementById('mobile-menu-chevron');
+            menuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.style.opacity === '0' || mobileMenu.style.opacity === '';
+                if (isHidden) {
+                    mobileMenu.style.opacity = '1';
+                    mobileMenu.style.transform = 'translateY(0)';
+                    mobileMenu.style.pointerEvents = 'auto';
+                    menuChevron.style.transform = 'rotate(180deg)';
+                } else {
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.transform = 'translateY(-16px)';
+                    mobileMenu.style.pointerEvents = 'none';
+                    menuChevron.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // --- 6. Modal Dialog Handlers ---
+            const modal = document.getElementById('download-modal');
+            const openBtns = document.querySelectorAll('.trigger-download-modal');
+            const closeBtn = document.getElementById('close-download-modal');
+            const backdrop = modal.querySelector('.dialog-backdrop');
+
+            function openModal() {
+                modal.showModal();
+                setTimeout(() => modal.classList.add('is-open'), 10);
+            }
+            function closeModal() {
+                modal.classList.remove('is-open');
+                setTimeout(() => modal.close(), 250); 
+            }
+            openBtns.forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+
+            // --- 7. GitHub API Stats & Release Fetcher (Latest Stable + Pre-release Beta) ---
             fetch('https://api.github.com/repos/cgens67/avidtune')
                 .then(res => res.json())
                 .then(data => {
@@ -1068,6 +1067,7 @@
                 .then(res => res.json())
                 .then(releases => {
                     if (Array.isArray(releases) && releases.length > 0) {
+                        // Total downloads
                         let totalDownloads = 0;
                         releases.forEach(rel => {
                             if (rel.assets) rel.assets.forEach(a => totalDownloads += a.download_count);
@@ -1077,14 +1077,14 @@
                         // 1. Latest Stable release
                         const latestStable = releases.find(r => !r.prerelease) || releases[0];
                         
-                        // 2. Beta Pre-release
+                        // 2. Beta Pre-release (finds prerelease or tag with 'b'/'beta')
                         const betaRelease = releases.find(r => r.prerelease || r.tag_name.toLowerCase().startsWith('b') || r.tag_name.toLowerCase().includes('beta')) || releases[0];
 
-                        function resolveApk(rel, isBeta = false) {
+                        function resolveApk(rel) {
                             if (!rel || !rel.assets || rel.assets.length === 0) {
                                 return rel?.html_url || 'https://github.com/cgens67/avidtune/releases';
                             }
-                            // Direct target: app-universal-release.apk
+                            // Priority: app-universal-release.apk
                             const universal = rel.assets.find(a => a.name === 'app-universal-release.apk' || a.name.includes('universal') && a.name.endsWith('.apk'));
                             if (universal) return universal.browser_download_url;
 
@@ -1092,13 +1092,13 @@
                             return anyApk ? anyApk.browser_download_url : rel.html_url;
                         }
 
-                        // Latest stable APK
-                        const latestUrl = resolveApk(latestStable, false);
+                        // Update Latest Link
+                        const latestUrl = resolveApk(latestStable);
                         document.getElementById('dl-latest').href = latestUrl;
                         document.getElementById('dl-latest-label').textContent = latestStable.tag_name || 'Stable Build';
 
-                        // Beta pre-release app-universal-release.apk
-                        const betaUrl = resolveApk(betaRelease, true);
+                        // Update Beta Link (fetching pre-release app-universal-release.apk)
+                        const betaUrl = resolveApk(betaRelease);
                         document.getElementById('dl-beta').href = betaUrl;
                         document.getElementById('dl-beta-label').textContent = betaRelease.tag_name || 'Beta Pre-release';
                         document.getElementById('dl-btn-beta-section').href = betaUrl;
@@ -1109,7 +1109,7 @@
                     document.getElementById('dl-btn-beta-section').href = 'https://github.com/cgens67/avidtune/releases';
                 });
 
-            // --- 8. Carousel Logic with local images ---
+            // --- 8. Carousel Logic ---
             const slides = [
                 {
                     title: "Synced Lyrics",
@@ -1144,7 +1144,7 @@
             
             slides.forEach((_, idx) => {
                 const dot = document.createElement('button');
-                dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 border border-black/20 dark:border-white/20 hover:opacity-100`;
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 border border-[var(--border-color)]`;
                 dot.addEventListener('click', () => goToSlide(idx));
                 dotsContainer.appendChild(dot);
             });
