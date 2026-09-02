@@ -130,6 +130,7 @@
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform;
             backface-visibility: hidden;
+            cursor: pointer;
         }
 
         .mockup-item:hover {
@@ -1177,11 +1178,16 @@
                 ];
                 
                 mockupsData.forEach((mockup, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up';
-                    item.style.setProperty('--py', `${mockup.py}px`);
-                    item.style.transitionDelay = `${mockup.delay}ms`;
+                    // Wrapper for reveal-up animation (separating the translation so it doesn't fight with parallax/hover)
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'snap-center shrink-0 w-[230px] md:w-[270px] reveal-up';
+                    wrapper.style.transitionDelay = `${mockup.delay}ms`;
 
+                    // Inner wrapper for hover/parallax transformation
+                    const item = document.createElement('div');
+                    item.className = 'mockup-item w-full h-full';
+                    item.style.setProperty('--py', `${mockup.py}px`);
+                    
                     const frame = document.createElement('div');
                     frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame shadow-xl';
                     
@@ -1192,10 +1198,11 @@
 
                     frame.appendChild(img);
                     item.appendChild(frame);
-                    dynamicMockups.appendChild(item);
+                    wrapper.appendChild(item);
+                    dynamicMockups.appendChild(wrapper);
                     
                     // Observe for reveal animation
-                    observer.observe(item);
+                    observer.observe(wrapper);
                 });
 
                 // Parallax Mouse Effect
@@ -1208,7 +1215,6 @@
 
                         const items = dynamicMockups.querySelectorAll('.mockup-item');
                         items.forEach((item, index) => {
-                            // Depth variation to create 3D staggered parallax
                             const depth = 1 + (index % 2 === 0 ? 0.2 : -0.2); 
                             item.style.setProperty('--px', `${x * depth}px`);
                         });
