@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="dark" lang="en" style="scroll-behavior: smooth;">
+<html class="light" lang="en" style="scroll-behavior: smooth;">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>AvidTune</title>
+    <title>AvidTune — Modern Music Player for Android</title>
     <meta name="description" content="A modern YouTube Music client designed with Material Design 3 for Android.">
 
     <!-- Favicon -->
@@ -18,28 +18,31 @@
     <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
+    <!-- Tailwind Configuration (White/Clean Theme) -->
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#ffffff",
-                        "surface": "rgba(175, 190, 255, 0.15)",
-                        "surface-dim": "rgba(175, 190, 255, 0.1)",
-                        "surface-bright": "rgba(175, 190, 255, 0.25)",
-                        "surface-container-lowest": "rgba(175, 190, 255, 0.05)",
-                        "surface-container-low": "rgba(175, 190, 255, 0.08)",
-                        "surface-container": "rgba(175, 190, 255, 0.12)",
-                        "surface-container-high": "rgba(175, 190, 255, 0.18)",
-                        "surface-container-highest": "rgba(175, 190, 255, 0.25)",
-                        "on-surface": "#e5e2e1",
-                        "on-surface-variant": "#c2c6d6",
-                        "vivi": { blue: '#afbeff', purple: '#5669bd' },
-                        "primary-container": "#4d8eff",
-                        "outline-variant": "#424754",
-                        "background": "#152671",
-                        "on-background": "#e5e2e1",
+                        "primary": "#09090b",
+                        "surface": "rgba(255, 255, 255, 0.7)",
+                        "surface-dim": "rgba(255, 255, 255, 0.4)",
+                        "surface-bright": "rgba(255, 255, 255, 0.9)",
+                        "surface-container-lowest": "rgba(255, 255, 255, 0.2)",
+                        "surface-container-low": "rgba(255, 255, 255, 0.45)",
+                        "surface-container": "rgba(255, 255, 255, 0.65)",
+                        "surface-container-high": "rgba(255, 255, 255, 0.85)",
+                        "surface-container-highest": "rgba(255, 255, 255, 0.95)",
+                        "on-surface": "#09090b",
+                        "on-surface-variant": "#475569",
+                        "accent": {
+                            blue: '#2563eb',
+                            purple: '#4f46e5',
+                            light: '#dbeafe'
+                        },
+                        "background": "#ffffff",
+                        "on-background": "#09090b",
                     },
                     fontFamily: {
                         sora: ['Sora', 'sans-serif'],
@@ -63,14 +66,17 @@
         }
     </script>
     
-    <!-- Custom Animations and styles (VIVI Music Exact Replication) -->
+    <!-- Custom Glassmorphism, Animations & Physics -->
     <style>
-        body { background-color: transparent !important; }
-        
+        body {
+            background-color: #ffffff !important;
+            color: #09090b;
+        }
+
         #page-background {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw; height: 100vh; z-index: -1;
-            background: linear-gradient(180deg, #152671 10%, #1b2c78 30%, #5669bd 100%);
+            background: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
             pointer-events: none;
         }
 
@@ -87,45 +93,69 @@
 
         .floating-element-delayed {
             animation: float 5s ease-in-out infinite;
-            animation-delay: 1s; will-change: transform; backface-visibility: hidden;
+            animation-delay: 1.2s; will-change: transform; backface-visibility: hidden;
         }
 
-        .glass-card {
-            background: rgba(175, 190, 255, 0.15);
-            backdrop-filter: blur(12px); border: 1px solid rgba(175, 190, 255, 0.25);
+        .glass-card, .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
         }
 
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        .phone-frame { box-shadow: 0 0 80px rgba(175, 190, 255, 0.15); }
+        /* 3D Gallery / Mockup Perspective & Stagger Lift */
+        .mockup-container {
+            perspective: 1200px;
+        }
 
-        .progress-bar-fill { transition: width 0.1s linear; }
+        .mockup-item {
+            --px: 0px;
+            --py: 0px;
+            transform: translate3d(var(--px), var(--py), 0);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .mockup-item:hover {
+            transform: translate3d(var(--px), calc(var(--py) - 28px), 0) scale(1.05);
+            z-index: 50;
+            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.2);
+        }
+
+        .phone-frame {
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.12);
+        }
 
         .glow-avatar {
-            box-shadow: 0 0 30px rgba(175, 190, 255, 0.3), inset 0 0 20px rgba(175, 190, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.15), inset 0 0 15px rgba(37, 99, 235, 0.1);
+            border: 2px solid rgba(37, 99, 235, 0.3);
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         @keyframes revealUpAnim {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(35px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .reveal-up { opacity: 0; will-change: opacity, transform; }
         .reveal-visible { animation: revealUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #152671; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, rgba(175, 190, 255, 0.8) 0%, rgba(175, 190, 255, 0.2) 100%);
-            border-radius: 999px; border: 2px solid #152671;
+            background: #cbd5e1;
+            border-radius: 999px; border: 2px solid #f8fafc;
         }
-        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(175, 190, 255, 0.4) 100%); }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
         @keyframes navSlideDown {
             from { transform: translateY(-100%); opacity: 0; }
@@ -134,36 +164,53 @@
 
         #top-navbar {
             position: fixed; top: 0; width: 100%; z-index: 100;
-            transition: padding-top 0.4s ease, padding-bottom 0.4s ease, background-color 0.3s ease, backdrop-filter 0.3s ease;
+            transition: padding 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
 
         #top-navbar::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 150%;
-            background: linear-gradient(180deg, #152671 0%, rgba(21, 38, 113, 0.99) 6.25%, rgba(21, 38, 113, 0.96) 12.5%, rgba(21, 38, 113, 0.91) 18.75%, rgba(21, 38, 113, 0.85) 25%, rgba(21, 38, 113, 0.77) 31.25%, rgba(21, 38, 113, 0.69) 37.5%, rgba(21, 38, 113, 0.59) 43.75%, rgba(21, 38, 113, 0.5) 50%, rgba(21, 38, 113, 0.4) 56.25%, rgba(21, 38, 113, 0.3) 62.5%, rgba(21, 38, 113, 0.22) 68.75%, rgba(21, 38, 113, 0.14) 75%, rgba(21, 38, 113, 0.08) 81.25%, rgba(21, 38, 113, 0.03) 87.5%, rgba(21, 38, 113, 0.01) 93.75%, rgba(21, 38, 113, 0) 100%);
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 140%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
             pointer-events: none; z-index: -1;
         }
 
         #top-navbar.animate-nav { animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        #top-navbar.scrolled { padding-top: 12px; padding-bottom: 12px; }
 
         .nav-link {
-            color: #ffffff !important; background-color: transparent; padding: 9px 16px; border-radius: 50px;
-            font-size: 16px; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
-            transition: background-color 0.1s ease, transform 0.2s ease, opacity 0.2s ease;
-            display: flex; align-items: center; text-decoration: none; user-select: none; will-change: transform;
+            color: #334155 !important; background-color: transparent; padding: 8px 16px; border-radius: 50px;
+            font-size: 15px; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
+            transition: all 0.2s ease; display: flex; align-items: center; user-select: none;
         }
-
-        .nav-link:hover { background-color: rgba(175, 190, 255, 0.25) !important; }
-        .nav-link:active { background-color: rgba(175, 190, 255, 0.3) !important; transform: scale(0.97); }
+        .nav-link:hover { color: #09090b !important; background-color: rgba(0, 0, 0, 0.05) !important; }
+        .nav-link:active { transform: scale(0.97); }
 
         .mobile-menu-link {
-            color: #ffffff !important; font-family: 'Instrument Sans', sans-serif; font-size: 18px;
-            font-weight: 500; text-decoration: none; transition: opacity 0.2s ease, transform 0.2s ease;
-            display: inline-flex; align-items: center; user-select: none; will-change: transform;
+            color: #09090b !important; font-family: 'Instrument Sans', sans-serif; font-size: 18px;
+            font-weight: 500; text-decoration: none; transition: all 0.2s ease;
+            display: inline-flex; align-items: center; user-select: none;
         }
-        .mobile-menu-link:hover { opacity: 0.8; }
-        .mobile-menu-link:active { transform: scale(0.97); opacity: 0.7; }
 
+        /* FAQ Accordion Animations */
+        details.faq-item summary::-webkit-details-marker { display: none; }
+        details.faq-item {
+            overflow: hidden;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        details.faq-item[open] {
+            background-color: rgba(241, 245, 249, 0.6);
+        }
+        details.faq-item .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+        }
+        details.faq-item[open] .faq-content {
+            grid-template-rows: 1fr;
+        }
+        details.faq-item .faq-content-inner {
+            overflow: hidden;
+        }
+
+        /* Modal / Dialog */
         dialog {
             display: none; align-items: center; justify-content: center; position: fixed; inset: 0;
             width: 100vw; height: 100vh; max-width: 100% !important; max-height: 100% !important;
@@ -173,93 +220,87 @@
         dialog::backdrop { display: none !important; }
 
         .dialog-backdrop {
-            position: absolute; inset: 0; background-color: rgba(27, 44, 120, 0);
+            position: absolute; inset: 0; background-color: rgba(15, 23, 42, 0);
             backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
-            transition: background-color 0.2s ease, backdrop-filter 0.2s ease, -webkit-backdrop-filter 0.2s ease;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
             z-index: 1; pointer-events: auto;
         }
         dialog.is-open .dialog-backdrop {
-            background-color: rgba(27, 44, 120, 0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            background-color: rgba(15, 23, 42, 0.35); backdrop-filter: blur(8px);
         }
 
         .helium-dialog-container {
-            width: calc(100% - 32px); max-width: 380px; font-size: 16px;
-            background: rgba(27, 44, 120, 0.9); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 2px solid rgba(175, 190, 255, 0.3); border-radius: 28px;
-            transform-origin: center; transform: scale(0.8); opacity: 0;
-            transition: transform 0.2s ease, opacity 0.2s ease; z-index: 10; pointer-events: auto;
+            width: calc(100% - 32px); max-width: 400px; font-size: 16px;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(24px);
+            border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            transform-origin: center; transform: scale(0.9); opacity: 0;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+            z-index: 10; pointer-events: auto;
         }
         dialog.is-open .helium-dialog-container { transform: scale(1); opacity: 1; }
 
         .helium-dialog-btn {
-            background: rgba(175, 190, 255, 0.2); border-radius: 12px; padding: 14px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 5px; color: #ffffff; font-family: 'Instrument Sans', sans-serif; text-align: center;
-            user-select: none; transition: background-color 0.15s ease, transform 0.15s ease; border: none; outline: none;
+            background: rgba(241, 245, 249, 0.85); border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px; padding: 16px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 6px; color: #09090b;
+            font-family: 'Instrument Sans', sans-serif; text-align: center;
+            user-select: none; transition: all 0.2s ease; outline: none;
         }
-        .helium-dialog-btn:hover { background-color: rgba(175, 190, 255, 0.25); }
-        .helium-dialog-btn:active { background-color: rgba(175, 190, 255, 0.3); transform: scale(0.97); }
+        .helium-dialog-btn:hover { background-color: #ffffff; border-color: #2563eb; transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(37,99,235,0.1); }
+        .helium-dialog-btn:active { transform: scale(0.98); }
 
         .helium-dialog-btn-close {
-            background: #ffffff !important; color: #000000 !important; border-radius: 12px !important;
-            padding: 11px 18px !important; width: 100%; font-family: 'Instrument Sans', sans-serif;
-            font-weight: 700; font-size: 15px; transition: background-color 0.15s ease, transform 0.15s ease;
-            border: none; outline: none; cursor: pointer; text-align: center; user-select: none;
+            background: #09090b !important; color: #ffffff !important; border-radius: 12px !important;
+            padding: 12px 18px !important; width: 100%; font-family: 'Instrument Sans', sans-serif;
+            font-weight: 600; font-size: 15px; cursor: pointer; transition: opacity 0.2s ease, transform 0.15s ease;
         }
-        .helium-dialog-btn-close:hover { background-color: rgba(255, 255, 255, 0.9) !important; }
-        .helium-dialog-btn-close:active { transform: scale(0.97) !important; }
+        .helium-dialog-btn-close:hover { opacity: 0.9; }
+        .helium-dialog-btn-close:active { transform: scale(0.98) !important; }
 
         @media screen and (max-width: 550px) {
             dialog { align-items: flex-end !important; }
-            .dialog-backdrop {
-                background: linear-gradient(0deg, rgba(21, 38, 113, 0.98) 40%, rgba(21, 38, 113, 0.6) 75%, rgba(21, 38, 113, 0) 100%) !important;
-                opacity: 0; backdrop-filter: blur(0px) !important; -webkit-backdrop-filter: blur(0px) !important;
-                transition: opacity 0.25s ease, backdrop-filter 0.25s ease, -webkit-backdrop-filter 0.25s ease !important;
-            }
-            dialog.is-open .dialog-backdrop {
-                opacity: 1 !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important;
-            }
             .helium-dialog-container {
-                width: calc(100% - 32px); max-width: 500px; background: transparent !important;
-                backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
-                border: none !important; box-shadow: none !important; border-radius: 0 !important; margin-bottom: 24px;
+                width: calc(100% - 24px); max-width: 500px;
+                border-radius: 28px; margin-bottom: 20px;
                 transform: translateY(100%) !important; opacity: 0;
-                transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
             }
             dialog.is-open .helium-dialog-container { transform: translateY(0) !important; opacity: 1; }
         }
     </style>
 </head>
 
-<body class="bg-transparent text-on-surface font-sora selection:bg-vivi-blue selection:text-white overflow-x-hidden">
+<body class="bg-transparent text-on-surface font-sora selection:bg-accent-light selection:text-accent-blue overflow-x-hidden">
 
-    <!-- Fixed background gradient element -->
+    <!-- Fixed clean white gradient background -->
     <div id="page-background"></div>
 
     <!-- BEGIN: Navigation -->
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
         <div class="flex items-center gap-2">
             <a href="#home" class="flex items-center gap-3">
-                <img src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/New%20Project%2019%20%5BC773B12%5D.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover" decoding="async" />
-                <span class="text-xl font-bold tracking-tight text-white">AvidTune</span>
+                <img src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/New%20Project%2019%20%5BC773B12%5D.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm" decoding="async" />
+                <span class="text-xl font-bold tracking-tight text-primary">AvidTune</span>
             </a>
         </div>
 
         <div class="flex items-center gap-8">
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a class="nav-link" href="#features">Features</a>
                 <a class="nav-link" href="#faq">FAQ</a>
                 <a class="nav-link" href="#sponsor">Sponsor</a>
                 <a class="nav-link" href="https://github.com/cgens67/avidtune" target="_blank">GitHub</a>
             </div>
 
             <div class="flex items-center gap-4">
-                <button class="trigger-download-modal hidden sm:inline-block bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-white/85 transition-colors text-center shadow-md">
+                <button class="trigger-download-modal hidden sm:inline-block bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-black/85 transition-all active:scale-95 shadow-md">
                     Download
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition-colors select-none">
+                <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-sm font-medium hover:bg-slate-200 transition-colors select-none">
                     <span>Links</span>
                     <span class="material-symbols-outlined text-[18px] transition-transform duration-200" id="mobile-menu-chevron">expand_more</span>
                 </button>
@@ -267,13 +308,14 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="absolute right-6 md:right-12 top-full mt-2 z-[90] flex flex-col items-end gap-5 transform -translate-y-4 opacity-0 transition-all duration-300 pointer-events-none md:hidden">
+        <div id="mobile-menu" class="absolute right-6 md:right-12 top-full mt-2 z-[90] flex flex-col items-end gap-4 p-5 rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl transform -translate-y-4 opacity-0 transition-all duration-300 pointer-events-none md:hidden">
+            <a class="mobile-menu-link" href="#features">Features</a>
             <a class="mobile-menu-link" href="#faq">FAQ</a>
             <a class="mobile-menu-link" href="#sponsor">Sponsor</a>
             <a class="mobile-menu-link flex items-center gap-1" href="https://github.com/cgens67/avidtune" target="_blank">
-                GitHub <span class="material-symbols-outlined text-[16px] opacity-65">open_in_new</span>
+                GitHub <span class="material-symbols-outlined text-[16px] opacity-60">open_in_new</span>
             </a>
-            <button class="trigger-download-modal flex items-center justify-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold shadow-md">
+            <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md w-full">
                 <span class="material-symbols-outlined text-[18px]">download</span> Download
             </button>
         </div>
@@ -281,89 +323,98 @@
     <!-- END: Navigation -->
 
     <main id="home" class="relative min-h-screen pt-32 pb-20 overflow-hidden">
-        <!-- Hero Text Content -->
+        <!-- Hero Section -->
         <section class="container mx-auto px-6 text-center relative z-10 reveal-up">
-            <img src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/New%20Project%2019%20%5BC773B12%5D.png" alt="AvidTune Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-lg" decoding="async" />
+            <img src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/New%20Project%2019%20%5BC773B12%5D.png" alt="AvidTune Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-slate-200" decoding="async" />
 
-            <h1 class="text-4xl md:text-[48px] font-medium mb-6 tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[1.1] max-w-[660px] mx-auto flex items-center justify-center flex-wrap">
+            <h1 class="text-4xl md:text-[54px] font-semibold mb-6 tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[1.1] max-w-[700px] mx-auto flex items-center justify-center flex-wrap">
                 More Than Just Music
             </h1>
-            <p class="text-[#afbeff]/90 text-base md:text-lg max-w-[700px] mx-auto mb-10 leading-relaxed font-geist">
-                A modern YouTube Music client designed with Material Design 3 for Android. Enjoy seamless background playback, a highly customizable interface, and deep ecosystem integration without compromises.
+            <p class="text-on-surface-variant text-base md:text-lg max-w-[650px] mx-auto mb-10 leading-relaxed font-geist">
+                An elegant, open-source YouTube Music client for Android with Material Design 3. Enjoy seamless background playback, synchronized lyrics, and high-fidelity streaming.
             </p>
             
             <div class="flex flex-col items-center justify-center gap-3 mb-6">
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
-                    <button class="trigger-download-modal flex items-center justify-center gap-2 bg-white text-black px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-white/85 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-black/85 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                         <span class="material-symbols-outlined text-[20px]">download</span>
                         Download App
                     </button>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-geist text-[#afbeff]/60 select-none">
-                    <span class="border border-[#afbeff]/30 text-[#afbeff]/80 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
+                <div class="flex items-center gap-2 text-xs font-geist text-slate-500 select-none">
+                    <span class="border border-slate-300 text-slate-700 bg-slate-100 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
                     <span>for Android 8.0+</span>
-                    <span class="text-white/10 mx-1">|</span>
-                    <a href="#beta-channel" class="hover:text-white transition-colors flex items-center gap-1.5 text-[#afbeff]/85">
-                        <span class="border border-amber-500/30 text-amber-300 px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold tracking-wider uppercase">Beta</span>
-                        <span class="underline underline-offset-2">Pre-releases</span>
+                    <span class="text-slate-300 mx-1">|</span>
+                    <a href="#beta-channel" class="hover:text-primary transition-colors flex items-center gap-1.5 text-slate-600">
+                        <span class="border border-amber-500/40 text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold tracking-wider uppercase">Beta</span>
+                        <span class="underline underline-offset-2">Pre-release builds</span>
                     </a>
                 </div>
-                <div class="flex items-center gap-3 text-[11px] font-geist text-[#afbeff]/50 select-none mt-1 flex-wrap justify-center">
+                <div class="flex items-center gap-3 text-[12px] font-geist text-slate-400 select-none mt-1 flex-wrap justify-center">
                     <div class="flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-[13px]">star</span>
+                        <span class="material-symbols-outlined text-[14px]">star</span>
                         <span id="github-stars-hero">— GitHub stars</span>
                     </div>
-                    <span class="text-white/10">|</span>
+                    <span class="text-slate-300">|</span>
                     <div class="flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-[13px]">download</span>
+                        <span class="material-symbols-outlined text-[14px]">download</span>
                         <span id="total-downloads-hero">— total downloads</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Main Visual -->
+        <!-- Hero Mockup with Floating Animation -->
         <section class="relative max-w-4xl mx-auto mt-12 px-6 flex flex-col items-center justify-center reveal-up" style="transition-delay: 200ms;">
-            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-black rounded-[3rem] p-3 border-[6px] border-surface-container-highest shadow-2xl overflow-hidden shadow-vivi-blue/10 floating-element">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-30"></div>
-                <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-black">
+            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-slate-200 shadow-2xl shadow-blue-500/10 floating-element">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
+                <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950">
                     <img alt="AvidTune App Preview" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_023022.jpg">
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- BEGIN: Features Section -->
-    <div id="features" class="font-body-md text-on-background bg-transparent w-full pt-32 pb-24">
-        <!-- Features Hero -->
+    <!-- BEGIN: Showcase / Gallery (VIVI Style Staggered Wave Mockups) -->
+    <div id="screenshots" class="font-body-md text-on-background bg-transparent w-full pt-28 pb-24">
         <section class="max-w-7xl mx-auto px-6 md:px-16 text-center mb-16 reveal-up">
-            <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6 tracking-tighter leading-tight text-white">
+            <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6 tracking-tighter leading-tight text-primary">
                 Immersive,<br />dynamic playback.
             </h1>
             <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
-                Experience a music player that beautifully adapts to every beat and album cover.
+                Experience a music player that beautifully adapts to every beat, palette, and album cover.
             </p>
         </section>
 
-        <!-- Horizontal Scroll Phone Mockups -->
-        <section class="relative w-full overflow-hidden pt-12">
-            <div class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[700px] snap-x snap-mandatory py-4 md:py-0">
+        <!-- 3D Staggered Phone Wave Mockups -->
+        <section class="relative w-full overflow-hidden pt-6 mockup-container">
+            <div class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-10 px-6 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[640px] snap-x snap-mandatory py-8">
                 
-                <div class="snap-center shrink-0 w-[240px] md:w-[280px] reveal-up floating-element" style="transition-delay: 50ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-surface-container-highest bg-black overflow-hidden shadow-2xl shadow-black/50 phone-frame">
+                <!-- Mockup 1 -->
+                <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 40px; transition-delay: 50ms;">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-200 bg-black overflow-hidden phone-frame">
                         <img alt="Player Screen" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_022916.jpg">
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[240px] md:w-[280px] reveal-up floating-element-delayed" style="transition-delay: 150ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-surface-container-highest bg-black overflow-hidden shadow-2xl shadow-black/50 phone-frame">
+                <!-- Mockup 2 (Center Hero) -->
+                <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 0px; transition-delay: 100ms;">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 bg-black overflow-hidden phone-frame shadow-xl">
+                        <img alt="Lyrics Screen" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_023022.jpg">
+                    </div>
+                </div>
+
+                <!-- Mockup 3 -->
+                <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 20px; transition-delay: 150ms;">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-200 bg-black overflow-hidden phone-frame">
                         <img alt="Library Screen" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_022931.jpg">
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[240px] md:w-[280px] reveal-up floating-element" style="transition-delay: 250ms;">
-                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-surface-container-highest bg-black overflow-hidden shadow-2xl shadow-black/50 phone-frame">
-                        <img alt="Search Screen" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_022952.jpg">
+                <!-- Mockup 4 -->
+                <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 55px; transition-delay: 200ms;">
+                    <div class="relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-200 bg-black overflow-hidden phone-frame">
+                        <img alt="Settings Screen" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_022941.jpg">
                     </div>
                 </div>
 
@@ -371,48 +422,48 @@
         </section>
     </div>
 
-    <!-- BEGIN: Features Carousel (Custom Implementation mimicking VIVI's JS) -->
-    <section id="features-carousel" class="w-full max-w-7xl mx-auto px-6 md:px-12 py-32 bg-transparent reveal-up">
+    <!-- BEGIN: Interactive Features Carousel -->
+    <section id="features-carousel" class="w-full max-w-7xl mx-auto px-6 md:px-12 py-24 bg-transparent reveal-up">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
 
             <!-- Left: Text Content -->
-            <div class="flex flex-col justify-between order-2 lg:order-1 min-h-[350px] md:min-h-[450px]">
-                <div id="carousel-content" class="transition-all duration-500 transform min-h-[280px] md:min-h-[350px]">
-                    <div id="slide-tagline" class="border border-white/20 rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] font-bold text-white/80 inline-block mb-6 backdrop-blur-sm bg-white/5">
+            <div class="flex flex-col justify-between order-2 lg:order-1 min-h-[350px] md:min-h-[420px]">
+                <div id="carousel-content" class="transition-all duration-500 transform min-h-[260px]">
+                    <div id="slide-tagline" class="border border-slate-300 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-bold text-slate-700 inline-block mb-6 bg-slate-100">
                         PREMIUM EXPERIENCE
                     </div>
-                    <h2 id="slide-title" class="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-[1.1] mb-6">
+                    <h2 id="slide-title" class="text-4xl md:text-6xl font-bold text-primary tracking-tighter leading-[1.1] mb-6 font-geist">
                         Synced Lyrics
                     </h2>
-                    <p id="slide-desc" class="text-on-surface-variant font-body text-base md:text-xl leading-relaxed max-w-xl mb-8 md:mb-12">
-                        Sing along with perfectly synced, glowing lyrics that follow every word in real-time. Experience your music like never before.
+                    <p id="slide-desc" class="text-on-surface-variant font-body text-base md:text-lg leading-relaxed max-w-xl mb-8">
+                        Sing along with synchronized lyrics that follow every word in real-time. Experience your YouTube Music playlists like never before.
                     </p>
                 </div>
 
                 <!-- Controls -->
-                <div class="flex flex-col gap-6 mt-4 md:mt-8 w-full">
+                <div class="flex flex-col gap-6 mt-4 w-full">
                     <div class="flex gap-3 items-center">
                         <div class="flex gap-2" id="pagination-dots">
                             <!-- Dots injected by JS -->
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
-                        <button id="btn-prev" class="w-12 h-12 rounded-full border border-[#afbeff]/30 flex items-center justify-center text-white hover:bg-[#afbeff]/20 hover:border-[#afbeff]/40 transition-colors group">
+                        <button id="btn-prev" class="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-100 hover:border-slate-400 transition-colors group">
                             <span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
                         </button>
-                        <button id="btn-next" class="w-12 h-12 rounded-full border border-[#afbeff]/30 flex items-center justify-center text-white hover:bg-[#afbeff]/20 hover:border-[#afbeff]/40 transition-colors group">
+                        <button id="btn-next" class="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-100 hover:border-slate-400 transition-colors group">
                             <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
                         </button>
-                        <div class="ml-4 flex-1 max-w-[120px] h-1.5 bg-white/10 rounded-full overflow-hidden">
-                            <div id="autoplay-progress" class="h-full bg-[#afbeff] w-0"></div>
+                        <div class="ml-4 flex-1 max-w-[120px] h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="autoplay-progress" class="h-full bg-primary w-0"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right: Phone Mockup Image (Dynamic) -->
+            <!-- Right: Mockup Image -->
             <div class="flex justify-center items-center order-1 lg:order-2 w-full">
-                <div class="relative w-[240px] md:w-[320px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-surface-container-highest bg-black overflow-hidden shadow-2xl shadow-black/40">
+                <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-slate-200 bg-black overflow-hidden shadow-2xl shadow-black/10">
                     <div class="w-full h-full relative">
                         <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_023022.jpg" alt="Feature Slide">
                     </div>
@@ -423,55 +474,55 @@
     </section>
 
     <!-- BEGIN: Grid Features -->
-    <section id="more-features" class="w-full max-w-7xl mx-auto px-6 md:px-12 pb-12 bg-transparent reveal-up">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-white/10 md:border-l md:border-r">
+    <section id="features" class="w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 bg-transparent reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-slate-200 md:border-l md:border-r">
             
-            <div class="p-8 md:p-10 border-b border-white/10 lg:border-r lg:col-span-2 flex flex-col justify-between min-h-[300px] hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-slate-200 lg:border-r lg:col-span-2 flex flex-col justify-between min-h-[280px] hover:bg-slate-50 transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-[#afbeff] font-geist tracking-widest block mb-4">01 / BRAND PROMISE</span>
-                    <h3 class="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight font-geist leading-tight">Ad-Free & Open Source</h3>
-                    <p class="text-[#afbeff]/80 font-geist text-sm md:text-base leading-relaxed max-w-2xl">
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">01 / BRAND PROMISE</span>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Ad-Free & Open Source</h3>
+                    <p class="text-on-surface-variant font-geist text-sm md:text-base leading-relaxed max-w-2xl">
                         Seamless background playback with high-fidelity streams from YouTube Music, completely ad-free forever. Open source code for absolute transparency.
                     </p>
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 border-b border-white/10 flex flex-col justify-between min-h-[300px] hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-slate-200 flex flex-col justify-between min-h-[280px] hover:bg-slate-50 transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-[#afbeff] font-geist tracking-widest block mb-4">02 / CORE FUNCTION</span>
-                    <h3 class="text-xl md:text-2xl font-medium text-white mb-4 tracking-tight font-geist leading-tight">Offline Mode</h3>
-                    <p class="text-[#afbeff]/80 font-geist text-sm leading-relaxed">
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">02 / CORE FUNCTION</span>
+                    <h3 class="text-xl md:text-2xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Offline Mode</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
                         Download and cache tracks onto your device. Intelligent storage management optimizes your offline space automatically.
                     </p>
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 border-b border-white/10 md:border-r flex flex-col justify-between min-h-[250px] hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-slate-200 md:border-r flex flex-col justify-between min-h-[250px] hover:bg-slate-50 transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-[#afbeff] font-geist tracking-widest block mb-4">03 / ECOSYSTEM</span>
-                    <h3 class="text-xl font-medium text-white mb-4 tracking-tight font-geist leading-tight">YouTube Integration</h3>
-                    <p class="text-[#afbeff]/80 font-geist text-sm leading-relaxed">
-                        Sync your account to access your libraries seamlessly and efficiently.
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">03 / ECOSYSTEM</span>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">YouTube Integration</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Sync your account to access your personalized libraries, playlists, and recommendations effortlessly.
                     </p>
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 border-b border-white/10 lg:border-b-0 lg:border-r flex flex-col justify-between min-h-[250px] hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 border-b border-slate-200 lg:border-b-0 lg:border-r flex flex-col justify-between min-h-[250px] hover:bg-slate-50 transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-[#afbeff] font-geist tracking-widest block mb-4">04 / ETHICS</span>
-                    <h3 class="text-xl font-medium text-white mb-4 tracking-tight font-geist leading-tight">100% Privacy-First</h3>
-                    <p class="text-[#afbeff]/80 font-geist text-sm leading-relaxed">
-                        No hidden subscriptions. Local libraries and playlists give you full control over your privacy and streaming data.
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">04 / ETHICS</span>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">100% Privacy-First</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Zero trackers or unnecessary telemetry. All your history and custom preferences remain local to your device.
                     </p>
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 flex flex-col justify-between min-h-[250px] hover:bg-white/[0.02] transition-colors group">
+            <div class="p-8 md:p-10 flex flex-col justify-between min-h-[250px] hover:bg-slate-50 transition-colors group">
                 <div>
-                    <span class="text-xs font-bold text-[#afbeff] font-geist tracking-widest block mb-4">05 / EXPERIENCE</span>
-                    <h3 class="text-xl font-medium text-white mb-4 tracking-tight font-geist leading-tight">Optimized Experience</h3>
-                    <p class="text-[#afbeff]/80 font-geist text-sm leading-relaxed">
-                        Intuitive navigation and agile performance with an interface that constantly evolves.
+                    <span class="text-xs font-bold text-accent-blue font-geist tracking-widest block mb-4">05 / PERSONALIZATION</span>
+                    <h3 class="text-xl font-semibold text-primary mb-4 tracking-tight font-geist leading-tight">Material Design 3</h3>
+                    <p class="text-on-surface-variant font-geist text-sm leading-relaxed">
+                        Built with expressive Material 3 tokens, intuitive navigation, dynamic shapes, and agile playback performance.
                     </p>
                 </div>
             </div>
@@ -485,11 +536,11 @@
 
             <!-- Left: Vision Text -->
             <div class="lg:col-span-7 xl:col-span-8">
-                <h2 class="text-4xl md:text-[48px] font-medium tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[0.95] mb-8">
+                <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-8">
                     More Than Just a Project
                 </h2>
 
-                <div class="space-y-6 text-[#afbeff]/85 font-geist text-base md:text-lg leading-relaxed mb-10 max-w-3xl">
+                <div class="space-y-6 text-on-surface-variant font-geist text-base md:text-lg leading-relaxed mb-10 max-w-3xl">
                     <p>
                         AvidTune is a free and open-source music player for Android that brings together the best features from modern music apps. Built with premium design principles, it offers a beautiful, personalized experience that adapts to your style.
                     </p>
@@ -498,27 +549,27 @@
                     </p>
                 </div>
 
-                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-white/85 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-black/85 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px]">call_split</span>
                     Contribute on GitHub
                 </a>
             </div>
 
             <!-- Right: Author -->
-            <div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end lg:border-l lg:border-white/10 lg:pl-16">
+            <div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end lg:border-l lg:border-slate-200 lg:pl-16">
                 <div class="flex flex-col items-center text-center w-full max-w-sm relative">
-                    <div class="relative w-32 h-32 rounded-full mb-6 p-1 bg-gradient-to-tr from-[#afbeff] to-[#152671] glow-avatar overflow-hidden">
-                        <img src="https://avatars.githubusercontent.com/u/237695506?v=4" alt="cgens67" class="w-full h-full object-cover rounded-full border-2 border-black" loading="lazy" decoding="async" />
+                    <div class="relative w-32 h-32 rounded-full mb-6 p-1 bg-gradient-to-tr from-slate-200 to-blue-200 glow-avatar overflow-hidden">
+                        <img src="https://avatars.githubusercontent.com/u/237695506?v=4" alt="cgens67" class="w-full h-full object-cover rounded-full border-2 border-white" loading="lazy" decoding="async" />
                     </div>
 
-                    <h3 class="text-2xl font-bold text-white mb-2 tracking-tight font-geist">cgens67</h3>
-                    <p class="text-[#afbeff]/60 text-xs font-semibold uppercase tracking-widest mb-4 font-geist">Lead Developer</p>
+                    <h3 class="text-2xl font-bold text-primary mb-2 tracking-tight font-geist">cgens67</h3>
+                    <p class="text-slate-500 text-xs font-semibold uppercase tracking-widest mb-4 font-geist">Lead Developer</p>
 
                     <p class="text-on-surface-variant font-geist text-sm leading-relaxed mb-8">
                         Creator and lead developer. Passionate about building beautiful, open-source Android experiences.
                     </p>
 
-                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-[#afbeff]/20 border border-[#afbeff]/15 text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-[#afbeff]/25 hover:scale-105 transition-all active:scale-95 shadow-lg w-full">
+                    <a href="https://github.com/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-slate-100 border border-slate-200 text-primary px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-slate-200 hover:scale-105 transition-all active:scale-95 shadow-sm w-full">
                         <span class="material-symbols-outlined text-[18px]">account_circle</span>
                         View Profile
                     </a>
@@ -528,70 +579,75 @@
         </div>
     </section>
 
-    <!-- Sponsor Section (Adapted for AvidTune context) -->
-    <section id="sponsor" class="w-full max-w-4xl mx-auto px-6 md:px-12 mt-10 reveal-up">
-        <div class="flex flex-col items-center text-center border-t border-white/10 pt-16 pb-16">
-            <h2 class="text-4xl md:text-[48px] font-medium tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[0.95] mb-6">
-                Support the Development
+    <!-- BEGIN: Sponsor Section -->
+    <section id="sponsor" class="w-full max-w-4xl mx-auto px-6 md:px-12 mt-12 reveal-up">
+        <div class="flex flex-col items-center text-center border-t border-slate-200 pt-16 pb-16">
+            <div class="w-12 h-12 rounded-full bg-pink-50 border border-pink-200 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-pink-600 text-2xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+            
+            <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-6">
+                Support Development
             </h2>
 
-            <p class="text-[#afbeff]/80 font-geist text-base md:text-lg max-w-xl mb-8 leading-relaxed">
-                AvidTune is 100% free and open-source. If you enjoy the app, consider supporting the developer on GitHub Sponsors to help cover development time.
+            <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl mb-8 leading-relaxed">
+                AvidTune is 100% free and open-source. Sponsoring helps cover testing devices, development tools, and infrastructure.
             </p>
 
             <div class="flex items-center justify-center w-full">
-                <a href="https://github.com/sponsors/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-white text-black px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-white/85 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
-                    <span class="material-symbols-outlined text-[20px] text-pink-500" style="font-variation-settings: 'FILL' 1;">favorite</span>
-                    Sponsor via GitHub
+                <a href="https://github.com/sponsors/cgens67" target="_blank" class="flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/85 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <span class="material-symbols-outlined text-[20px] text-pink-400" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    Sponsor on GitHub
                 </a>
             </div>
         </div>
     </section>
 
     <!-- GitHub Star Call to Action -->
-    <section class="w-full max-w-4xl mx-auto px-6 md:px-12 mt-10 reveal-up">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-t border-white/10 pt-16 pb-16">
+    <section class="w-full max-w-4xl mx-auto px-6 md:px-12 reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-t border-slate-200 pt-16 pb-16">
             <div class="md:col-span-8 text-left">
-                <h2 class="text-4xl md:text-[48px] font-medium tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[0.95] mb-4">
+                <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-4">
                     Love the Project?
                 </h2>
-                <p class="text-[#afbeff]/80 font-geist text-base md:text-lg max-w-xl leading-relaxed">
+                <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl leading-relaxed">
                     AvidTune is built with passion and shared completely for free. If you like the work, support us by starring our repository on GitHub!
                 </p>
             </div>
             <div class="md:col-span-4 flex justify-start md:justify-end w-full">
-                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-white/85 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
-                    <span class="material-symbols-outlined text-[20px] text-black fill-current">star</span>
+                <a href="https://github.com/cgens67/avidtune" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-black/85 hover:scale-105 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                    <span class="material-symbols-outlined text-[20px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
                     Star on GitHub
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
-    <section class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-32 reveal-up">
-        <div class="flex flex-col items-center text-center border-t border-white/10 pt-16">
-            <div class="text-white mb-6">
+    <!-- Ready to Try Section -->
+    <section class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-28 reveal-up">
+        <div class="flex flex-col items-center text-center border-t border-slate-200 pt-16">
+            <div class="text-primary mb-6">
                 <svg class="w-12 h-12 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
                     <path d="M7 11l5 5l5 -5"></path>
                     <path d="M12 4l0 12"></path>
                 </svg>
             </div>
-            <h2 class="text-4xl md:text-[48px] font-medium tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[0.95] mb-6">
+
+            <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-6">
                 Ready to try AvidTune?
             </h2>
-            <p class="text-[#afbeff]/80 font-geist text-base md:text-lg max-w-xl mb-8 leading-relaxed">
-                It's never too late to take control of your music listening experience. Enjoy a fast, fully open-source app with no ads or subscriptions.
+            <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl mb-8 leading-relaxed">
+                Take control of your music listening experience today. Enjoy a fast, ad-free, and fully customizable open-source player.
             </p>
 
             <div class="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
-                <button class="trigger-download-modal flex items-center justify-center gap-2 bg-white text-black px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-white/85 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
+                <button class="trigger-download-modal flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-black/85 transition-all active:scale-95 shadow-lg w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[20px]">download</span>
                     Download App
                 </button>
-                <div class="flex items-center gap-2 text-xs font-geist text-[#afbeff]/60 select-none">
-                    <span class="border border-[#afbeff]/30 text-[#afbeff]/80 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
+                <div class="flex items-center gap-2 text-xs font-geist text-slate-500 select-none">
+                    <span class="border border-slate-300 bg-slate-100 text-slate-700 px-2 py-0.5 rounded-[4px] text-[10px] font-bold tracking-wider">Stable</span>
                     <span>for Android 8.0+</span>
                 </div>
             </div>
@@ -599,177 +655,215 @@
     </section>
 
     <!-- Experimental Beta Section -->
-    <section id="beta-channel" class="w-full max-w-4xl mx-auto px-6 md:px-12 mt-10 reveal-up">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-white/10 pt-16 pb-16">
+    <section id="beta-channel" class="w-full max-w-4xl mx-auto px-6 md:px-12 mb-16 reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-slate-200 pt-16 pb-16">
             <div class="md:col-span-8 text-left">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-amber-500/10 text-amber-300 border border-amber-500/20 mb-4 select-none">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-amber-50 text-amber-700 border border-amber-200 mb-4 select-none">
                     <span class="material-symbols-outlined text-[14px]">science</span> Pre-releases
                 </span>
-                <h2 class="text-4xl md:text-[48px] font-medium tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[0.95] mb-4">
+                <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-4">
                     Try the Beta
                 </h2>
-                <p class="text-[#afbeff]/85 font-geist text-base md:text-lg max-w-xl leading-relaxed mb-6">
-                    Get updates directly from our latest GitHub releases to try new features and bug fixes before the stable drop.
+                <p class="text-on-surface-variant font-geist text-base md:text-lg max-w-xl leading-relaxed mb-6">
+                    Get bleeding-edge updates built directly from the latest source code commits. Try new features and bug fixes before they release.
                 </p>
+                <div class="text-xs text-slate-500 leading-relaxed font-geist flex items-start gap-2 max-w-xl">
+                    <span class="material-symbols-outlined text-slate-400 text-[18px] select-none shrink-0 mt-0.5">info</span>
+                    <span>
+                        <strong>Note:</strong> Beta builds may contain experimental features and are intended for testing and feedback.
+                    </span>
+                </div>
             </div>
 
             <div class="md:col-span-4 flex flex-col items-start md:items-end justify-center w-full md:pt-14 select-none">
-                <a href="https://github.com/cgens67/avidtune/releases" target="_blank" class="flex items-center justify-center gap-2 bg-[#afbeff] text-black px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-[#afbeff]/85 transition-all active:scale-95 shadow-lg w-full">
+                <a id="dl-btn-beta-section" href="#" class="flex items-center justify-center gap-2 bg-slate-900 text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:scale-105 hover:bg-black transition-all active:scale-95 shadow-lg w-full">
                     <span class="material-symbols-outlined text-[20px]">science</span>
-                    View Releases
+                    Download Beta
                 </a>
-                <div class="flex items-center gap-2 text-[10px] font-geist text-[#afbeff]/50 mt-3 w-full justify-center md:justify-end">
-                    <span class="border border-[#afbeff]/20 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider">GitHub</span>
-                    <span>Direct from Source</span>
+                <div class="flex items-center gap-2 text-[10px] font-geist text-slate-400 mt-3 w-full justify-center md:justify-end">
+                    <span class="border border-slate-200 bg-slate-50 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-slate-600">Pre-release</span>
+                    <span>Direct GitHub Build</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BEGIN: FAQ Section -->
+    <!-- BEGIN: FAQ Section with Smooth Animated Accordion -->
     <section id="faq" class="w-full max-w-4xl mx-auto px-6 md:px-12 pb-32 reveal-up">
-        <div class="border-t border-white/10 pt-16">
-            <h2 class="text-4xl md:text-[48px] font-medium tracking-tight md:tracking-[-0.04em] text-white font-geist leading-[0.95] mb-12 text-center">
+        <div class="border-t border-slate-200 pt-16">
+            <h2 class="text-4xl md:text-[48px] font-semibold tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[0.95] mb-12 text-center">
                 Frequently Asked Questions
             </h2>
 
-            <div class="space-y-0">
-                <details class="group border-t border-l border-r border-white/10 rounded-t-2xl rounded-b-none bg-white/[0.02] backdrop-blur-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex justify-between items-center p-6 text-white font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-white/[0.02] rounded-t-2xl transition-colors">
+            <div class="space-y-0 rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <!-- FAQ Item 1 -->
+                <details class="faq-item group border-b border-slate-200 bg-white" id="faq-item-1">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-slate-50 transition-colors">
                         <span>What is AvidTune?</span>
-                        <span class="material-symbols-outlined text-[#afbeff] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                        <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
                     </summary>
-                    <div class="px-6 pb-6 pt-0 text-[#afbeff]/80 font-geist text-sm md:text-base leading-relaxed">
-                        AvidTune is a modern, free, and open-source YouTube Music client for Android. It focuses on a beautifully crafted Material Design 3 experience while retaining the core features needed for effortless music streaming.
+                    <div class="faq-content">
+                        <div class="faq-content-inner px-6 pb-6 pt-0 text-slate-600 font-geist text-sm md:text-base leading-relaxed">
+                            AvidTune is a free and open-source music player for Android. It streams high-fidelity music from YouTube Music completely ad-free and offers an intuitive Material Design 3 interface that adapts to your style.
+                        </div>
                     </div>
                 </details>
 
-                <details class="group border-t border-l border-r border-white/10 rounded-none bg-white/[0.02] backdrop-blur-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex justify-between items-center p-6 text-white font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-white/[0.02] transition-colors">
+                <!-- FAQ Item 2 -->
+                <details class="faq-item group border-b border-slate-200 bg-white" id="faq-item-2">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-slate-50 transition-colors">
                         <span>Is AvidTune free and ad-free?</span>
-                        <span class="material-symbols-outlined text-[#afbeff] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                        <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
                     </summary>
-                    <div class="px-6 pb-6 pt-0 text-[#afbeff]/80 font-geist text-sm md:text-base leading-relaxed">
-                        Yes, AvidTune is completely free, licensed under GPL-3.0, and contains zero ads.
+                    <div class="faq-content">
+                        <div class="faq-content-inner px-6 pb-6 pt-0 text-slate-600 font-geist text-sm md:text-base leading-relaxed">
+                            Yes, AvidTune is 100% free and open-source under the GPL-3.0 license. It contains no ads, paid subscriptions, or tracking.
+                        </div>
                     </div>
                 </details>
 
-                <details class="group border-t border-l border-r border-white/10 rounded-none bg-white/[0.02] backdrop-blur-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex justify-between items-center p-6 text-white font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-white/[0.02] transition-colors">
+                <!-- FAQ Item 3 -->
+                <details class="faq-item group border-b border-slate-200 bg-white" id="faq-item-3">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-slate-50 transition-colors">
                         <span>Does it support offline playback?</span>
-                        <span class="material-symbols-outlined text-[#afbeff] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                        <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
                     </summary>
-                    <div class="px-6 pb-6 pt-0 text-[#afbeff]/80 font-geist text-sm md:text-base leading-relaxed">
-                        Absolutely. You can download and cache your favorite tracks to listen offline seamlessly.
+                    <div class="faq-content">
+                        <div class="faq-content-inner px-6 pb-6 pt-0 text-slate-600 font-geist text-sm md:text-base leading-relaxed">
+                            Yes! You can download and cache your favorite tracks to listen offline. The storage system organizes files neatly on your internal storage.
+                        </div>
                     </div>
                 </details>
 
-                <details class="group border border-white/10 rounded-b-2xl rounded-t-none bg-white/[0.02] backdrop-blur-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex justify-between items-center p-6 text-white font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-white/[0.02] rounded-b-2xl transition-colors">
-                        <span>How do I install or update?</span>
-                        <span class="material-symbols-outlined text-[#afbeff] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                <!-- FAQ Item 4 -->
+                <details class="faq-item group border-b border-slate-200 bg-white" id="faq-item-4">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-slate-50 transition-colors">
+                        <span>Is my listening data private?</span>
+                        <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
                     </summary>
-                    <div class="px-6 pb-6 pt-0 text-[#afbeff]/80 font-geist text-sm md:text-base leading-relaxed">
-                        You can download the APK file directly from our website by using the download buttons, or directly from the official GitHub Releases page. Install it manually like any standard Android APK.
+                    <div class="faq-content">
+                        <div class="faq-content-inner px-6 pb-6 pt-0 text-slate-600 font-geist text-sm md:text-base leading-relaxed">
+                            Yes. AvidTune respects your privacy with zero external tracking. Your playlists, listening stats, and preferences are stored locally on your device.
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 5 -->
+                <details class="faq-item group bg-white" id="faq-item-5">
+                    <summary class="flex justify-between items-center p-6 text-primary font-geist font-medium text-base md:text-lg cursor-pointer select-none focus:outline-none hover:bg-slate-50 transition-colors">
+                        <span>How do I install or update AvidTune?</span>
+                        <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="faq-content">
+                        <div class="faq-content-inner px-6 pb-6 pt-0 text-slate-600 font-geist text-sm md:text-base leading-relaxed">
+                            You can download the APK directly using the download buttons on this site or from our GitHub Releases page. Simply install the APK file on your Android device (Android 8.0+).
+                        </div>
                     </div>
                 </details>
             </div>
         </div>
     </section>
+    <!-- END: FAQ Section -->
 
     <!-- BEGIN: Footer -->
-    <footer class="border-t border-white/10 bg-[#152671]/40 backdrop-blur-md pt-16 pb-8 px-6 md:px-12">
+    <footer class="border-t border-slate-200 bg-slate-50 pt-16 pb-8 px-6 md:px-12">
         <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
-            <!-- Logo -->
+            <!-- Logo & Description -->
             <div class="col-span-1 flex flex-col gap-6">
                 <div class="flex items-center gap-3">
-                    <img src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/New%20Project%2019%20%5BC773B12%5D.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover" />
-                    <span class="text-lg font-bold tracking-tight text-white">AvidTune</span>
+                    <img src="https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/New%20Project%2019%20%5BC773B12%5D.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200" />
+                    <span class="text-lg font-bold tracking-tight text-primary">AvidTune</span>
                 </div>
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-xs pr-4">
-                    A YouTube Music client with Material Design 3, for Android.
+                    Crafting a clean, modern, and open-source YouTube Music experience for Android.
                 </p>
                 <div class="flex gap-4 mt-2">
-                    <a href="https://github.com/cgens67/avidtune" target="_blank" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                    <a href="https://github.com/cgens67/avidtune" target="_blank" class="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-primary hover:border-slate-300 transition-colors shadow-sm">
                         <span class="material-symbols-outlined text-[20px]">code</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Product -->
+            <!-- Product Links -->
             <div>
-                <h4 class="font-bold mb-6 text-base text-white tracking-tight">Product</h4>
+                <h4 class="font-bold mb-6 text-base text-primary tracking-tight">Product</h4>
                 <ul class="space-y-4 text-sm text-on-surface-variant font-body">
-                    <li><a class="hover:text-white transition-colors" href="#features">Features</a></li>
-                    <li><a class="trigger-download-modal hover:text-white transition-colors cursor-pointer">Download</a></li>
-                    <li><a class="hover:text-white transition-colors" href="#screenshots">Gallery</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#features">Features</a></li>
+                    <li><a class="trigger-download-modal hover:text-primary transition-colors cursor-pointer">Download</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#screenshots">Gallery</a></li>
                 </ul>
             </div>
 
-            <!-- Community -->
+            <!-- Community Links -->
             <div>
-                <h4 class="font-bold mb-6 text-base text-white tracking-tight">Community</h4>
+                <h4 class="font-bold mb-6 text-base text-primary tracking-tight">Community</h4>
                 <ul class="space-y-4 text-sm text-on-surface-variant font-body">
-                    <li><a class="hover:text-white transition-colors" href="https://github.com/cgens67/avidtune" target="_blank">GitHub Repository</a></li>
-                    <li><a class="hover:text-white transition-colors" href="https://github.com/cgens67/avidtune/issues/new" target="_blank">Bug Reports</a></li>
-                    <li><a class="hover:text-white transition-colors" href="https://github.com/cgens67/avidtune/releases" target="_blank">Releases</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com/cgens67/avidtune" target="_blank">GitHub Repository</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com/cgens67/avidtune/issues" target="_blank">Bug Reports</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="https://github.com/cgens67/avidtune/releases" target="_blank">Releases</a></li>
                 </ul>
             </div>
 
-            <!-- License -->
+            <!-- License Info -->
             <div>
-                <h4 class="font-bold mb-6 text-base text-white tracking-tight">License</h4>
+                <h4 class="font-bold mb-6 text-base text-primary tracking-tight">License</h4>
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed mb-6 max-w-[280px]">
-                    AvidTune is released under the <strong class="text-white font-semibold">GPL-3.0 License</strong>. We believe in the power of free and open software.
+                    AvidTune is released under the <strong class="text-primary font-semibold">GPL-3.0 License</strong>. We believe in free and open software.
                 </p>
-                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-vivi-purple/20 bg-vivi-purple/10 text-[#d4c6ff] text-xs font-semibold tracking-wide">
-                    <span class="material-symbols-outlined text-[16px]">verified</span> Fully Open Source
+                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-semibold tracking-wide shadow-sm">
+                    <span class="material-symbols-outlined text-[16px] text-accent-blue">verified</span> Fully Open Source
                 </div>
             </div>
         </div>
 
-        <div class="container mx-auto max-w-7xl pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body text-on-surface-variant/50">
+        <!-- Bottom Bar -->
+        <div class="container mx-auto max-w-7xl pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body text-slate-500">
             <div class="flex items-center gap-4">
-                <p>© 2026 cgens67. All rights reserved.</p>
+                <p>© 2026 AvidTune. All rights reserved.</p>
             </div>
             <p class="flex items-center gap-1 flex-wrap justify-center md:justify-end">
-                <span>Developed by</span>
-                <a href="https://github.com/cgens67" target="_blank" class="text-white/80 hover:text-white transition-colors font-semibold">cgens67</a>
+                <span>Created by</span>
+                <a href="https://github.com/cgens67" target="_blank" class="text-primary hover:underline transition-colors font-semibold">cgens67</a>
             </p>
         </div>
     </footer>
     <!-- END: Footer -->
 
-    <!-- BEGIN: Download Modal (Helium-Matching) -->
+    <!-- BEGIN: Download Modal (Latest / Beta) -->
     <dialog id="download-modal" class="outline-none border-none">
         <div class="dialog-backdrop"></div>
+
         <div class="helium-dialog-container p-6 text-center relative z-10 shadow-2xl flex flex-col items-center gap-4">
             <div class="flex flex-col items-center select-none">
-                <span class="material-symbols-outlined text-[40px] text-white mb-[-4px]">android</span>
-                <h3 class="text-2xl font-bold text-white tracking-tight font-instrument">Get AvidTune</h3>
+                <span class="material-symbols-outlined text-[40px] text-primary mb-[-4px]">android</span>
+                <h3 class="text-2xl font-bold text-primary tracking-tight font-instrument">Get AvidTune</h3>
             </div>
             <p class="text-on-surface-variant font-instrument text-base leading-relaxed mb-4 px-1">
-                Choose your preferred build for Android 8.0+.
+                Choose between the latest stable release or the experimental beta for Android.
             </p>
 
             <div class="grid grid-cols-2 gap-3 mb-3 w-full">
-                <a id="dl-universal" href="#" target="_blank" class="helium-dialog-btn select-none group">
-                    <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-[#afbeff]">download</span>
-                    <span class="text-base font-bold">Universal</span>
-                    <span class="text-xs text-[#afbeff]/60">Supports all arch</span>
+                <!-- Choice 1: Latest (Stable) -->
+                <a id="dl-latest" href="#" target="_blank" class="helium-dialog-btn select-none group">
+                    <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-accent-blue">download</span>
+                    <span class="text-base font-bold">Latest</span>
+                    <span id="dl-latest-label" class="text-xs text-slate-500 truncate max-w-full">Stable Build</span>
                 </a>
-                <a id="dl-standard" href="#" target="_blank" class="helium-dialog-btn select-none group">
-                    <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-[#afbeff]">download</span>
-                    <span class="text-base font-bold">Standard</span>
-                    <span class="text-xs text-[#afbeff]/60">Standard Build</span>
+
+                <!-- Choice 2: Beta (Pre-release) -->
+                <a id="dl-beta" href="#" target="_blank" class="helium-dialog-btn select-none group">
+                    <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform text-amber-600">science</span>
+                    <span class="text-base font-bold">Beta</span>
+                    <span id="dl-beta-label" class="text-xs text-slate-500 truncate max-w-full">Pre-release</span>
                 </a>
             </div>
 
+            <!-- All Releases Link -->
             <a href="https://github.com/cgens67/avidtune/releases" target="_blank" class="helium-dialog-btn select-none group !flex-row !items-center !justify-start !text-left gap-3 w-full py-3 mb-2">
-                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform text-[#afbeff] shrink-0">science</span>
+                <span class="material-symbols-outlined text-2xl text-slate-600 shrink-0">history</span>
                 <div class="text-left flex-1 min-w-0">
-                    <span class="text-sm font-bold block leading-none mb-1 text-white">View Releases</span>
-                    <span class="text-[10px] text-[#afbeff]/60 leading-none block truncate">See all GitHub assets</span>
+                    <span class="text-sm font-bold block leading-none mb-1 text-primary">All GitHub Releases</span>
+                    <span class="text-[11px] text-slate-500 leading-none block truncate">View release notes & older APKs</span>
                 </div>
             </a>
 
@@ -780,11 +874,11 @@
     </dialog>
     <!-- END: Download Modal -->
 
-    <!-- Custom JS to handle logic without external index.js -->
+    <!-- Application Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Intersect Observer for Reveal animations
+            // --- 1. Reveal on Scroll (Intersection Observer) ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -795,39 +889,37 @@
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
 
-            // Navbar behavior
+            // --- 2. Top Navbar Scroll State ---
             const navbar = document.getElementById('top-navbar');
             navbar.classList.add('animate-nav');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('bg-[#152671]/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-white/10');
+                if (window.scrollY > 40) {
+                    navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-slate-200');
                 } else {
-                    navbar.classList.remove('bg-[#152671]/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-white/10');
+                    navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-slate-200');
                 }
             });
 
-            // Mobile Menu
+            // --- 3. Mobile Menu Toggle ---
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuChevron = document.getElementById('mobile-menu-chevron');
             menuBtn.addEventListener('click', () => {
-                const isHidden = mobileMenu.style.opacity === '0';
+                const isHidden = mobileMenu.style.opacity === '0' || mobileMenu.style.opacity === '';
                 if (isHidden) {
                     mobileMenu.style.opacity = '1';
                     mobileMenu.style.transform = 'translateY(0)';
                     mobileMenu.style.pointerEvents = 'auto';
-                    menuBtn.classList.add('bg-white/20');
                     menuChevron.style.transform = 'rotate(180deg)';
                 } else {
                     mobileMenu.style.opacity = '0';
                     mobileMenu.style.transform = 'translateY(-16px)';
                     mobileMenu.style.pointerEvents = 'none';
-                    menuBtn.classList.remove('bg-white/20');
                     menuChevron.style.transform = 'rotate(0deg)';
                 }
             });
 
-            // Dialog logic
+            // --- 4. Modal Dialog Handlers ---
             const modal = document.getElementById('download-modal');
             const openBtns = document.querySelectorAll('.trigger-download-modal');
             const closeBtn = document.getElementById('close-download-modal');
@@ -845,63 +937,79 @@
             closeBtn.addEventListener('click', closeModal);
             backdrop.addEventListener('click', closeModal);
 
-            // Fetch GitHub Repo Stats
+            // --- 5. GitHub API Stats & Release Fetcher (Latest + Beta Pre-release) ---
             fetch('https://api.github.com/repos/cgens67/avidtune')
                 .then(res => res.json())
                 .then(data => {
                     if (data.stargazers_count !== undefined) {
                         document.getElementById('github-stars-hero').textContent = `${data.stargazers_count} GitHub stars`;
                     }
-                }).catch(e => console.error(e));
+                }).catch(() => {});
 
-            // Fetch Latest Release & Total Downloads
             fetch('https://api.github.com/repos/cgens67/avidtune/releases')
                 .then(res => res.json())
                 .then(releases => {
-                    if(releases.length > 0) {
+                    if (Array.isArray(releases) && releases.length > 0) {
+                        // Total downloads
                         let totalDownloads = 0;
                         releases.forEach(rel => {
-                            if(rel.assets) {
-                                rel.assets.forEach(a => totalDownloads += a.download_count);
-                            }
+                            if (rel.assets) rel.assets.forEach(a => totalDownloads += a.download_count);
                         });
                         document.getElementById('total-downloads-hero').textContent = `${totalDownloads.toLocaleString()} total downloads`;
-                        
-                        // Populate download links from the latest release
-                        const latest = releases[0];
-                        let uniUrl = latest.html_url;
-                        let stdUrl = latest.html_url;
-                        
-                        if(latest.assets) {
-                            const uni = latest.assets.find(a => a.name.includes('universal') && a.name.endsWith('.apk'));
-                            const std = latest.assets.find(a => !a.name.includes('universal') && a.name.endsWith('.apk'));
-                            if(uni) uniUrl = uni.browser_download_url;
-                            if(std) stdUrl = std.browser_download_url;
-                            else if(uni) stdUrl = uni.browser_download_url;
-                        }
-                        
-                        document.getElementById('dl-universal').href = uniUrl;
-                        document.getElementById('dl-standard').href = stdUrl;
-                    }
-                }).catch(e => console.error(e));
 
-            // Custom Carousel Logic
+                        // 1. Stable / Latest release (first non-prerelease, or fallback to index 0)
+                        const latestStable = releases.find(r => !r.prerelease) || releases[0];
+                        
+                        // 2. Beta release (first prerelease, or tag starting with 'b', or index 0)
+                        const betaRelease = releases.find(r => r.prerelease || r.tag_name.toLowerCase().startsWith('b') || r.tag_name.toLowerCase().includes('beta')) || releases[0];
+
+                        function resolveApk(rel) {
+                            if (!rel || !rel.assets || rel.assets.length === 0) {
+                                return rel?.html_url || 'https://github.com/cgens67/avidtune/releases';
+                            }
+                            // Priority 1: app-universal-release.apk
+                            const universal = rel.assets.find(a => a.name === 'app-universal-release.apk' || a.name.includes('universal') && a.name.endsWith('.apk'));
+                            if (universal) return universal.browser_download_url;
+
+                            // Priority 2: any apk
+                            const anyApk = rel.assets.find(a => a.name.endsWith('.apk'));
+                            return anyApk ? anyApk.browser_download_url : rel.html_url;
+                        }
+
+                        // Update Latest Link
+                        const latestUrl = resolveApk(latestStable);
+                        document.getElementById('dl-latest').href = latestUrl;
+                        document.getElementById('dl-latest-label').textContent = latestStable.tag_name || 'Stable Build';
+
+                        // Update Beta Link (pre-release app-universal-release.apk)
+                        const betaUrl = resolveApk(betaRelease);
+                        document.getElementById('dl-beta').href = betaUrl;
+                        document.getElementById('dl-beta-label').textContent = betaRelease.tag_name || 'Beta Pre-release';
+                        document.getElementById('dl-btn-beta-section').href = betaUrl;
+                    }
+                }).catch(() => {
+                    document.getElementById('dl-latest').href = 'https://github.com/cgens67/avidtune/releases/latest';
+                    document.getElementById('dl-beta').href = 'https://github.com/cgens67/avidtune/releases';
+                    document.getElementById('dl-btn-beta-section').href = 'https://github.com/cgens67/avidtune/releases';
+                });
+
+            // --- 6. Carousel Logic ---
             const slides = [
                 {
                     title: "Synced Lyrics",
-                    desc: "Sing along with perfectly synced, glowing lyrics that follow every word in real-time. Experience your music like never before.",
+                    desc: "Sing along with synchronized lyrics that follow every word in real-time. Experience your YouTube Music playlists like never before.",
                     img: "https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_023022.jpg",
                     tag: "PREMIUM EXPERIENCE"
                 },
                 {
                     title: "Smart Library",
-                    desc: "Access your entire YouTube Music library seamlessly. Everything is perfectly organized and ready to play.",
+                    desc: "Access your entire YouTube Music library seamlessly. Everything is neatly categorized and instantly accessible.",
                     img: "https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_022931.jpg",
                     tag: "ORGANIZATION"
                 },
                 {
                     title: "Deep Customization",
-                    desc: "Tailor the interface to your liking with deep customization options, dynamic colors, and Material Design 3 elements.",
+                    desc: "Tailor the interface with customizable themes, agile layouts, and Material Design 3 component styling.",
                     img: "https://raw.githubusercontent.com/cgens67/Assets/main/avidtunescreenshots/Screenshot_20260603_022941.jpg",
                     tag: "PERSONALIZATION"
                 }
@@ -909,7 +1017,7 @@
 
             let currentSlide = 0;
             let slideInterval;
-            const SLIDE_DURATION = 10000; // 10 seconds
+            const SLIDE_DURATION = 8000;
 
             const titleEl = document.getElementById('slide-title');
             const descEl = document.getElementById('slide-desc');
@@ -918,16 +1026,14 @@
             const dotsContainer = document.getElementById('pagination-dots');
             const progressBar = document.getElementById('autoplay-progress');
             
-            // Build dots
             slides.forEach((_, idx) => {
                 const dot = document.createElement('button');
-                dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 border border-white/20 hover:bg-white/40`;
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 border border-slate-300 hover:bg-slate-400`;
                 dot.addEventListener('click', () => goToSlide(idx));
                 dotsContainer.appendChild(dot);
             });
 
             function updateSlide() {
-                // Update text with simple fade
                 const contentWrapper = document.getElementById('carousel-content');
                 contentWrapper.style.opacity = 0;
                 
@@ -936,23 +1042,21 @@
                     descEl.textContent = slides[currentSlide].desc;
                     tagEl.textContent = slides[currentSlide].tag;
                     contentWrapper.style.opacity = 1;
-                }, 250);
+                }, 200);
 
-                // Update Image
                 imgEl.style.opacity = 0;
                 setTimeout(() => {
                     imgEl.src = slides[currentSlide].img;
                     imgEl.style.opacity = 1;
-                }, 250);
+                }, 200);
 
-                // Update dots
                 Array.from(dotsContainer.children).forEach((dot, idx) => {
-                    if(idx === currentSlide) {
-                        dot.classList.add('bg-white');
-                        dot.classList.remove('bg-transparent');
+                    if (idx === currentSlide) {
+                        dot.classList.add('bg-primary', 'w-6');
+                        dot.classList.remove('bg-transparent', 'w-2.5');
                     } else {
-                        dot.classList.remove('bg-white');
-                        dot.classList.add('bg-transparent');
+                        dot.classList.remove('bg-primary', 'w-6');
+                        dot.classList.add('bg-transparent', 'w-2.5');
                     }
                 });
 
@@ -964,11 +1068,10 @@
                 progressBar.style.transition = 'none';
                 progressBar.style.width = '0%';
                 
-                // Allow browser reflow
                 setTimeout(() => {
                     progressBar.style.transition = `width ${SLIDE_DURATION}ms linear`;
                     progressBar.style.width = '100%';
-                }, 50);
+                }, 40);
 
                 slideInterval = setInterval(() => {
                     goToSlide((currentSlide + 1) % slides.length);
@@ -983,12 +1086,10 @@
             document.getElementById('btn-prev').addEventListener('click', () => {
                 goToSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
             });
-
             document.getElementById('btn-next').addEventListener('click', () => {
                 goToSlide((currentSlide + 1) % slides.length);
             });
 
-            // Init first slide
             updateSlide();
         });
     </script>
