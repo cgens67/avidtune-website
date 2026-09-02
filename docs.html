@@ -63,10 +63,9 @@
         }
     </script>
     
-    <!-- Custom CSS (AvidTune Theming + Layout logic) -->
+    <!-- Custom CSS -->
     <style>
         :root {
-            /* Light Mode */
             --bg-gradient: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
             --text-primary: #09090b;
             --text-muted: #475569;
@@ -78,14 +77,12 @@
             --tag-text: #334155;
             --tag-border: #cbd5e1;
             
-            /* Blob Colors - Light */
             --blob-color-1: rgba(37, 99, 235, 0.15);
             --blob-color-2: rgba(79, 70, 229, 0.12);
             --blob-color-3: rgba(14, 165, 233, 0.15);
         }
 
         html.dark {
-            /* Dark Mode */
             --bg-gradient: radial-gradient(circle at 50% 0%, #18181b 0%, #09090b 50%, #000000 100%);
             --text-primary: #f8fafc;
             --text-muted: #a1a1aa;
@@ -97,7 +94,6 @@
             --tag-text: #f8fafc;
             --tag-border: rgba(255, 255, 255, 0.2);
 
-            /* Blob Colors - Dark */
             --blob-color-1: rgba(37, 99, 235, 0.08);
             --blob-color-2: rgba(79, 70, 229, 0.07);
             --blob-color-3: rgba(14, 165, 233, 0.08);
@@ -109,7 +105,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Fixed Background Container */
         #page-background {
             position: fixed; 
             top: 0; left: 0; right: 0; bottom: 0;
@@ -121,7 +116,6 @@
             overflow: hidden;
         }
 
-        /* Floating Background Blobs */
         .bg-blob {
             position: absolute; border-radius: 50%; filter: blur(80px);
             will-change: transform; pointer-events: none; transition: background-color 0.4s ease;
@@ -142,11 +136,9 @@
         @keyframes blob-float-2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-15vw, -20vh) scale(0.9); } 100% { transform: translate(-25vw, 5vh) scale(1.05); } }
         @keyframes blob-float-3 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(10vw, -15vh) scale(1.15); } 100% { transform: translate(-10vw, -5vh) scale(0.9); } }
 
-        /* Typography & Scroll Offsets */
         .prose-headings { scroll-margin-top: 100px; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
-        /* Navbar Styles */
         #top-navbar {
             transition: padding 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
@@ -156,13 +148,11 @@
         }
         .nav-link:hover { color: var(--text-primary) !important; background-color: var(--accent-light) !important; }
 
-        /* Sidebar Scrolling */
         .sidebar-scroll::-webkit-scrollbar { width: 4px; }
         .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
         .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
         .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-        /* Collapsible Sidebar Styles */
         .sidebar-group.collapsed ul {
             max-height: 0 !important; opacity: 0; margin: 0; padding-top: 0; padding-bottom: 0; pointer-events: none; border-color: transparent;
         }
@@ -179,7 +169,6 @@
             color: #60a5fa !important;
         }
 
-        /* Mobile Drawer */
         .mobile-drawer-backdrop {
             position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
@@ -199,14 +188,12 @@
 
 <body class="bg-transparent text-primary font-geist selection:bg-accent-light selection:text-accent-blue overflow-x-hidden">
 
-    <!-- Fixed Gradient Element with Blobs -->
     <div id="page-background">
         <div class="bg-blob blob-1"></div>
         <div class="bg-blob blob-2"></div>
         <div class="bg-blob blob-3"></div>
     </div>
 
-    <!-- Top Navigation Bar -->
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-4 px-6 md:px-12 flex justify-between items-center bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-color)] shadow-sm">
         <div class="flex items-center gap-6">
             <a href="index.html" class="flex items-center gap-3">
@@ -220,31 +207,26 @@
             </div>
         </div>
         
-        <!-- Right Actions -->
         <div class="flex items-center gap-3">
             <div class="hidden lg:flex items-center bg-black/5 dark:bg-white/5 border border-[var(--border-color)] rounded-full px-4 py-2 w-64 cursor-text hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                 <span class="material-symbols-outlined text-[18px] text-slate-400 mr-2">search</span>
                 <span class="text-sm text-slate-400">Search docs...</span>
             </div>
             
-            <!-- Theme Toggler -->
             <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center ml-2" aria-label="Toggle Theme">
                 <span id="theme-icon" class="material-symbols-outlined text-[20px]">dark_mode</span>
             </button>
 
-            <!-- Fixed Visual Bug: Replaced variables with explicit tailwind colors (bg-black dark:bg-white text-white dark:text-black) to ensure visibility in both themes -->
             <a href="https://github.com/cgens67/avidtune" target="_blank" class="hidden sm:flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-black dark:bg-white text-white dark:text-black text-sm font-bold hover:scale-105 transition-all">
                 <span class="material-symbols-outlined text-[18px]">code</span> GitHub
             </a>
 
-            <!-- Hamburger Button (mobile only) -->
             <button id="mobile-menu-btn" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-[var(--border-color)] hover:bg-black/10 dark:hover:bg-white/10 transition-colors" aria-label="Open menu">
                 <span class="material-symbols-outlined text-primary text-[20px]">menu</span>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Navigation Drawer -->
     <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="px-6 py-5 flex items-center justify-between border-b border-[var(--border-color)]">
@@ -268,7 +250,6 @@
 
         <div class="px-5 py-2">
             <div class="flex flex-col gap-6 text-sm py-4">
-                <!-- Mobile Sidebar Groups -->
                 <div class="sidebar-group">
                     <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center">
                         <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">import_contacts</span> Introduction
@@ -392,7 +373,6 @@
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight font-sora leading-tight">Official Documentation</h1>
                 
                 <div class="flex flex-wrap gap-4 mt-8">
-                    <!-- Fixed Visual Bug: Replaced variable backgrounds with explicit tailwind classes (bg-black dark:bg-white text-white dark:text-black) -->
                     <a href="index.html" class="flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-xl text-sm font-bold hover:scale-105 transition-all shadow-md">
                         <span class="material-symbols-outlined text-[20px]">public</span> Main Website
                     </a>
@@ -436,12 +416,12 @@
                 <h3 id="installing">Installing AvidTune</h3>
                 <p>Because AvidTune is a third-party YouTube client, it is not available on the Google Play Store. You must install the APK manually.</p>
                 
-                <a href="https://github.com/cgens67/avidtune/releases" target="_blank" class="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-xl text-sm font-bold hover:scale-105 transition-all shadow-md mt-2 mb-4 no-underline">
+                <a id="docs-dl-btn" href="https://github.com/cgens67/avidtune/releases/latest" target="_blank" class="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-xl text-sm font-bold hover:scale-105 transition-all shadow-md mt-2 mb-4 no-underline">
                     <span class="material-symbols-outlined text-[20px]">download</span> Install AvidTune
                 </a>
                 
                 <ol>
-                    <li>Visit the <a href="https://github.com/cgens67/avidtune/releases" target="_blank">GitHub Releases</a> page (or use the button above).</li>
+                    <li>Visit the <a href="https://github.com/cgens67/avidtune/releases" target="_blank">GitHub Releases</a> page (or use the button above to grab the latest stable APK).</li>
                     <li>Download the latest <code>.apk</code> file (usually named <code>app-universal-release.apk</code>).</li>
                     <li>Open the file on your device. You may be prompted to allow <strong>"Install from unknown sources"</strong> in your Android security settings.</li>
                     <li>Tap Install and wait for the process to complete.</li>
@@ -463,7 +443,7 @@
                 </ul>
 
                 <h3 id="updating">Updating AvidTune</h3>
-                <p>AvidTune includes an in-app updater. Go to <strong>Settings</strong>, and it will say "New version available!" if got update.</p>
+                <p>AvidTune includes an in-app updater. Go to <strong>Settings</strong>, and it will say "New version available!" if there's an update. Simply tap it to download the latest release.</p>
 
                 <hr class="my-12 border-[var(--border-color)]">
 
@@ -485,7 +465,7 @@
                 </ul>
 
                 <h3 id="appearance">Appearance & Theming</h3>
-                <p>In <strong>Settings > Appearance</strong>, you can force a specific color palette or force Dark/Light mode.</p>
+                <p>In <strong>Settings > Appearance</strong>, you can force a specific color palette or force Dark/Light mode to perfectly match your aesthetic.</p>
 
                 <h3 id="privacy">Privacy & Storage</h3>
                 <p>Manage your footprint locally. In <strong>Settings > Privacy</strong>, you can clear your search history and listening cache.</p>
@@ -557,6 +537,23 @@
     <!-- Interactive Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Fetch Latest Stable APK URL ---
+            fetch('https://api.github.com/repos/cgens67/avidtune/releases')
+                .then(res => res.json())
+                .then(releases => {
+                    if (Array.isArray(releases) && releases.length > 0) {
+                        const latestStable = releases.find(r => !r.prerelease) || releases[0];
+                        let apkUrl = latestStable.html_url;
+                        if (latestStable.assets && latestStable.assets.length > 0) {
+                            // Find universal apk, fallback to any apk
+                            const universal = latestStable.assets.find(a => a.name === 'app-universal-release.apk' || (a.name.includes('universal') && a.name.endsWith('.apk'))) || latestStable.assets.find(a => a.name.endsWith('.apk'));
+                            if (universal) apkUrl = universal.browser_download_url;
+                        }
+                        const dlBtn = document.getElementById('docs-dl-btn');
+                        if (dlBtn) dlBtn.href = apkUrl;
+                    }
+                }).catch(e => console.error('Failed to fetch latest release:', e));
 
             // --- Theme Management ---
             const themeToggleBtn = document.getElementById('theme-toggle');
