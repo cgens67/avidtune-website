@@ -8,7 +8,7 @@
     <meta name="description" content="A modern YouTube Music client designed with Material Design 3 for Android.">
 
     <!-- Favicon -->
-    <link rel="icon" href="images/logo.png" sizes="any">
+    <link rel="icon" href="/images/logo.png" sizes="any">
 
     <!-- Google Fonts: Sora, Geist, Instrument Sans, Material Symbols -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -102,6 +102,11 @@
             --blob-color-1: rgba(37, 99, 235, 0.08); /* Dimmer blue */
             --blob-color-2: rgba(79, 70, 229, 0.07); /* Dimmer purple */
             --blob-color-3: rgba(14, 165, 233, 0.08); /* Dimmer sky */
+        }
+
+        html {
+            /* Offset for sticky header when clicking anchor links */
+            scroll-padding-top: 120px;
         }
 
         body {
@@ -369,7 +374,7 @@
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
         <div class="flex items-center gap-2">
             <a href="/" class="flex items-center gap-3">
-                <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" decoding="async" />
+                <img src="/images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" decoding="async" />
                 <span class="text-xl font-bold tracking-tight text-primary">AvidTune</span>
             </a>
         </div>
@@ -421,7 +426,7 @@
     <main id="home" class="relative min-h-screen pt-32 pb-20 overflow-hidden">
         <!-- Hero Section -->
         <section class="container mx-auto px-6 text-center relative z-10 reveal-up">
-            <img src="images/logo.png" alt="AvidTune Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)]" decoding="async" />
+            <img src="/images/logo.png" alt="AvidTune Logo" class="w-16 h-16 rounded-2xl mx-auto mb-8 shadow-md border border-[var(--border-color)]" decoding="async" />
 
             <h1 class="text-4xl md:text-[54px] font-semibold mb-6 tracking-tight md:tracking-[-0.04em] text-primary font-geist leading-[1.1] max-w-[700px] mx-auto flex items-center justify-center flex-wrap">
                 More Than Just Music
@@ -469,7 +474,7 @@
             <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
                 <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950">
-                    <img alt="AvidTune App Preview" class="w-full h-full object-cover" src="images/lyricsscreen.jpg">
+                    <img alt="AvidTune App Preview" class="w-full h-full object-cover" src="/images/lyricsscreen.jpg">
                 </div>
             </div>
         </section>
@@ -539,7 +544,7 @@
             <div class="flex justify-center items-center order-1 lg:order-2 w-full">
                 <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl shadow-black/10">
                     <div class="w-full h-full relative">
-                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="images/lyricsscreen.jpg" alt="Feature Slide">
+                        <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="/images/lyricsscreen.jpg" alt="Feature Slide">
                     </div>
                 </div>
             </div>
@@ -845,7 +850,7 @@
             <!-- Logo & Description -->
             <div class="col-span-1 flex flex-col gap-6">
                 <div class="flex items-center gap-3">
-                    <img src="images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-[var(--border-color)]" />
+                    <img src="/images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-[var(--border-color)]" />
                     <span class="text-lg font-bold tracking-tight text-primary">AvidTune</span>
                 </div>
                 <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-xs pr-4">
@@ -1196,19 +1201,19 @@
                 {
                     title: "Synced Lyrics",
                     desc: "Sing along with synchronized lyrics that follow every word in real-time. Experience your YouTube Music playlists like never before.",
-                    img: "images/lyricsscreen.jpg",
+                    img: "/images/lyricsscreen.jpg",
                     tag: "PREMIUM EXPERIENCE"
                 },
                 {
                     title: "Smart Library",
                     desc: "Access your entire YouTube Music library seamlessly. Everything is neatly categorized and instantly accessible.",
-                    img: "images/libraryscreen.jpg",
+                    img: "/images/libraryscreen.jpg",
                     tag: "ORGANIZATION"
                 },
                 {
                     title: "Deep Customization",
                     desc: "Tailor the interface with customizable themes, agile layouts, and Material Design 3 component styling.",
-                    img: "images/settingsscreen.jpg",
+                    img: "/images/settingsscreen.jpg",
                     tag: "PERSONALIZATION"
                 }
             ];
@@ -1294,10 +1299,10 @@
             const dynamicMockups = document.getElementById('dynamic-mockups');
             if (dynamicMockups) {
                 const mockupsData = [
-                    { src: 'images/playerscreen.jpg', py: 40, delay: 50 },
-                    { src: 'images/lyricsscreen.jpg', py: 0, delay: 100 },
-                    { src: 'images/libraryscreen.jpg', py: 20, delay: 150 },
-                    { src: 'images/settingsscreen.jpg', py: 55, delay: 200 }
+                    { src: '/images/playerscreen.jpg', py: 40, delay: 50 },
+                    { src: '/images/lyricsscreen.jpg', py: 0, delay: 100 },
+                    { src: '/images/libraryscreen.jpg', py: 20, delay: 150 },
+                    { src: '/images/settingsscreen.jpg', py: 55, delay: 200 }
                 ];
                 
                 mockupsData.forEach((mockup, index) => {
