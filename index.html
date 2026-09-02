@@ -121,7 +121,7 @@
 
         .floating-element-delayed {
             animation: float 5s ease-in-out infinite;
-            animation-delay: 1.2s; will-change: transform; backface-visibility: hidden;
+            animation-delay: 1s; will-change: transform; backface-visibility: hidden;
         }
 
         .glass-card, .glass-panel {
@@ -145,15 +145,14 @@
             --px: 0px;
             --py: 0px;
             transform: translate3d(var(--px), var(--py), 0);
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform;
             backface-visibility: hidden;
         }
 
         .mockup-item:hover {
-            transform: translate3d(var(--px), calc(var(--py) - 28px), 0) scale(1.05);
+            transform: translate3d(var(--px), calc(var(--py) - 24px), 0) scale(1.05);
             z-index: 50;
-            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.25);
         }
 
         .phone-frame {
@@ -168,7 +167,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         @keyframes revealUpAnim {
-            from { opacity: 0; transform: translateY(35px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -401,8 +400,8 @@
         </section>
 
         <!-- 3D Staggered Phone Wave Mockups -->
-        <section class="relative w-full overflow-hidden pt-6 mockup-container">
-            <div class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-10 px-6 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[640px] snap-x snap-mandatory py-8">
+        <section class="relative w-full overflow-hidden pt-12 mockup-container">
+            <div class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[700px] snap-x snap-mandatory py-4 md:py-0">
                 
                 <!-- Mockup 1: Player -->
                 <div class="snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up" style="--py: 40px; transition-delay: 50ms;">
