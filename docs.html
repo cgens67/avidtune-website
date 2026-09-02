@@ -46,7 +46,7 @@
                                 h1: { color: 'var(--text-primary)', fontFamily: 'Sora, sans-serif', tracking: '-0.02em' },
                                 h2: { color: 'var(--text-primary)', fontFamily: 'Sora, sans-serif', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginTop: '3.5rem' },
                                 h3: { color: 'var(--text-primary)', fontFamily: 'Geist, sans-serif', fontWeight: '600', marginTop: '2rem' },
-                                h4: { color: '#2563eb', fontFamily: 'Geist, sans-serif' },
+                                h4: { color: 'var(--text-primary)', fontFamily: 'Geist, sans-serif', fontWeight: '600', marginTop: '1.5rem' },
                                 strong: { color: 'var(--text-primary)' },
                                 a: { color: '#2563eb', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
                                 code: { color: 'var(--text-primary)', backgroundColor: 'var(--tag-bg)', padding: '0.2rem 0.4rem', borderRadius: '0.25rem', fontWeight: '500' },
@@ -172,7 +172,7 @@
         .delay-300 { animation-delay: 300ms; }
 
         /* Scroll Margins for jumping to anchors */
-        h2[id], h3[id] { scroll-margin-top: 24px; }
+        h2[id], h3[id], h4[id] { scroll-margin-top: 24px; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
         /* Navbar Styles */
@@ -203,7 +203,7 @@
         }
         .sidebar-group.collapsed .chevron { transform: rotate(-90deg); }
         .sidebar-group ul {
-            max-height: 500px; opacity: 1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden;
+            max-height: 800px; opacity: 1; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden;
         }
         .chevron { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
@@ -252,7 +252,7 @@
             <div class="hidden md:flex items-center gap-2 text-sm font-medium ml-4">
                 <a href="/" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">home</span> Home</a>
                 <a href="#welcome" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">menu_book</span> Guide</a>
-                <a href="#chapter-6" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">build</span> Troubleshooting</a>
+                <a href="#chapter-4" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">build</span> Troubleshooting</a>
             </div>
         </div>
         
@@ -360,8 +360,20 @@
                     <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2">
                         <li><a href="#account" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Account & Sync</a></li>
                         <li><a href="#player-audio" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Player & Audio</a></li>
+                        <li><a href="#music-together" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Music Together</a></li>
                         <li><a href="#appearance" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Appearance</a></li>
                         <li><a href="#privacy" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Privacy & Storage</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-group collapsed">
+                    <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center">
+                        <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">code</span> Developers
+                        <span class="material-symbols-outlined ml-auto text-[16px] chevron text-slate-400">expand_more</span>
+                    </h4>
+                    <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2">
+                        <li><a href="#architecture" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">Architecture & Stack</a></li>
+                        <li><a href="#contributing" class="text-on-surface-variant hover:text-primary transition-colors mobile-nav-link">How to Contribute</a></li>
                     </ul>
                 </div>
 
@@ -419,8 +431,20 @@
                         <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2 font-medium">
                             <li><a href="#account" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">Account & Sync</a></li>
                             <li><a href="#player-audio" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">Player & Audio</a></li>
+                            <li><a href="#music-together" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">Music Together</a></li>
                             <li><a href="#appearance" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">Appearance</a></li>
                             <li><a href="#privacy" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">Privacy & Storage</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-group collapsed">
+                        <h4 class="font-bold text-primary mb-3 uppercase tracking-wider text-xs cursor-pointer select-none flex items-center hover:text-accent-blue transition-colors">
+                            <span class="material-symbols-outlined text-[18px] text-accent-blue mr-2">code</span> Developers
+                            <span class="material-symbols-outlined ml-auto text-[16px] chevron">expand_more</span>
+                        </h4>
+                        <ul class="flex flex-col gap-3 pl-4 border-l border-[var(--border-color)] ml-2 font-medium">
+                            <li><a href="#architecture" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">Architecture & Stack</a></li>
+                            <li><a href="#contributing" class="text-on-surface-variant hover:text-primary transition-colors nav-link-sidebar">How to Contribute</a></li>
                         </ul>
                     </div>
 
@@ -533,17 +557,35 @@
                     <p>Customize AvidTune to match your preferences and synchronize your data.</p>
 
                     <h3 id="account">Account & Sync</h3>
-                    <p>You can use AvidTune entirely anonymously. However, logging in allows you to access your YouTube Music library.</p>
+                    <p>Navigate to <strong>Settings > Account</strong> and choose "Login" to securely connect your Google account. Doing this will link your YouTube Music library, automatically syncing your liked songs, playlists, and listening algorithms.</p>
+                    
+                    <h4 id="token-login">Token-Based Login</h4>
+                    <p>If you prefer not to use the standard Google sign-in flow, AvidTune supports token-based authentication. Navigate to <strong>Settings > Account</strong> and tap "Tap to show token" to view or enter a raw login token. This is especially convenient for users migrating from other alternative clients like InnerTune or OuterTune.</p>
+
+                    <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/50 rounded-2xl p-5 my-6 flex gap-4 items-start shadow-sm">
+                        <span class="material-symbols-outlined text-amber-500 mt-0.5 text-2xl">security</span>
+                        <div>
+                            <strong class="text-amber-700 dark:text-amber-400 block mb-1 text-base">Security Warning</strong>
+                            <p class="text-amber-600/90 dark:text-amber-300/80 m-0 leading-relaxed text-sm">Please keep your authentication token completely private. Sharing it grants full access to your linked account.</p>
+                        </div>
+                    </div>
+
+                    <h3 id="player-audio">Player & Audio Settings</h3>
+                    <p>Navigate to <strong>Settings > Player and audio</strong> to fine-tune your listening experience. Here is a breakdown of what each setting does:</p>
                     <ul>
-                        <li>Navigate to <strong>Settings > Account</strong> and sign in.</li>
-                        <li>Once authenticated, your Playlists, Liked Songs, and Recommendations will automatically populate in the Library tab.</li>
+                        <li><strong>Audio Quality:</strong> Choose between High, Auto, and Low to balance high-fidelity audio against mobile data usage.</li>
+                        <li><strong>Double Tap to Seek:</strong> Customize the jump duration (5, 10, 15, or 30 seconds) when double-tapping the player screen to skip forward or backward.</li>
+                        <li><strong>Skip Silence:</strong> Automatically fast-forwards through dead air and silent parts at the beginning or end of tracks.</li>
+                        <li><strong>Enable SponsorBlock:</strong> An essential feature that automatically skips non-music sections, lengthy intros, and sponsorships commonly embedded within YouTube music videos.</li>
+                        <li><strong>Premium Audio Fading:</strong> Smoothly fades the volume in and out when pausing, playing, or skipping tracks for a highly polished feel.</li>
+                        <li><strong>Audio Normalization:</strong> Keeps all tracks at a consistent volume level, preventing sudden loud jumps when transitioning between different albums or eras of music.</li>
                     </ul>
 
-                    <h3 id="player-audio">Player & Audio Quality</h3>
-                    <p>AvidTune streams high-quality audio directly from YouTube's servers. Under <strong>Settings > Player and audio</strong>, you can set the default audio quality to prioritize data saving or maximum fidelity.</p>
+                    <h3 id="music-together">Music Together</h3>
+                    <p>AvidTune allows you to seamlessly share and sync your playback with friends on the same local network (LAN). You can access this feature directly from the main menu's top header or via <strong>Settings > Music Together</strong>.</p>
                     <ul>
-                        <li><strong>Skip Silence:</strong> Automatically jumps over silent gaps at the beginning and end of tracks.</li>
-                        <li><strong>Audio Normalization:</strong> Keeps volume consistent across varying albums and eras.</li>
+                        <li>One person acts as the <strong>Host</strong> by creating a new room.</li>
+                        <li>Other users on the network can join the session using a 6-digit PIN, by clicking a direct session link (e.g., <code>AvidTune://together?host=...</code>), or by using the built-in auto-detection tool to scan for active rooms.</li>
                     </ul>
 
                     <h3 id="appearance">Appearance & Theming</h3>
@@ -555,7 +597,29 @@
 
                     <hr class="my-12 border-[var(--border-color)]">
 
-                    <h2 id="chapter-6" class="flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">handyman</span> Chapter 3 — Troubleshooting</h2>
+                    <h2 id="chapter-3" class="flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">code</span> Chapter 3 — For Developers</h2>
+                    <p>AvidTune is proudly open-source and deeply values contributions from the community. If you are a developer looking to fix a bug or add a highly requested feature, this section covers how to get involved.</p>
+
+                    <h3 id="architecture">Architecture & Tech Stack</h3>
+                    <p>AvidTune is a native Android application built entirely with <strong>Kotlin</strong>. It embraces modern Android development paradigms to ensure a robust, reactive, and easily maintainable codebase.</p>
+                    <ul>
+                        <li><strong>Language:</strong> 100% Kotlin.</li>
+                        <li><strong>User Interface:</strong> Built with <strong>Jetpack Compose</strong> for a fluid, reactive, and highly customizable Material Design 3 aesthetic.</li>
+                        <li><strong>Audio Engine:</strong> Powered by Google's robust <strong>ExoPlayer / Media3</strong> framework, guaranteeing seamless buffering, background processing, and gapless playback support.</li>
+                    </ul>
+
+                    <h3 id="contributing">How to Contribute</h3>
+                    <p>We welcome all pull requests! To ensure a smooth review process, please follow these steps:</p>
+                    <ol>
+                        <li><strong>Fork the Repository:</strong> Head over to our GitHub and fork the AvidTune repository to your own account.</li>
+                        <li><strong>Create a Branch:</strong> Create a new branch specifically for your feature or bug fix (e.g., <code>feature/add-new-theme</code> or <code>fix/player-crash</code>).</li>
+                        <li><strong>Develop & Test:</strong> Make your changes and test them thoroughly on an emulator or physical device.</li>
+                        <li><strong>Submit a Pull Request:</strong> Open a PR against the main repository with a clear, concise description of what you changed, how you tested it, and why the change is necessary.</li>
+                    </ol>
+
+                    <hr class="my-12 border-[var(--border-color)]">
+
+                    <h2 id="chapter-4" class="flex items-center gap-3"><span class="material-symbols-outlined text-accent-blue text-3xl">handyman</span> Chapter 4 — Troubleshooting</h2>
 
                     <h3 id="playback-issues">Playback Issues</h3>
                     <p><strong>Music won't play or buffers endlessly:</strong></p>
@@ -593,7 +657,8 @@
                     <li><a href="#welcome" class="hover:text-primary transition-colors toc-link block truncate">Welcome to AvidTune</a></li>
                     <li><a href="#chapter-1" class="hover:text-primary transition-colors toc-link block truncate">Installation</a></li>
                     <li><a href="#chapter-2" class="hover:text-primary transition-colors toc-link block truncate">Setting Up</a></li>
-                    <li><a href="#chapter-6" class="hover:text-primary transition-colors toc-link block truncate">Troubleshooting</a></li>
+                    <li><a href="#chapter-3" class="hover:text-primary transition-colors toc-link block truncate">Developers</a></li>
+                    <li><a href="#chapter-4" class="hover:text-primary transition-colors toc-link block truncate">Troubleshooting</a></li>
                 </ul>
                 
                 <!-- Helpful links card -->
@@ -695,12 +760,12 @@
             const searchResults = document.getElementById('search-results');
             const closeSearchBtn = document.getElementById('close-search');
 
-            // Build index automatically from docs headings
+            // Build index automatically from docs headings (h2, h3, h4)
             let searchIndex = [];
-            document.querySelectorAll('.prose h2, .prose h3').forEach(heading => {
+            document.querySelectorAll('.prose h2, .prose h3, .prose h4').forEach(heading => {
                 if (heading.id) {
                     // Extract clean text (removing material icons text)
-                    let text = heading.innerText.replace(/waving_hand|download_for_offline|tune|handyman/g, '').trim();
+                    let text = heading.innerText.replace(/waving_hand|download_for_offline|tune|code|handyman/g, '').trim();
                     searchIndex.push({ id: heading.id, title: text });
                 }
             });
@@ -804,7 +869,7 @@
                 link.addEventListener('click', toggleMobileMenu);
             });
 
-            // --- Navbar Background effect on scroll (Now attached to the Main Scroll Slider) ---
+            // --- Navbar Background effect on scroll (Attached to the Main Scroll Slider) ---
             const navbar = document.getElementById('top-navbar');
             const mainScrollArea = document.getElementById('main-scroll-area');
 
@@ -819,16 +884,14 @@
             });
 
             // --- Dynamic Scrollspy for Left & Right Sidebars ---
-            // Now targets ALL linked headings (h2 and h3) inside the prose container
-            const sections = document.querySelectorAll('.prose h2[id], .prose h3[id]');
+            const sections = document.querySelectorAll('.prose h2[id], .prose h3[id], .prose h4[id]');
             const tocLinks = document.querySelectorAll('.toc-link');
             const sidebarLinks = document.querySelectorAll('.nav-link-sidebar');
 
             if (sections.length > 0) {
-                // Since the main view is fixed, we observe intersection in the main slider
                 const observerOptions = {
                     root: mainScrollArea,
-                    rootMargin: '-2% 0px -85% 0px', // Triggers gracefully when passing near the top of the container
+                    rootMargin: '-2% 0px -85% 0px',
                     threshold: 0
                 };
 
@@ -856,13 +919,11 @@
                         if(activeSidebar) {
                             activeSidebar.classList.add('nav-active');
                             
-                            // Auto expand the folder it belongs to
                             const group = activeSidebar.closest('.sidebar-group');
                             if (group && group.classList.contains('collapsed')) {
                                 group.classList.remove('collapsed');
                             }
                             
-                            // Gently scroll the left sidebar to ensure active link is always visible
                             activeSidebar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                         }
                     }
