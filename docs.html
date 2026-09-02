@@ -156,6 +156,8 @@
             transition: padding 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
         .nav-link {
+            display: inline-flex;
+            align-items: center;
             color: var(--text-muted) !important; padding: 8px 16px; border-radius: 50px;
             font-size: 14px; font-weight: 500; transition: all 0.2s ease;
         }
@@ -219,9 +221,9 @@
                 <span class="text-xl font-bold tracking-tight text-primary hidden sm:block font-sora">AvidTune Docs</span>
             </a>
             <div class="hidden md:flex items-center gap-2 text-sm font-medium ml-4">
-                <a href="/" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">home</span> Home</a>
-                <a href="#welcome" class="nav-link text-primary bg-black/5 dark:bg-white/10"><span class="material-symbols-outlined text-[18px] mr-1.5">menu_book</span> Guide</a>
-                <a href="#chapter-6" class="nav-link"><span class="material-symbols-outlined text-[18px] mr-1.5">build</span> Troubleshooting</a>
+                <a href="/" class="nav-link flex items-center"><span class="material-symbols-outlined text-[18px] mr-1.5">home</span> Home</a>
+                <a href="#welcome" class="nav-link text-primary bg-black/5 dark:bg-white/10 flex items-center"><span class="material-symbols-outlined text-[18px] mr-1.5">menu_book</span> Guide</a>
+                <a href="#chapter-6" class="nav-link flex items-center"><span class="material-symbols-outlined text-[18px] mr-1.5">build</span> Troubleshooting</a>
             </div>
         </div>
         
