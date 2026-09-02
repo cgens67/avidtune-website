@@ -154,11 +154,18 @@
             0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
         .animate-in-down {
             animation: fadeSlideDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         .animate-in-up {
             animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .animate-pop {
+            animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
@@ -438,7 +445,11 @@
                 <!-- Page Header -->
                 <div class="mb-14 border-b border-[var(--border-color)] pb-10 mt-4">
                     <div class="flex items-center gap-3 mb-6">
-                        <span id="docs-version-badge" class="bg-[var(--tag-bg)] text-primary px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--tag-border)]">Version 1.0.0</span>
+                        <!-- Skeleton Loader for Version -->
+                        <span id="docs-version-badge" class="bg-[var(--tag-bg)] text-primary px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--tag-border)] flex items-center justify-center w-24 h-7 animate-pulse">
+                            <span class="w-12 h-2 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+                        </span>
+                        
                         <span class="bg-black/5 dark:bg-white/5 text-on-surface-variant px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--border-color)]">Android Platform</span>
                     </div>
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight font-sora leading-tight">Official Documentation</h1>
@@ -613,15 +624,21 @@
             fetch('https://api.github.com/repos/cgens67/avidtune/releases')
                 .then(res => res.json())
                 .then(releases => {
+                    const versionBadge = document.getElementById('docs-version-badge');
+                    
                     if (Array.isArray(releases) && releases.length > 0) {
                         const latestStable = releases.find(r => !r.prerelease) || releases[0];
                         
                         // Update Version Badge
-                        const versionBadge = document.getElementById('docs-version-badge');
                         if (versionBadge && latestStable.tag_name) {
-                            // Strip "v" if present so it says "Version 1.0.0" instead of "Version v1.0.0"
                             const cleanVersion = latestStable.tag_name.replace(/^v/i, '');
+                            
+                            // Remove skeleton classes and set text
+                            versionBadge.classList.remove('w-24', 'h-7', 'flex', 'items-center', 'justify-center', 'animate-pulse');
                             versionBadge.textContent = `Version ${cleanVersion}`;
+                            
+                            // Add a little pop effect to celebrate the load
+                            versionBadge.classList.add('animate-pop');
                         }
 
                         // Update Download Button
@@ -634,7 +651,14 @@
                         const dlBtn = document.getElementById('docs-dl-btn');
                         if (dlBtn) dlBtn.href = apkUrl;
                     }
-                }).catch(e => console.error('Failed to fetch latest release:', e));
+                }).catch(e => {
+                    console.error('Failed to fetch latest release:', e);
+                    const versionBadge = document.getElementById('docs-version-badge');
+                    if(versionBadge) {
+                        versionBadge.classList.remove('w-24', 'h-7', 'flex', 'items-center', 'justify-center', 'animate-pulse');
+                        versionBadge.textContent = `Version N/A`;
+                    }
+                });
 
             // --- Theme Management ---
             const themeToggleBtn = document.getElementById('theme-toggle');
