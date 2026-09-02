@@ -69,7 +69,6 @@
             --dialog-bg: rgba(255, 255, 255, 0.95);
             --dialog-btn: rgba(241, 245, 249, 0.9);
             --mockup-border: #e2e8f0;
-            --phone-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.12);
             --nav-bg: rgba(255, 255, 255, 0.9);
             --tag-bg: #f1f5f9;
             --tag-text: #334155;
@@ -87,7 +86,6 @@
             --dialog-bg: rgba(15, 23, 42, 0.95);
             --dialog-btn: rgba(30, 41, 59, 0.8);
             --mockup-border: #1e293b;
-            --phone-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
             --nav-bg: rgba(15, 23, 42, 0.85);
             --tag-bg: rgba(255, 255, 255, 0.08);
             --tag-text: #e2e8f0;
@@ -108,22 +106,6 @@
             pointer-events: none;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating-element {
-            animation: float 4s ease-in-out infinite;
-            will-change: transform; backface-visibility: hidden;
-        }
-
-        .floating-element-delayed {
-            animation: float 5s ease-in-out infinite;
-            animation-delay: 1.2s; will-change: transform; backface-visibility: hidden;
-        }
-
         .glass-card, .glass-panel {
             background: var(--surface-bg);
             backdrop-filter: blur(20px);
@@ -136,7 +118,7 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        /* 3D Gallery / Mockup Perspective & Stagger Lift */
+        /* Phone Mockup Showcase & Stagger Lift */
         .mockup-container {
             perspective: 1200px;
         }
@@ -156,7 +138,11 @@
         }
 
         .phone-frame {
-            box-shadow: var(--phone-shadow);
+            box-shadow: 0 0 80px rgba(37, 99, 235, 0.15);
+        }
+        
+        html.dark .phone-frame {
+            box-shadow: 0 0 80px rgba(175, 190, 255, 0.15);
         }
 
         .glow-avatar {
@@ -377,9 +363,9 @@
             </div>
         </section>
 
-        <!-- Hero Mockup with Floating Animation -->
+        <!-- Hero Mockup without floating animation -->
         <section class="relative max-w-4xl mx-auto mt-12 px-6 flex flex-col items-center justify-center reveal-up" style="transition-delay: 200ms;">
-            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl floating-element">
+            <div class="relative z-20 w-64 md:w-72 aspect-[9/18.5] bg-slate-900 rounded-[3rem] p-3 border-[6px] border-[var(--mockup-border)] shadow-2xl">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
                 <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-950">
                     <img alt="AvidTune App Preview" class="w-full h-full object-cover" src="images/lyricsscreen.jpg">
@@ -388,7 +374,7 @@
         </section>
     </main>
 
-    <!-- BEGIN: Showcase / Gallery (Staggered Wave Mockups) -->
+    <!-- BEGIN: Showcase / Gallery (Dynamic Phone Mockups) -->
     <div id="screenshots" class="font-body-md bg-transparent w-full pt-28 pb-24">
         <section class="max-w-7xl mx-auto px-6 md:px-16 text-center mb-16 reveal-up">
             <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6 tracking-tighter leading-tight text-primary">
@@ -402,9 +388,11 @@
         <!-- Phone Mockups Showcase -->
         <section class="relative w-full overflow-hidden pt-12 mockup-container">
             <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[700px] snap-x snap-mandatory py-4 md:py-0">
+                <!-- Javascript will inject mockup items here for staggered and parallax gallery animation -->
             </div>
         </section>
     </div>
+    <!-- END: Showcase / Gallery -->
 
     <!-- BEGIN: Interactive Features Carousel -->
     <section id="features-carousel" class="w-full max-w-7xl mx-auto px-6 md:px-12 py-24 bg-transparent reveal-up">
@@ -447,7 +435,7 @@
 
             <!-- Right: Mockup Image -->
             <div class="flex justify-center items-center order-1 lg:order-2 w-full">
-                <div class="relative w-[240px] md:w-[320px] aspect-[9/19.5] rounded-3xl border border-[var(--border-color)] bg-black overflow-hidden shadow-2xl shadow-black/10">
+                <div class="relative w-[240px] md:w-[300px] aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl shadow-black/10">
                     <div class="w-full h-full relative">
                         <img id="slide-img" class="w-full h-full object-cover transition-opacity duration-500" src="images/lyricsscreen.jpg" alt="Feature Slide">
                     </div>
@@ -1079,70 +1067,7 @@
                     document.getElementById('dl-btn-beta-section').href = 'https://github.com/cgens67/avidtune/releases';
                 });
 
-            // --- 8. Dynamic Gallery Mockups (VIVI Music Style) ---
-            const dynamicMockups = document.getElementById('dynamic-mockups');
-            if (dynamicMockups) {
-                const mockupsData = [
-                    { src: 'images/libraryscreen.jpg', alt: 'Library', delay: '50ms' },
-                    { src: 'images/playerscreen.jpg', alt: 'Player', delay: '100ms' },
-                    { src: 'images/lyricsscreen.jpg', alt: 'Lyrics (Hero)', delay: '150ms' },
-                    { src: 'images/settingsscreen.jpg', alt: 'Settings', delay: '200ms' },
-                    { src: 'images/playerscreen.jpg', alt: 'Player 2', delay: '250ms' }
-                ];
-
-                const centerIndex = Math.floor(mockupsData.length / 2);
-
-                mockupsData.forEach((mockup, idx) => {
-                    const dist = Math.abs(idx - centerIndex);
-                    // The arc effect: center is py=0, outer items pushed down by factor of 40px
-                    const py = dist * 40; 
-                    
-                    const el = document.createElement('div');
-                    el.className = 'snap-center shrink-0 w-[240px] md:w-[320px] mockup-item reveal-up';
-                    el.style.setProperty('--py', `${py}px`);
-                    el.style.transitionDelay = mockup.delay;
-
-                    const isCenter = dist === 0;
-
-                    // Match vivi-music's border and styling exactly
-                    el.innerHTML = `
-                        <div class="relative w-full aspect-[9/19.5] rounded-[2.5rem] border-[6px] border-[var(--mockup-border)] bg-black overflow-hidden shadow-2xl phone-frame">
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-30"></div>
-                            <div class="w-full h-full relative">
-                                <img src="${mockup.src}" alt="${mockup.alt}" class="w-full h-full object-cover transition-opacity duration-500" loading="lazy" />
-                            </div>
-                        </div>
-                    `;
-                    dynamicMockups.appendChild(el);
-                    
-                    // Observe the newly created element for the reveal animation
-                    observer.observe(el);
-                });
-
-                // Mouse Parallax Animation
-                const section = dynamicMockups.parentElement;
-                section.addEventListener('mousemove', (e) => {
-                    const rect = section.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    // Normalized cursor position (-1 to 1)
-                    const percentX = (e.clientX - centerX) / (rect.width / 2);
-
-                    Array.from(dynamicMockups.children).forEach((item, idx) => {
-                        const dist = idx - centerIndex;
-                        // Outer items move faster to create 3D cylinder effect
-                        const shift = percentX * dist * -30; 
-                        item.style.setProperty('--px', `${shift}px`);
-                    });
-                });
-
-                section.addEventListener('mouseleave', () => {
-                    Array.from(dynamicMockups.children).forEach(item => {
-                        item.style.setProperty('--px', `0px`);
-                    });
-                });
-            }
-
-            // --- 9. Carousel Logic ---
+            // --- 8. Carousel Logic ---
             const slides = [
                 {
                     title: "Synced Lyrics",
@@ -1240,6 +1165,64 @@
             });
 
             updateSlide();
+
+            // --- 9. Dynamic Mockups (Matching Vivi Music Gallery) ---
+            const dynamicMockups = document.getElementById('dynamic-mockups');
+            if (dynamicMockups) {
+                const mockupsData = [
+                    { src: 'images/playerscreen.jpg', py: 40, delay: 50 },
+                    { src: 'images/lyricsscreen.jpg', py: 0, delay: 100 },
+                    { src: 'images/libraryscreen.jpg', py: 20, delay: 150 },
+                    { src: 'images/settingsscreen.jpg', py: 55, delay: 200 }
+                ];
+                
+                mockupsData.forEach((mockup, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'snap-center shrink-0 w-[230px] md:w-[270px] mockup-item reveal-up';
+                    item.style.setProperty('--py', `${mockup.py}px`);
+                    item.style.transitionDelay = `${mockup.delay}ms`;
+
+                    const frame = document.createElement('div');
+                    frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame shadow-xl';
+                    
+                    const img = document.createElement('img');
+                    img.alt = `Screenshot ${index + 1}`;
+                    img.className = 'w-full h-full object-cover';
+                    img.src = mockup.src;
+
+                    frame.appendChild(img);
+                    item.appendChild(frame);
+                    dynamicMockups.appendChild(item);
+                    
+                    // Observe for reveal animation
+                    observer.observe(item);
+                });
+
+                // Parallax Mouse Effect
+                const gallerySection = dynamicMockups.closest('section');
+                if (gallerySection) {
+                    gallerySection.addEventListener('mousemove', (e) => {
+                        const rect = gallerySection.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const x = (e.clientX - centerX) * 0.05;
+
+                        const items = dynamicMockups.querySelectorAll('.mockup-item');
+                        items.forEach((item, index) => {
+                            // Depth variation to create 3D staggered parallax
+                            const depth = 1 + (index % 2 === 0 ? 0.2 : -0.2); 
+                            item.style.setProperty('--px', `${x * depth}px`);
+                        });
+                    });
+
+                    gallerySection.addEventListener('mouseleave', () => {
+                        const items = dynamicMockups.querySelectorAll('.mockup-item');
+                        items.forEach(item => {
+                            item.style.setProperty('--px', `0px`);
+                        });
+                    });
+                }
+            }
+
         });
     </script>
 </body>
