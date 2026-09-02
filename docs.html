@@ -385,7 +385,7 @@
             <!-- Page Header -->
             <div class="mb-14 border-b border-[var(--border-color)] pb-10">
                 <div class="flex items-center gap-3 mb-6">
-                    <span class="bg-[var(--tag-bg)] text-primary px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--tag-border)]">Version 1.0.0</span>
+                    <span id="docs-version-badge" class="bg-[var(--tag-bg)] text-primary px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--tag-border)]">Version 1.0.0</span>
                     <span class="bg-black/5 dark:bg-white/5 text-on-surface-variant px-3 py-1.5 rounded-full text-xs font-bold tracking-wide border border-[var(--border-color)]">Android Platform</span>
                 </div>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight font-sora leading-tight">Official Documentation</h1>
@@ -556,12 +556,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Fetch Latest Stable APK URL ---
+            // --- Fetch Latest Stable Release details for Version & APK ---
             fetch('https://api.github.com/repos/cgens67/avidtune/releases')
                 .then(res => res.json())
                 .then(releases => {
                     if (Array.isArray(releases) && releases.length > 0) {
                         const latestStable = releases.find(r => !r.prerelease) || releases[0];
+                        
+                        // Update Version Badge
+                        const versionBadge = document.getElementById('docs-version-badge');
+                        if (versionBadge && latestStable.tag_name) {
+                            // Strip "v" if present so it says "Version 1.0.0" instead of "Version v1.0.0"
+                            const cleanVersion = latestStable.tag_name.replace(/^v/i, '');
+                            versionBadge.textContent = `Version ${cleanVersion}`;
+                        }
+
+                        // Update Download Button
                         let apkUrl = latestStable.html_url;
                         if (latestStable.assets && latestStable.assets.length > 0) {
                             // Find universal apk, fallback to any apk
