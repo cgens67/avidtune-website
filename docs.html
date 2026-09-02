@@ -147,6 +147,25 @@
         @keyframes blob-float-2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-15vw, -20vh) scale(0.9); } 100% { transform: translate(-25vw, 5vh) scale(1.05); } }
         @keyframes blob-float-3 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(10vw, -15vh) scale(1.15); } 100% { transform: translate(-10vw, -5vh) scale(0.9); } }
 
+        /* Initial Page Load Animations */
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeSlideDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in-down {
+            animation: fadeSlideDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .animate-in-up {
+            animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
         /* Typography & Scroll Offsets */
         .prose-headings { scroll-margin-top: 100px; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -214,7 +233,7 @@
     </div>
 
     <!-- Top Navigation Bar -->
-    <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-4 px-6 md:px-12 flex justify-between items-center bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-color)] shadow-sm">
+    <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-4 px-6 md:px-12 flex justify-between items-center bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-color)] shadow-sm animate-in-down">
         <div class="flex items-center gap-6">
             <a href="/" class="flex items-center gap-3">
                 <img src="/images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-[8px] object-cover shadow-sm border border-slate-200 dark:border-slate-800" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzI1NjNlYiIvPjwvc3ZnPg=='" />
@@ -229,13 +248,21 @@
         
         <!-- Right Actions -->
         <div class="flex items-center gap-3">
-            <div class="hidden lg:flex items-center bg-black/5 dark:bg-white/5 border border-[var(--border-color)] rounded-full px-4 py-2 w-64 cursor-text hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
-                <span class="material-symbols-outlined text-[18px] text-slate-400 mr-2">search</span>
-                <span class="text-sm text-slate-400">Search docs...</span>
+            <div id="search-trigger" class="hidden lg:flex items-center bg-black/5 dark:bg-white/5 border border-[var(--border-color)] rounded-full pl-4 pr-3 py-2 w-64 cursor-pointer hover:bg-black/10 dark:hover:bg-white/10 transition-colors group">
+                <span class="material-symbols-outlined text-[18px] text-slate-400 mr-2 group-hover:text-primary transition-colors">search</span>
+                <span class="text-sm text-slate-400 group-hover:text-primary transition-colors flex-1 flex justify-between items-center">
+                    Search docs... 
+                    <kbd class="hidden xl:inline-block bg-black/10 dark:bg-white/10 text-slate-500 px-1.5 py-0.5 rounded text-[11px] font-sans font-semibold ml-2 border border-[var(--border-color)] shadow-sm">Ctrl K</kbd>
+                </span>
             </div>
             
+            <!-- Mobile Search Icon -->
+            <button id="mobile-search-btn" class="lg:hidden p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center ml-1" aria-label="Search">
+                <span class="material-symbols-outlined text-[20px]">search</span>
+            </button>
+
             <!-- Theme Toggler -->
-            <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center ml-2" aria-label="Toggle Theme">
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center ml-1 lg:ml-2" aria-label="Toggle Theme">
                 <span id="theme-icon" class="material-symbols-outlined text-[20px]">dark_mode</span>
             </button>
 
@@ -249,6 +276,22 @@
             </button>
         </div>
     </nav>
+
+    <!-- Search Modal -->
+    <div id="search-modal-backdrop" class="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-[200] hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="search-modal" class="fixed top-20 left-1/2 -translate-x-1/2 w-[90%] max-w-xl bg-[var(--nav-bg)] backdrop-blur-xl border border-[var(--border-color)] rounded-2xl shadow-2xl z-[201] hidden opacity-0 scale-95 transition-all duration-300 flex flex-col overflow-hidden">
+        <div class="p-4 border-b border-[var(--border-color)] flex items-center gap-3 text-primary">
+            <span class="material-symbols-outlined text-accent-blue">search</span>
+            <input type="text" id="search-input" class="flex-1 bg-transparent border-none outline-none focus:ring-0 text-primary placeholder-slate-400 font-medium text-base p-0" placeholder="Search documentation...">
+            <button id="close-search" class="text-slate-400 hover:text-primary bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 p-1.5 rounded-lg transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-[18px]">close</span>
+            </button>
+        </div>
+        <div id="search-results" class="max-h-[60vh] md:max-h-80 overflow-y-auto p-2 flex flex-col gap-1">
+            <!-- Results populated by JS -->
+            <div class="p-6 text-center text-sm text-slate-500">Type something to start searching...</div>
+        </div>
+    </div>
 
     <!-- Mobile Navigation Drawer -->
     <div class="mobile-drawer-backdrop" id="mobile-backdrop"></div>
@@ -330,7 +373,7 @@
     <div class="max-w-[1440px] mx-auto px-6 lg:px-8 flex gap-8 relative pt-28 pb-12">
         
         <!-- Left Sidebar (Desktop) -->
-        <div class="hidden lg:block w-56 shrink-0 relative">
+        <div class="hidden lg:block w-56 shrink-0 relative animate-in-up delay-100">
             <aside class="sidebar-scroll py-6 pr-4 border-r border-[var(--border-color)]" style="position: sticky; top: 100px; height: calc(100vh - 100px); overflow-y: auto;">
                 <div class="flex flex-col gap-8 text-sm pb-10">
                     
@@ -387,7 +430,7 @@
         </div>
 
         <!-- Main Content Area -->
-        <main class="flex-1 min-w-0 py-6 max-w-4xl relative z-10">
+        <main class="flex-1 min-w-0 py-6 max-w-4xl relative z-10 animate-in-up delay-200">
             
             <!-- Page Header -->
             <div class="mb-14 border-b border-[var(--border-color)] pb-10">
@@ -398,7 +441,6 @@
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight font-sora leading-tight">Official Documentation</h1>
                 
                 <div class="flex flex-wrap gap-4 mt-8">
-                    <!-- Added absolute path to the main website link -->
                     <a href="/" class="flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-xl text-sm font-bold hover:scale-105 transition-all shadow-md">
                         <span class="material-symbols-outlined text-[20px]">public</span> Main Website
                     </a>
@@ -529,7 +571,7 @@
         </main>
 
         <!-- Right Sidebar (Table of Contents) -->
-        <div class="hidden xl:block w-56 shrink-0 relative">
+        <div class="hidden xl:block w-56 shrink-0 relative animate-in-up delay-300">
             <aside class="sidebar-scroll py-6 pl-6 border-l border-[var(--border-color)]" style="position: sticky; top: 100px; height: calc(100vh - 100px); overflow-y: auto;">
                 <div class="font-bold text-primary mb-6 text-xs uppercase tracking-widest font-sora">On this page</div>
                 
@@ -615,6 +657,91 @@
             themeToggleBtn.addEventListener('click', () => {
                 const isCurrentlyDark = htmlElement.classList.contains('dark');
                 applyTheme(!isCurrentlyDark);
+            });
+
+            // --- Search Functionality ---
+            const searchTrigger = document.getElementById('search-trigger');
+            const mobileSearchBtn = document.getElementById('mobile-search-btn');
+            const searchModal = document.getElementById('search-modal');
+            const searchBackdrop = document.getElementById('search-modal-backdrop');
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const closeSearchBtn = document.getElementById('close-search');
+
+            // Build index automatically from docs headings
+            let searchIndex = [];
+            document.querySelectorAll('.prose h2, .prose h3').forEach(heading => {
+                if (heading.id) {
+                    // Extract clean text (removing material icons text)
+                    let text = heading.innerText.replace(/waving_hand|download_for_offline|tune|handyman/g, '').trim();
+                    searchIndex.push({ id: heading.id, title: text });
+                }
+            });
+
+            function openSearch() {
+                searchBackdrop.classList.remove('hidden');
+                searchModal.classList.remove('hidden');
+                
+                // Slight delay to allow display block to apply before animating opacity
+                setTimeout(() => {
+                    searchBackdrop.classList.remove('opacity-0');
+                    searchModal.classList.remove('opacity-0', 'scale-95');
+                    searchInput.focus();
+                    renderSearchResults(searchInput.value);
+                }, 10);
+            }
+
+            function closeSearch() {
+                searchBackdrop.classList.add('opacity-0');
+                searchModal.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    searchBackdrop.classList.add('hidden');
+                    searchModal.classList.add('hidden');
+                }, 300);
+            }
+
+            function renderSearchResults(query) {
+                searchResults.innerHTML = '';
+                const lowerQuery = query.toLowerCase().trim();
+                
+                let filtered = searchIndex;
+                if (lowerQuery !== '') {
+                    filtered = searchIndex.filter(item => item.title.toLowerCase().includes(lowerQuery));
+                }
+
+                if (filtered.length === 0) {
+                    searchResults.innerHTML = `<div class="p-6 text-center text-sm text-slate-500">No results found for "${query}"</div>`;
+                    return;
+                }
+
+                filtered.forEach(item => {
+                    const a = document.createElement('a');
+                    a.href = `#${item.id}`;
+                    a.className = 'flex items-center gap-3 p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 text-primary transition-colors text-sm font-medium';
+                    a.innerHTML = `<span class="material-symbols-outlined text-[18px] text-slate-400">subdirectory_arrow_right</span> ${item.title}`;
+                    a.addEventListener('click', closeSearch);
+                    searchResults.appendChild(a);
+                });
+            }
+
+            if(searchTrigger) searchTrigger.addEventListener('click', openSearch);
+            if(mobileSearchBtn) mobileSearchBtn.addEventListener('click', openSearch);
+            if(closeSearchBtn) closeSearchBtn.addEventListener('click', closeSearch);
+            if(searchBackdrop) searchBackdrop.addEventListener('click', closeSearch);
+            
+            searchInput.addEventListener('input', (e) => {
+                renderSearchResults(e.target.value);
+            });
+
+            // Keyboard Shortcuts (Ctrl+K or Cmd+K)
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    openSearch();
+                }
+                if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+                    closeSearch();
+                }
             });
 
             // --- Collapsible Sidebar ---
