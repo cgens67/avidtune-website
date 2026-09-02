@@ -59,6 +59,7 @@
     <!-- Custom Glassmorphism, Dual Themes & Animations -->
     <style>
         :root {
+            /* Standard Light Mode Colors */
             --bg-gradient: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
             --text-primary: #09090b;
             --text-muted: #475569;
@@ -73,23 +74,34 @@
             --tag-bg: #f1f5f9;
             --tag-text: #334155;
             --tag-border: #cbd5e1;
+            
+            /* Blob Colors - Light */
+            --blob-color-1: rgba(37, 99, 235, 0.15); /* Blue */
+            --blob-color-2: rgba(79, 70, 229, 0.12); /* Purple */
+            --blob-color-3: rgba(14, 165, 233, 0.15); /* Sky */
         }
 
         html.dark {
-            --bg-gradient: radial-gradient(circle at 50% 0%, #152671 0%, #0d153a 50%, #050814 100%);
-            --text-primary: #ffffff;
-            --text-muted: #94a3b8;
-            --surface-bg: rgba(175, 190, 255, 0.08);
-            --border-color: rgba(255, 255, 255, 0.12);
-            --accent-light: rgba(175, 190, 255, 0.15);
-            --card-hover: rgba(255, 255, 255, 0.03);
-            --dialog-bg: rgba(15, 23, 42, 0.95);
-            --dialog-btn: rgba(30, 41, 59, 0.8);
-            --mockup-border: #1e293b;
-            --nav-bg: rgba(15, 23, 42, 0.85);
-            --tag-bg: rgba(255, 255, 255, 0.08);
-            --tag-text: #e2e8f0;
+            /* Standard Dark Gray/Black Colors */
+            --bg-gradient: radial-gradient(circle at 50% 0%, #18181b 0%, #09090b 50%, #000000 100%);
+            --text-primary: #f8fafc;
+            --text-muted: #a1a1aa;
+            --surface-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-light: rgba(255, 255, 255, 0.1);
+            --card-hover: rgba(255, 255, 255, 0.02);
+            --dialog-bg: rgba(9, 9, 11, 0.95);
+            --dialog-btn: rgba(39, 39, 42, 0.8);
+            --mockup-border: #27272a;
+            --nav-bg: rgba(9, 9, 11, 0.85);
+            --tag-bg: rgba(255, 255, 255, 0.1);
+            --tag-text: #f8fafc;
             --tag-border: rgba(255, 255, 255, 0.2);
+
+            /* Blob Colors - Dark */
+            --blob-color-1: rgba(37, 99, 235, 0.08); /* Dimmer blue */
+            --blob-color-2: rgba(79, 70, 229, 0.07); /* Dimmer purple */
+            --blob-color-3: rgba(14, 165, 233, 0.08); /* Dimmer sky */
         }
 
         body {
@@ -98,12 +110,79 @@
             transition: color 0.3s ease;
         }
 
+        /* Fixed Background Container */
         #page-background {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            width: 100vw; height: 100vh; z-index: -1;
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh; 
+            z-index: -1;
             background: var(--bg-gradient);
             transition: background 0.4s ease;
             pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* ----- Floating Background Blobs ----- */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            will-change: transform;
+            pointer-events: none;
+            transition: background-color 0.4s ease;
+        }
+
+        .blob-1 {
+            width: 400px; height: 400px;
+            background-color: var(--blob-color-1);
+            top: -10%; left: -10%;
+            animation: blob-float-1 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .blob-2 {
+            width: 500px; height: 500px;
+            background-color: var(--blob-color-2);
+            bottom: -20%; right: -10%;
+            animation: blob-float-2 22s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 350px; height: 350px;
+            background-color: var(--blob-color-3);
+            top: 40%; left: 40%;
+            animation: blob-float-3 28s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            animation-delay: -10s;
+        }
+
+        @keyframes blob-float-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(15vw, 15vh) scale(1.1); }
+            100% { transform: translate(-5vw, 25vh) scale(0.95); }
+        }
+
+        @keyframes blob-float-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-15vw, -20vh) scale(0.9); }
+            100% { transform: translate(-25vw, 5vh) scale(1.05); }
+        }
+
+        @keyframes blob-float-3 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10vw, -15vh) scale(1.15); }
+            100% { transform: translate(-10vw, -5vh) scale(0.9); }
+        }
+
+        /* Floating Components */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-element {
+            animation: float 4s ease-in-out infinite;
+            will-change: transform; backface-visibility: hidden;
         }
 
         .glass-card, .glass-panel {
@@ -141,11 +220,12 @@
 
         .phone-frame {
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-            transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease;
         }
         
         html.dark .phone-frame {
-            box-shadow: 0 0 60px rgba(175, 190, 255, 0.1);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .mockup-item:hover .phone-frame {
@@ -153,7 +233,7 @@
         }
         
         html.dark .mockup-item:hover .phone-frame {
-            box-shadow: 0 0 80px rgba(175, 190, 255, 0.25);
+            box-shadow: 0 30px 60px -15px rgba(255, 255, 255, 0.1);
         }
 
         .glow-avatar {
@@ -278,8 +358,12 @@
 
 <body class="bg-transparent text-primary font-sora selection:bg-accent-light selection:text-accent-blue overflow-x-hidden">
 
-    <!-- Fixed Gradient Element -->
-    <div id="page-background"></div>
+    <!-- Fixed Gradient Element with Blobs -->
+    <div id="page-background">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
 
     <!-- BEGIN: Navigation -->
     <nav id="top-navbar" class="fixed top-0 w-full z-[100] py-5 px-6 md:px-12 flex justify-between items-center transform -translate-y-full opacity-0 animate-nav">
@@ -399,7 +483,7 @@
         <!-- Phone Mockups Showcase -->
         <section class="relative w-full pt-12 mockup-container">
             <!-- Increased padding here (py-12 md:py-16) to ensure the 1.08x scale and -30px translate3d on hover don't hit the scroll container's clipping box -->
-            <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar md:overflow-visible min-h-[550px] md:min-h-[750px] snap-x snap-mandatory py-12 md:py-16">
+            <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar min-h-[550px] md:min-h-[750px] snap-x snap-mandatory pt-12 pb-16">
                 <!-- Javascript will inject mockup items here for staggered and parallax gallery animation -->
             </div>
         </section>
