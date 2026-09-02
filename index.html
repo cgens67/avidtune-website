@@ -127,6 +127,7 @@
             --px: 0px;
             --py: 0px;
             transform: translate3d(var(--px), var(--py), 0);
+            /* Bouncy cubic-bezier matching modern UI pops */
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform;
             backface-visibility: hidden;
@@ -134,16 +135,25 @@
         }
 
         .mockup-item:hover {
-            transform: translate3d(var(--px), calc(var(--py) - 24px), 0) scale(1.05);
+            transform: translate3d(var(--px), calc(var(--py) - 30px), 0) scale(1.06);
             z-index: 50;
         }
 
         .phone-frame {
-            box-shadow: 0 0 80px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         html.dark .phone-frame {
-            box-shadow: 0 0 80px rgba(175, 190, 255, 0.15);
+            box-shadow: 0 0 60px rgba(175, 190, 255, 0.1);
+        }
+
+        .mockup-item:hover .phone-frame {
+            box-shadow: 0 30px 60px -15px rgba(37, 99, 235, 0.35);
+        }
+        
+        html.dark .mockup-item:hover .phone-frame {
+            box-shadow: 0 0 80px rgba(175, 190, 255, 0.25);
         }
 
         .glow-avatar {
@@ -387,8 +397,9 @@
         </section>
 
         <!-- Phone Mockups Showcase -->
-        <section class="relative w-full overflow-hidden pt-12 mockup-container">
-            <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar md:overflow-visible min-h-[500px] md:min-h-[700px] snap-x snap-mandatory py-4 md:py-0">
+        <section class="relative w-full pt-12 mockup-container">
+            <!-- Increased padding here (py-12 md:py-16) to ensure the 1.08x scale and -30px translate3d on hover don't hit the scroll container's clipping box -->
+            <div id="dynamic-mockups" class="flex justify-start md:justify-center items-center md:items-end gap-6 md:gap-12 px-6 md:px-12 overflow-x-auto no-scrollbar md:overflow-visible min-h-[550px] md:min-h-[750px] snap-x snap-mandatory py-12 md:py-16">
                 <!-- Javascript will inject mockup items here for staggered and parallax gallery animation -->
             </div>
         </section>
@@ -1180,16 +1191,17 @@
                 mockupsData.forEach((mockup, index) => {
                     // Wrapper for reveal-up animation (separating the translation so it doesn't fight with parallax/hover)
                     const wrapper = document.createElement('div');
-                    wrapper.className = 'snap-center shrink-0 w-[230px] md:w-[270px] reveal-up';
+                    // Add pb-10 pt-4 so the scale + hover translateY doesn't get clipped by the flex container bounds
+                    wrapper.className = 'snap-center shrink-0 w-[230px] md:w-[270px] reveal-up pb-12 pt-6';
                     wrapper.style.transitionDelay = `${mockup.delay}ms`;
 
                     // Inner wrapper for hover/parallax transformation
                     const item = document.createElement('div');
-                    item.className = 'mockup-item w-full h-full';
+                    item.className = 'mockup-item relative w-full h-full';
                     item.style.setProperty('--py', `${mockup.py}px`);
                     
                     const frame = document.createElement('div');
-                    frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame shadow-xl';
+                    frame.className = 'relative w-full aspect-[9/19] rounded-[2.5rem] border-[6px] border-slate-900 dark:border-white/20 bg-black overflow-hidden phone-frame transition-all duration-300';
                     
                     const img = document.createElement('img');
                     img.alt = `Screenshot ${index + 1}`;
