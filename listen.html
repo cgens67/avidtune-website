@@ -205,23 +205,23 @@
 
             <div class="relative z-10 w-full rounded-[28px] border border-[var(--border-color)] bg-[var(--surface-bg)] backdrop-blur-2xl p-6 md:p-8 shadow-2xl transition-all">
                 
-                <!-- Album Artwork Section -->
-                <div class="relative w-full aspect-square rounded-[22px] overflow-hidden bg-slate-900 border border-black/10 dark:border-white/10 shadow-lg mb-6 group">
+                <!-- Album Artwork Section (Clickable: Opens in AvidTune) -->
+                <a id="artwork-link" href="#" class="block relative w-full aspect-square rounded-[22px] overflow-hidden bg-slate-900 border border-black/10 dark:border-white/10 shadow-lg mb-6 group cursor-pointer active:scale-[0.98] transition-transform">
                     <img id="track-artwork" src="/images/playerscreen.jpg" alt="Track Cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
 
                     <!-- Floating Timestamp Badge -->
-                    <div id="timestamp-container" class="absolute top-4 left-4 hidden items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-md">
+                    <div id="timestamp-container" class="absolute top-4 left-4 hidden items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-md z-10">
                         <span class="material-symbols-outlined text-[16px] text-blue-400">schedule</span>
                         <span id="timestamp-text" class="text-xs font-bold font-mono tracking-wide">0:00</span>
                     </div>
 
-                    <!-- Overlay Icon -->
+                    <!-- Overlay Play Button that launches the App -->
                     <div class="absolute inset-0 bg-black/25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div class="w-16 h-16 rounded-full bg-white/90 text-black flex items-center justify-center shadow-xl">
+                        <div class="w-16 h-16 rounded-full bg-white/95 text-black flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110 active:scale-90">
                             <span class="material-symbols-outlined text-[36px] ml-1">play_arrow</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Track Metadata -->
                 <div class="text-center mb-6">
@@ -381,7 +381,12 @@
             // YouTube Music Web Fallback
             const ytmUrl = `https://music.youtube.com/watch?v=${songId}${timestampSeconds > 0 ? '&t=' + timestampSeconds : ''}`;
 
+            // Wire up both the button and the artwork container to open in AvidTune
             document.getElementById('btn-open-app').href = androidIntent;
+            const artworkLink = document.getElementById('artwork-link');
+            if (artworkLink) {
+                artworkLink.href = androidIntent;
+            }
             document.getElementById('btn-ytm').href = ytmUrl;
 
             // Timestamp visual badge
