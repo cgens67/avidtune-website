@@ -1,6 +1,5 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/docs",
@@ -19,11 +18,19 @@
       "destination": "/listen.html"
     },
     {
-      "source": "/:songId([a-zA-Z0-9_-]{11})/:timestamp*",
+      "source": "/listen/:path*",
       "destination": "/listen.html"
     },
     {
-      "source": "/:songId([a-zA-Z0-9_-]{11})",
+      "source": "/:songId([a-zA-Z0-9_-]+)",
+      "destination": "/listen.html"
+    },
+    {
+      "source": "/:songId([a-zA-Z0-9_-]+)/",
+      "destination": "/listen.html"
+    },
+    {
+      "source": "/:songId([a-zA-Z0-9_-]+)/:path*",
       "destination": "/listen.html"
     }
   ]
