@@ -1,32 +1,20 @@
 {
-  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/docs",
       "destination": "/docs.html"
     },
     {
-      "source": "/docs/:path*",
-      "destination": "/docs.html"
-    },
-    {
-      "source": "/images/:path*",
-      "destination": "/images/:path*"
-    },
-    {
       "source": "/listen",
       "destination": "/listen.html"
     },
     {
-      "source": "/listen/:path*",
+      "source": "/:songId([a-zA-Z0-9_\\-]{11})",
       "destination": "/listen.html"
     },
     {
-      "source": "/:songId/:path*",
-      "destination": "/listen.html"
-    },
-    {
-      "source": "/:songId",
+      "source": "/:songId([a-zA-Z0-9_\\-]{11})/:timestamp*",
       "destination": "/listen.html"
     }
   ]
