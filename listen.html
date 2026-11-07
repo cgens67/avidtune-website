@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title id="page-title">AvidTune — Shared Track</title>
+    <meta name="description" content="Listen to this track on AvidTune — A modern YouTube Music client for Android with ad-free playback and synchronized lyrics.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/logo.png" sizes="any">
+
+    <!-- Google Fonts: Sora, Geist, Instrument Sans, Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Geist:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "var(--text-primary)",
+                        "surface": "var(--surface-bg)",
+                        "on-surface-variant": "var(--text-muted)",
+                        "accent": {
+                            blue: '#2563eb',
+                            purple: '#4f46e5',
+                            light: 'var(--accent-light)'
+                        }
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        geist: ["Geist", "sans-serif"],
+                        instrument: ['"Instrument Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at 50% 0%, #f1f5fd 0%, #fafcff 40%, #ffffff 100%);
+            --text-primary: #09090b;
+            --text-muted: #475569;
+            --surface-bg: rgba(255, 255, 255, 0.85);
+            --border-color: rgba(226, 232, 240, 0.85);
+            --accent-light: #dbeafe;
+            --dialog-bg: rgba(255, 255, 255, 0.95);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --tag-border: #cbd5e1;
+            --blob-color-1: rgba(37, 99, 235, 0.15);
+            --blob-color-2: rgba(79, 70, 229, 0.12);
+            --blob-color-3: rgba(14, 165, 233, 0.15);
+        }
+
+        html.dark {
+            --bg-gradient: radial-gradient(circle at 50% 0%, #18181b 0%, #09090b 50%, #000000 100%);
+            --text-primary: #f8fafc;
+            --text-muted: #a1a1aa;
+            --surface-bg: rgba(24, 24, 27, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-light: rgba(255, 255, 255, 0.1);
+            --dialog-bg: rgba(9, 9, 11, 0.95);
+            --nav-bg: rgba(9, 9, 11, 0.85);
+            --tag-bg: rgba(255, 255, 255, 0.1);
+            --tag-text: #f8fafc;
+            --tag-border: rgba(255, 255, 255, 0.2);
+            --blob-color-1: rgba(37, 99, 235, 0.1);
+            --blob-color-2: rgba(79, 70, 229, 0.08);
+            --blob-color-3: rgba(14, 165, 233, 0.09);
+        }
+
+        body {
+            background-color: transparent !important;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #page-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: var(--bg-gradient);
+            transition: background 0.4s ease;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 450px; height: 450px;
+            background-color: var(--blob-color-1);
+            top: -10%; left: -10%;
+            animation: blob-float-1 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .blob-2 {
+            width: 500px; height: 500px;
+            background-color: var(--blob-color-2);
+            bottom: -20%; right: -10%;
+            animation: blob-float-2 22s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 350px; height: 350px;
+            background-color: var(--blob-color-3);
+            top: 40%; left: 35%;
+            animation: blob-float-3 28s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            animation-delay: -10s;
+        }
+
+        @keyframes blob-float-1 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(15vw, 15vh) scale(1.1); } 100% { transform: translate(-5vw, 25vh) scale(0.95); } }
+        @keyframes blob-float-2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-15vw, -20vh) scale(0.9); } 100% { transform: translate(-25vw, 5vh) scale(1.05); } }
+        @keyframes blob-float-3 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(10vw, -15vh) scale(1.15); } 100% { transform: translate(-10vw, -5vh) scale(0.9); } }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .ambient-artwork-glow {
+            position: absolute;
+            inset: -15px;
+            border-radius: 36px;
+            filter: blur(40px);
+            opacity: 0.6;
+            z-index: 0;
+            transition: all 0.5s ease;
+        }
+
+        .nav-link {
+            color: var(--text-muted) !important;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+            background-color: var(--accent-light) !important;
+        }
+    </style>
+</head>
+
+<body class="bg-transparent text-primary font-geist selection:bg-accent-light selection:text-accent-blue">
+
+    <!-- Fixed Dynamic Background -->
+    <div id="page-background">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 h-20 px-6 md:px-12 flex justify-between items-center bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-color)]">
+        <div class="flex items-center gap-6">
+            <a href="/" class="flex items-center gap-3">
+                <img src="/images/logo.png" alt="AvidTune Logo" class="w-8 h-8 rounded-lg object-cover shadow-sm border border-slate-200 dark:border-slate-800" onerror="this.src='/images/logo.png'">
+                <span class="text-xl font-bold tracking-tight text-primary font-sora">AvidTune</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2 text-sm font-medium">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/docs/" class="nav-link">Documentation</a>
+                <a href="https://github.com/cgens67/avidtune" target="_blank" class="nav-link">GitHub</a>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-primary transition-colors flex items-center justify-center" aria-label="Toggle Theme">
+                <span id="theme-icon" class="material-symbols-outlined text-[20px]">dark_mode</span>
+            </button>
+            <a id="nav-download-btn" href="https://github.com/cgens67/avidtune/releases/latest" target="_blank" class="flex items-center gap-1.5 bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:scale-105 active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span>Get App</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 flex flex-col items-center justify-center px-6 pt-28 pb-16 relative z-10 max-w-xl mx-auto w-full">
+
+        <!-- Song Preview Card (AvidTune Player Aesthetic) -->
+        <div class="w-full relative mb-8">
+            <div id="ambient-glow" class="ambient-artwork-glow bg-blue-600"></div>
+
+            <div class="relative z-10 w-full rounded-[28px] border border-[var(--border-color)] bg-[var(--surface-bg)] backdrop-blur-2xl p-6 md:p-8 shadow-2xl transition-all">
+                
+                <!-- Album Artwork Section -->
+                <div class="relative w-full aspect-square rounded-[22px] overflow-hidden bg-slate-900 border border-black/10 dark:border-white/10 shadow-lg mb-6 group">
+                    <img id="track-artwork" src="/images/playerscreen.jpg" alt="Track Cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+
+                    <!-- Floating Timestamp Badge -->
+                    <div id="timestamp-container" class="absolute top-4 left-4 hidden items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-md">
+                        <span class="material-symbols-outlined text-[16px] text-blue-400">schedule</span>
+                        <span id="timestamp-text" class="text-xs font-bold font-mono tracking-wide">0:00</span>
+                    </div>
+
+                    <!-- Overlay Icon -->
+                    <div class="absolute inset-0 bg-black/25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div class="w-16 h-16 rounded-full bg-white/90 text-black flex items-center justify-center shadow-xl">
+                            <span class="material-symbols-outlined text-[36px] ml-1">play_arrow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track Metadata -->
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-accent-blue text-[11px] font-bold uppercase tracking-wider mb-2">
+                        <span class="material-symbols-outlined text-[14px]">headphones</span>
+                        <span>Shared on AvidTune</span>
+                    </div>
+                    <h1 id="track-title" class="text-2xl md:text-3xl font-bold font-sora text-primary tracking-tight line-clamp-2 mb-1.5">
+                        Loading song details...
+                    </h1>
+                    <p id="track-artist" class="text-base text-on-surface-variant font-medium line-clamp-1">
+                        Please wait
+                    </p>
+                </div>
+
+                <!-- Action Buttons: Open App, Download, and YouTube Music -->
+                <div class="flex flex-col gap-3">
+                    
+                    <!-- 1. Open in AvidTune (Deep-Link) -->
+                    <a id="btn-open-app" href="#" class="w-full flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-lg shadow-blue-500/25 active:scale-[0.98] transition-all">
+                        <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+                        <span>Open in AvidTune</span>
+                    </a>
+
+                    <!-- 2. Listen on YouTube Music (Web Fallback) -->
+                    <a id="btn-ytm" href="#" target="_blank" class="w-full flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold text-base shadow-md active:scale-[0.98] transition-all">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        <span>Listen in YouTube Music</span>
+                    </a>
+
+                    <!-- 3. Share / Copy Link -->
+                    <button id="btn-copy" class="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-2xl border border-[var(--border-color)] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-primary font-semibold text-sm transition-all active:scale-[0.98]">
+                        <span class="material-symbols-outlined text-[18px]">share</span>
+                        <span id="copy-btn-text">Share Track Link</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner Prompt: Don't have AvidTune? -->
+        <div class="w-full rounded-[24px] border border-[var(--border-color)] bg-[var(--surface-bg)] backdrop-blur-xl p-6 shadow-md flex flex-col md:flex-row items-center gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
+                <img src="/images/logo.png" alt="AvidTune App" class="w-9 h-9 rounded-md object-cover border border-white/20">
+            </div>
+
+            <div class="flex-1 text-center md:text-left">
+                <h2 class="text-base font-bold text-primary mb-1">Don't have AvidTune yet?</h2>
+                <p class="text-xs text-on-surface-variant leading-relaxed">
+                    Install AvidTune for Android to experience ad-free music, synchronized live lyrics, and offline playback.
+                </p>
+            </div>
+
+            <a id="btn-download-apk" href="https://github.com/cgens67/avidtune/releases/latest" target="_blank" class="shrink-0 flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-xl text-xs font-bold hover:scale-105 active:scale-95 transition-all shadow-md">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span id="btn-download-text">Download APK</span>
+            </a>
+        </div>
+
+        <!-- Feature Pills Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full mt-6">
+            <div class="flex items-center gap-2.5 p-3 rounded-2xl border border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] text-xs font-medium text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px] text-blue-500">block</span>
+                <span>100% Ad-Free</span>
+            </div>
+            <div class="flex items-center gap-2.5 p-3 rounded-2xl border border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] text-xs font-medium text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px] text-indigo-500">lyrics</span>
+                <span>Synced Lyrics</span>
+            </div>
+            <div class="flex items-center gap-2.5 p-3 rounded-2xl border border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] text-xs font-medium text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px] text-sky-500">cloud_download</span>
+                <span>Offline Cache</span>
+            </div>
+            <div class="flex items-center gap-2.5 p-3 rounded-2xl border border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] text-xs font-medium text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px] text-emerald-500">verified_user</span>
+                <span>Open Source</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-[var(--border-color)] bg-black/[0.02] dark:bg-white/[0.02] py-6 px-6 text-center text-xs text-on-surface-variant">
+        <p>© 2026 AvidTune • Free & Open Source on <a href="https://github.com/cgens67/avidtune" target="_blank" class="text-accent-blue font-semibold hover:underline">GitHub</a></p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. Theme Management ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlElement = document.documentElement;
+
+            function applyTheme(isDark) {
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                    themeIcon.textContent = 'light_mode';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    themeIcon.textContent = 'dark_mode';
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(savedTheme ? savedTheme === 'dark' : prefersDark);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isCurrentlyDark = htmlElement.classList.contains('dark');
+                applyTheme(!isCurrentlyDark);
+            });
+
+            // --- 2. Extract songId and timestamp from current URL ---
+            // Format: /<songId>/<optionalTimestamp> or ?v=<songId>&t=<optionalTimestamp>
+            const pathSegments = window.location.pathname.split('/').filter(p => p.length > 0 && p !== 'listen' && p !== 'listen.html');
+            const urlParams = new URLSearchParams(window.location.search);
+
+            let songId = pathSegments[0] || urlParams.get('v') || "";
+            let rawTimestamp = pathSegments[1] || urlParams.get('t') || "0";
+
+            function parseSeconds(val) {
+                if (!val) return 0;
+                val = val.toString().trim().toLowerCase();
+                if (/^\d+$/.test(val)) return parseInt(val, 10);
+                
+                let total = 0;
+                const m = val.match(/(\d+)m/);
+                const s = val.match(/(\d+)s/);
+                if (m) total += parseInt(m[1], 10) * 60;
+                if (s) total += parseInt(s[1], 10);
+                return total;
+            }
+
+            const timestampSeconds = parseSeconds(rawTimestamp);
+
+            function formatTime(totalSec) {
+                const m = Math.floor(totalSec / 60);
+                const s = totalSec % 60;
+                return `${m}:${s < 10 ? '0' : ''}${s}`;
+            }
+
+            // Default fallback if no song ID is provided
+            if (!songId) {
+                document.getElementById('track-title').textContent = "No Track Specified";
+                document.getElementById('track-artist').textContent = "Open AvidTune or choose a valid link";
+                return;
+            }
+
+            // --- 3. Construct Deep-Links and URLs ---
+            // Direct app intent for Android
+            const androidIntent = `intent://avidtune.vercel.app/${songId}/${timestampSeconds}#Intent;scheme=https;package=com.cgens67.avidtune;end`;
+            const customSchemeUrl = `avidtune://play?v=${songId}&t=${timestampSeconds}`;
+            
+            // YouTube Music Web Fallback
+            const ytmUrl = `https://music.youtube.com/watch?v=${songId}${timestampSeconds > 0 ? '&t=' + timestampSeconds : ''}`;
+
+            document.getElementById('btn-open-app').href = androidIntent;
+            document.getElementById('btn-ytm').href = ytmUrl;
+
+            // Timestamp visual badge
+            if (timestampSeconds > 0) {
+                const container = document.getElementById('timestamp-container');
+                const text = document.getElementById('timestamp-text');
+                text.textContent = `Starts at ${formatTime(timestampSeconds)}`;
+                container.classList.remove('hidden');
+                container.classList.add('flex');
+            }
+
+            // --- 4. Auto-Redirect if user is on Android ---
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            if (isAndroid) {
+                // Try to trigger the intent seamlessly
+                setTimeout(() => {
+                    window.location.href = androidIntent;
+                }, 200);
+            }
+
+            // --- 5. Fetch High-Quality Metadata & Artwork from YouTube oEmbed ---
+            const oEmbedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${songId}&format=json`;
+            const highResThumb = `https://i.ytimg.com/vi/${songId}/maxresdefault.jpg`;
+            const fallbackThumb = `https://i.ytimg.com/vi/${songId}/hqdefault.jpg`;
+
+            const artworkImg = document.getElementById('track-artwork');
+            artworkImg.src = highResThumb;
+            artworkImg.onerror = () => { artworkImg.src = fallbackThumb; };
+
+            fetch(oEmbedUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error("Metadata fetch failed");
+                    return res.json();
+                })
+                .then(data => {
+                    const rawTitle = data.title || "Shared Track";
+                    const author = data.author_name || "YouTube Music";
+
+                    // Update UI text
+                    document.getElementById('track-title').textContent = rawTitle;
+                    document.getElementById('track-artist').textContent = author;
+                    document.getElementById('page-title').textContent = `${rawTitle} — AvidTune`;
+                })
+                .catch(() => {
+                    document.getElementById('track-title').textContent = `Track ID: ${songId}`;
+                    document.getElementById('track-artist').textContent = "Listen on AvidTune";
+                });
+
+            // --- 6. Fetch Latest APK Download Link from GitHub Releases ---
+            fetch('https://api.github.com/repos/cgens67/avidtune/releases/latest')
+                .then(res => res.json())
+                .then(release => {
+                    if (release.assets && release.assets.length > 0) {
+                        const universalApk = release.assets.find(a => 
+                            a.name === 'app-universal-release.apk' || 
+                            (a.name.includes('universal') && a.name.endsWith('.apk'))
+                        ) || release.assets.find(a => a.name.endsWith('.apk'));
+
+                        if (universalApk) {
+                            const apkUrl = universalApk.browser_download_url;
+                            document.getElementById('btn-download-apk').href = apkUrl;
+                            document.getElementById('nav-download-btn').href = apkUrl;
+                            if (release.tag_name) {
+                                document.getElementById('btn-download-text').textContent = `Download APK (${release.tag_name})`;
+                            }
+                        }
+                    }
+                })
+                .catch(() => {});
+
+            // --- 7. Copy Link Button with Toast Feedback ---
+            const copyBtn = document.getElementById('btn-copy');
+            const copyBtnText = document.getElementById('copy-btn-text');
+
+            copyBtn.addEventListener('click', () => {
+                const shareUrl = window.location.href;
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    copyBtnText.textContent = "Link Copied to Clipboard!";
+                    copyBtn.classList.add('text-accent-blue', 'border-accent-blue');
+                    setTimeout(() => {
+                        copyBtnText.textContent = "Share Track Link";
+                        copyBtn.classList.remove('text-accent-blue', 'border-accent-blue');
+                    }, 2500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
