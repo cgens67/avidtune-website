@@ -22,15 +22,11 @@
       "destination": "/listen.html"
     },
     {
-      "source": "/:songId([a-zA-Z0-9_-]+)",
+      "source": "/:songId/:path*",
       "destination": "/listen.html"
     },
     {
-      "source": "/:songId([a-zA-Z0-9_-]+)/",
-      "destination": "/listen.html"
-    },
-    {
-      "source": "/:songId([a-zA-Z0-9_-]+)/:path*",
+      "source": "/:songId",
       "destination": "/listen.html"
     }
   ]
